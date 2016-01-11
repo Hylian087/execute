@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PlayerInputs : MonoBehaviour {
-
-	int personalScore;
-	Time rythm;
+public class GameManager : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -13,6 +10,6 @@ public class PlayerInputs : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+	
 	}
 }
