@@ -1,17 +1,17 @@
 fileFormatVersion: 2
-guid: e3e087d1c044140449409bc658acd2e6
-timeCreated: 1453121833
+guid: 15e3083c849864a4e931f09feb96dadc
+timeCreated: 1453123733
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: AssetsInputs_0
-    21300002: AssetsInputs_1
-    21300004: AssetsInputs_2
-    21300006: AssetsInputs_3
-    21300008: AssetsInputs_4
-    21300010: AssetsInputs_5
-    21300012: AssetsInputs_6
-    21300014: AssetsInputs_7
+    21300000: Buttons-x3_0
+    21300002: Buttons-x3_1
+    21300004: Buttons-x3_2
+    21300006: Buttons-x3_3
+    21300008: Buttons-x3_4
+    21300010: Buttons-x3_5
+    21300012: Buttons-x3_6
+    21300014: Buttons-x3_7
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -58,83 +58,83 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: AssetsInputs_0
+    - name: Buttons-x3_0
       rect:
         serializedVersion: 2
-        x: 5
-        y: 114
-        width: 105
-        height: 105
+        x: 0
+        y: 48
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_1
+    - name: Buttons-x3_1
       rect:
         serializedVersion: 2
-        x: 117
-        y: 115
-        width: 103
-        height: 104
+        x: 48
+        y: 48
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_2
+    - name: Buttons-x3_2
       rect:
         serializedVersion: 2
-        x: 230
-        y: 115
-        width: 102
-        height: 103
+        x: 96
+        y: 48
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_3
+    - name: Buttons-x3_3
       rect:
         serializedVersion: 2
-        x: 344
-        y: 115
-        width: 102
-        height: 104
+        x: 144
+        y: 48
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_4
+    - name: Buttons-x3_4
       rect:
         serializedVersion: 2
-        x: 6
-        y: 4
-        width: 103
-        height: 104
+        x: 0
+        y: 0
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_5
+    - name: Buttons-x3_5
       rect:
         serializedVersion: 2
-        x: 118
-        y: 4
-        width: 102
-        height: 104
+        x: 144
+        y: 0
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_6
+    - name: Buttons-x3_6
       rect:
         serializedVersion: 2
-        x: 230
-        y: 4
-        width: 105
-        height: 104
+        x: 96
+        y: 0
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: AssetsInputs_7
+    - name: Buttons-x3_7
       rect:
         serializedVersion: 2
-        x: 345
-        y: 4
-        width: 101
-        height: 103
+        x: 48
+        y: 0
+        width: 48
+        height: 48
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
