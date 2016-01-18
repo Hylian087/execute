@@ -9,18 +9,23 @@ public class PlayerInputs : MonoBehaviour {
 	string[] p1Inputs;
 	int randomNumber;
 	string randomSelectedInput;
-	string[] p1Selected;
+	string[] p1Selected = new string[3];
 	int maxInputs = 3;
+
+	void threeList(){
+		p1Inputs = new string[]{"Joy1A", "Joy1B", "Joy1X", "Joy1Y"};
+
+		for(int i = 0; i < maxInputs; i++){
+			randomNumber = Random.Range (0,4);
+			Debug.Log (randomNumber);
+			p1Selected[i] = p1Inputs[randomNumber];
+			Debug.Log (p1Selected[i]);
+		}
+	}
 
 	// Use this for initialization
 	void Start () {
-		p1Inputs = new string[]{"Joy1A", "Joy1B", "Joy1X", "Joy1Y"};
-		for(int i = 0; i <= maxInputs; i++){
-			randomNumber = Random.Range (0,4);
-			Debug.Log(p1Selected[randomNumber]);
-			p1Selected = new string[]{p1Inputs[randomNumber]};
-
-		}
+		threeList ();
 	}
 	
 	// Update is called once per frame
