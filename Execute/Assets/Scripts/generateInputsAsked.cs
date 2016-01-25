@@ -48,13 +48,12 @@ public class generateInputsAsked : MonoBehaviour {
 		IdRand [0] = rnd.Next(7); 
 		IdRand [1] = rnd.Next (7);
 		IdRand [2] = rnd.Next (7);
-
 		posString = this.transform.position;
+
 		for (int i=0; i<=2; i++) {
-			Debug.Log(i);
 			InputAsked[i] = Instantiate(InputAvailable[IdRand[i]]);
 			InputAsked[i].transform.parent = this.transform;
-			InputAsked[i].transform.position = new Vector3(posString.x + i, posString.y);
+			InputAsked[i].transform.position = new Vector3(posString.x + (float)i*0.65F, posString.y);
 		}
 
 		Debug.Log (Input.GetJoystickNames ()[0]);
