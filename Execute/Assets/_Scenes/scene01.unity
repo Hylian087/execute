@@ -199,6 +199,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inputString: {fileID: 170426, guid: 5a25826640c7b22408add9ebbfd9b408, type: 2}
+  fleche: {fileID: 195780, guid: 3b406d8929c1e1244b30f4ec38cad2a2, type: 2}
 --- !u!4 &1127844995
 Transform:
   m_ObjectHideFlags: 0
