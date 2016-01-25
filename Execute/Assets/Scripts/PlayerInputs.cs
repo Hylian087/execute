@@ -17,9 +17,9 @@ public class PlayerInputs : MonoBehaviour {
 
 		for(int i = 0; i < maxInputs; i++){
 			randomNumber = Random.Range (0,4);
-			Debug.Log (randomNumber);
+			//Debug.Log (randomNumber);
 			p1Selected[i] = p1Inputs[randomNumber];
-			Debug.Log (p1Selected[i]);
+			//Debug.Log (p1Selected[i]);
 		}
 	}
 
@@ -33,7 +33,7 @@ public class PlayerInputs : MonoBehaviour {
 
 
 		if(Input.GetButtonDown("Joy1A")){
-			Debug.Log ("Joy1A");
+			//Debug.Log ("Joy1A");
 		}
 
 	}

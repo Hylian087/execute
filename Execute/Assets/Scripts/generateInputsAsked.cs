@@ -30,7 +30,7 @@ public class generateInputsAsked : MonoBehaviour {
 	GameObject[] InputAvailable = new GameObject[8];
 	GameObject[] InputAsked = new GameObject[3];
 	System.Random rnd = new System.Random ();
-	int[] IdRand = new int[3];
+	public static int[] IdRand = new int[3];
 	Vector3 posString = new Vector3();
 
 
@@ -45,9 +45,7 @@ public class generateInputsAsked : MonoBehaviour {
 		InputAvailable[5] = inputAskedB;
 		InputAvailable[6] = inputAskedX;
 		InputAvailable[7] = inputAskedY;
-		IdRand [0] = rnd.Next(7); 
-		IdRand [1] = rnd.Next (7);
-		IdRand [2] = rnd.Next (7);
+
 		posString = this.transform.position;
 
 		for (int i=0; i<=2; i++) {
@@ -55,9 +53,6 @@ public class generateInputsAsked : MonoBehaviour {
 			InputAsked[i].transform.parent = this.transform;
 			InputAsked[i].transform.position = new Vector3(posString.x + (float)i*0.65F, posString.y);
 		}
-
-		Debug.Log (Input.GetJoystickNames ()[0]);
-
 	}
 	
 	// Update is called once per frame
