@@ -32,9 +32,9 @@ public class PlayerInputs : MonoBehaviour {
 	void Update () {
 
 
-		/*if(Input.GetButtonDown("Joy1A")){
+		if(Input.GetButtonDown("Joy1A")){
 			Debug.Log ("Joy1A");
-		}*/
+		}
 
 	}
 }

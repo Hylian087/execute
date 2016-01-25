@@ -57,11 +57,14 @@ public class generateInputsAsked : MonoBehaviour {
 			InputAsked[i].transform.position = new Vector3(posString.x + i, posString.y);
 		}
 
+		Debug.Log (Input.GetJoystickNames ()[0]);
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
 	}
+
+
 }
