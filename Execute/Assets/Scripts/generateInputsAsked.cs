@@ -28,7 +28,7 @@ public class generateInputsAsked : MonoBehaviour {
 	GameObject inputAskedY;
 
 	GameObject[] InputAvailable = new GameObject[8];
-	GameObject[] InputAsked = new GameObject[3];
+	public static GameObject[] InputAsked = new GameObject[3];
 	System.Random rnd = new System.Random ();
 	public static int[] IdRand = new int[3];
 	Vector3 posString = new Vector3();
