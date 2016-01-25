@@ -53,6 +53,7 @@ public class generateInputsAsked : MonoBehaviour {
 		for (int i=0; i<=2; i++) {
 			Debug.Log(i);
 			InputAsked[i] = Instantiate(InputAvailable[IdRand[i]]);
+			InputAsked[i].transform.parent = this.transform;
 			InputAsked[i].transform.position = new Vector3(posString.x + i, posString.y);
 		}
 
