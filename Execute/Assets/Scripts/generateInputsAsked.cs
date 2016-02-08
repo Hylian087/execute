@@ -33,6 +33,8 @@ public class generateInputsAsked : MonoBehaviour {
 	public static int[] IdRand = new int[3];
 	Vector3 posString = new Vector3();
 
+	int[] invertedButtons = new int[8];
+	public static int[] invertedAsked = new int[3];
 
 	// Use this for initialization
 	void Start () {
@@ -46,9 +48,22 @@ public class generateInputsAsked : MonoBehaviour {
 		InputAvailable[6] = inputAskedX;
 		InputAvailable[7] = inputAskedY;
 
+		invertedButtons [0] = 1;
+		invertedButtons [1] = 0;
+		invertedButtons [2] = 3;
+		invertedButtons [3] = 2;
+		invertedButtons [4] = 7;
+		invertedButtons [5] = 6;
+		invertedButtons [6] = 5;
+		invertedButtons [7] = 4;
+
 		posString = this.transform.position;
 
 		for (int i=0; i<=2; i++) {
+
+			invertedAsked[i] = invertedButtons[IdRand[i]];
+			Debug.Log (invertedAsked[i]);
+
 			InputAsked[i] = Instantiate(InputAvailable[IdRand[i]]);
 			InputAsked[i].transform.parent = this.transform;
 			InputAsked[i].transform.position = new Vector3(posString.x + (float)i*0.65F, posString.y);

@@ -4,52 +4,68 @@ using System.Collections;
 using System;
 
 public class GameManager : MonoBehaviour {
+	// Variable pour détecter les manettes
 	bool isControllersInit = false;
 	bool isController1Known = false;
 	bool isController2Known = false;
 	bool isController3Known = false;
 	bool isController4Known = false;
 
+	// Variable pour initialiser les manettes
 	bool isJoy1Init = false;
 	bool isJoy2Init = false;
 	bool isJoy3Init = false;
 	bool isJoy4Init = false;
 
-	string player1Numb = "";
+
+	/*string player1Numb = "";
 	string player2Numb = "";
 	string player3Numb = "";
-	string player4Numb = "";
+	string player4Numb = "";*/
+
+	// Tableau comportant le nom des joueurs - Joy1; Joy2; Joy3; Joy4
 	string currentPlayerNumb = "";
-	string[] playerNumb = new string[4]; 
+	string[] playerNumb = new string[4];  // initialise le tableau de joueur; 4 éléments string
 
 	int playerTurn = 1;
 
+	// Composants d'affichage des inputs pour les joueurs
 	Text textPlayer1;
 	Text textPlayer2;
 	Text textPlayer3;
 	Text textPlayer4;
 	Text textStart;
 
+	// Nombre maximum de joueurs
 	int playerMax;
 
-
+	// Variable de Positionnement des différents affichages
 	Vector2[] positionInputs = new Vector2[4];
 
+	// Elements à afficher
 	GameObject askedInputString;
 	public GameObject inputString;
 	public GameObject fleche;
 	GameObject flecheFeedback;
-	int inputPressed = -1;
+
+	// Variables de gestion de la partie
 	int stateTurn = 0;
 	System.Random rnd = new System.Random ();
+
+	// Variables d'utilisation du Horizontal & Vertical Axises
+	int inputPressed = -1; // variable de vérification de l'utilisation des axis
 	bool isHPressed = false;
 	bool isVPressed = false;
+
+	// Vérifie la création d'une nouvelle série d'input
 	bool isNewString = false;
 
 
 
 	// Use this for initialization
 	void Start () {
+
+		// Récupération des éléments d'affichage pour chaque joueur
 		GameObject TextPlayer1 = GameObject.Find("player1");
 		textPlayer1 = TextPlayer1.GetComponent<Text>();
 
@@ -65,12 +81,14 @@ public class GameManager : MonoBehaviour {
 		GameObject TextStart = GameObject.Find("pressStart");
 		textStart = TextStart.GetComponent<Text>();
 
+		// Initialisation des éléments d'affichage
 		textPlayer1.text = "Press A";
 		textPlayer2.text = "Press A";
 		textPlayer3.text = "Press A";
 		textPlayer4.text = "Press A";
 		textStart.text = "";
 
+		// Initialisation Position des écrans des joueurs
 		positionInputs [0] = new Vector2 (-9, 3);
 		positionInputs [1] = new Vector2 (9, 3);
 		positionInputs [2] = new Vector2 (9, -3);
@@ -81,6 +99,8 @@ public class GameManager : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		if (!isControllersInit) {
+
+			// Joueur 1
 			if (!isController1Known) {
 				if (Input.GetButtonDown ("Joy1A")) {
 					playerNumb[0] = "Joy1";
@@ -88,7 +108,7 @@ public class GameManager : MonoBehaviour {
 					isController1Known = true;
 					textPlayer1.text = "Ready";
 					textStart.text = "Press Start";
-					Debug.Log("Joy1");
+					//Debug.Log("Joy1");
 					//generateInputString ();
 				} else if (Input.GetButtonDown ("Joy2A")) {
 					playerNumb[0] = "Joy2";
@@ -96,7 +116,7 @@ public class GameManager : MonoBehaviour {
 					isController1Known = true;
 					textPlayer1.text = "Ready";
 					textStart.text = "Press Start";
-					Debug.Log("Joy2");
+					//Debug.Log("Joy2");
 					//generateInputString ();
 				} else if (Input.GetButtonDown ("Joy3A")) {
 					playerNumb[0] = "Joy3";
@@ -104,7 +124,7 @@ public class GameManager : MonoBehaviour {
 					isController1Known = true;
 					textPlayer1.text = "Ready";
 					textStart.text = "Press Start";
-					Debug.Log("Joy3");
+					//Debug.Log("Joy3");
 					//generateInputString ();
 				} else if (Input.GetButtonDown ("Joy4A")) {
 					playerNumb[0] = "Joy4";
@@ -112,39 +132,43 @@ public class GameManager : MonoBehaviour {
 					isController1Known = true;
 					textPlayer1.text = "Ready";
 					textStart.text = "Press Start";
-					Debug.Log("Joy4");
+					//Debug.Log("Joy4");
 					//generateInputString ();
 				} 
+
+				// Joueur 2
 			} else if (!isController2Known) {
 				if (Input.GetButtonDown ("Joy1A") && !isJoy1Init) {
 					playerNumb[1] = "Joy1";
 					isJoy1Init = true;
 					isController2Known = true;
 					textPlayer2.text = "Ready";
-					Debug.Log("Joy1");
+					//Debug.Log("Joy1");
 					//generateInputString ();
 				} else if (Input.GetButtonDown ("Joy2A") && !isJoy2Init) {
 					playerNumb[1] = "Joy2";
 					isJoy2Init = true;
 					isController2Known = true;
 					textPlayer2.text = "Ready";
-					Debug.Log("Joy2");
+					//Debug.Log("Joy2");
 					//generateInputString ();
 				} else if (Input.GetButtonDown ("Joy3A") && !isJoy3Init) {
 					playerNumb[1] = "Joy3";
 					isJoy3Init = true;
 					isController2Known = true;
 					textPlayer2.text = "Ready";
-					Debug.Log("Joy3");
+					//Debug.Log("Joy3");
 					//generateInputString ();
 				} else if (Input.GetButtonDown ("Joy4A") && !isJoy4Init) {
 					playerNumb[1] = "Joy4";
 					isJoy4Init = true;
 					isController2Known = true;
 					textPlayer2.text = "Ready";
-					Debug.Log("Joy4");
+					//Debug.Log("Joy4");
 					//generateInputString ();
 				} 
+
+				// Joueur 3
 			} else if (!isController3Known) {
 				if (Input.GetButtonDown ("Joy1A") && !isJoy1Init) {
 					playerNumb[2] = "Joy1";
@@ -171,6 +195,8 @@ public class GameManager : MonoBehaviour {
 					textPlayer3.text = "Ready";
 					//generateInputString ();
 				} 
+
+				// Joueur 4
 			} else if (!isController4Known) {
 				if (Input.GetButtonDown ("Joy1A") && !isJoy1Init) {
 					playerNumb[3] = "Joy1";
@@ -199,6 +225,8 @@ public class GameManager : MonoBehaviour {
 				} 
 			}
 
+
+
 			if (Input.GetButtonDown ("Joy1Start") || Input.GetButtonDown ("Joy2Start") || Input.GetButtonDown ("Joy3Start") || Input.GetButtonDown ("Joy4Start")) {
 				isControllersInit = true;
 				textPlayer1.text = "";
@@ -218,9 +246,9 @@ public class GameManager : MonoBehaviour {
 					playerMax = 1;
 				generateInputString ();
 			}
-		} else {
+		} else { // si les manettes sont définies, alors
 
-			Debug.Log ("playerTurn = " + playerTurn + ", currentPlayerNumb = " + currentPlayerNumb + ", playerMax = " +playerMax);
+			//Debug.Log ("playerTurn = " + playerTurn + ", currentPlayerNumb = " + currentPlayerNumb + ", playerMax = " +playerMax);
 
 			if (isHPressed && (Input.GetAxisRaw (currentPlayerNumb + "H") >= -0.2 && Input.GetAxisRaw (currentPlayerNumb + "H") <= 0.2)){
 				isHPressed = false;
@@ -288,11 +316,11 @@ public class GameManager : MonoBehaviour {
 	void testInput(){
 		if (inputPressed == -1)
 			return;
-		Debug.Log (inputPressed);
-		if (inputPressed == generateInputsAsked.IdRand [stateTurn]) {
+		//Debug.Log (inputPressed);
+		if (inputPressed == generateInputsAsked.IdRand [stateTurn]) { // si le bouton appuyé correspond au bouton affiché
 			stateTurn++;
 			if(stateTurn == 3){
-				Debug.Log ("Correct !");
+				Debug.Log ("Ordre Correct !");
 				stateTurn = 0;
 				if(playerTurn < playerMax)
 					playerTurn++;
@@ -303,8 +331,25 @@ public class GameManager : MonoBehaviour {
 			}
 			flecheFeedback.transform.position = new Vector2 (generateInputsAsked.InputAsked[stateTurn].transform.position.x, generateInputsAsked.InputAsked[stateTurn].transform.position.y + 0.6F);
 			inputPressed = -1;
-		} else {
-			Debug.Log ("Faux !");
+		} else if(inputPressed == generateInputsAsked.invertedAsked [stateTurn]){
+			stateTurn++;
+			if(stateTurn == 3){
+				Debug.Log ("Inverse Correct !");
+				stateTurn = 0;
+				if(playerTurn < playerMax)
+					playerTurn++;
+				else
+					playerTurn = 1;
+				currentPlayerNumb = playerNumb[playerTurn - 1];
+				generateInputString();
+			}
+			flecheFeedback.transform.position = new Vector2 (generateInputsAsked.InputAsked[stateTurn].transform.position.x, generateInputsAsked.InputAsked[stateTurn].transform.position.y + 0.6F);
+			inputPressed = -1;
+		}
+
+
+		else {
+			//Debug.Log ("Faux !");
 			stateTurn = 0;
 			if(playerTurn < playerMax)
 				playerTurn++;
