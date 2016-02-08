@@ -140,8 +140,8 @@ public class Joypad {
 					axis = Input.GetAxis("Joy" + id + "RightLeft");
 					
 					// Le bouton Droite ou Gauche est pressé
-					if ((button == "Left" 	&& axis == 1) ^
-						(button == "Right" 	&& axis == -1)) {
+					if ((button == "Left" 	&& axis == -1) ^
+						(button == "Right" 	&& axis == 1)) {
 						axesButtons[button]++;
 					}
 					else {

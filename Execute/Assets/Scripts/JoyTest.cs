@@ -37,9 +37,9 @@ public class JoyTest : MonoBehaviour {
 				if (joypad.IsDown(button)) {
 					Debug.Log("Joueur " + joypad.getID() + " appuie sur " + button);
 				}
-				// else if (joypad.IsInverseDown(button)) {
-				// 	Debug.Log("Joueur " + joypad.getID() + " appuie sur l'inverse de " + button);
-				// }
+				else if (joypad.IsInverseDown(button)) {
+					Debug.Log("Joueur " + joypad.getID() + " appuie sur l'inverse de " + button);
+				}
 				
 			}
 		}
