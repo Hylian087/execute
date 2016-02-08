@@ -21,7 +21,7 @@ public class Vote : MonoBehaviour {
 
 	/*Players and votes*/
 	List<string> players = new List<string>();
-	Dictionary<string,int> playerVotes = new Dictionary<string,int>();
+	//Dictionary<string,int> playerVotes = new Dictionary<string,int>();
 
 	// Use this for initialization
 	void Start () {
@@ -60,7 +60,7 @@ public class Vote : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		foreach (string player in players) {
+		/*foreach (string player in players) {
 			Debug.Log (player[2]);
 			if(Input.GetButtonDown ("Joy2A") || Input.GetButtonDown ("Joy3A") || Input.GetButtonDown ("Joy4A")){
 				playerVotes[player[0]]++;
@@ -79,7 +79,7 @@ public class Vote : MonoBehaviour {
 				Debug.Log(player[3]);
 			}
 
-		}
+		}*/
 
 
 	}
