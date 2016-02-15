@@ -3,16 +3,12 @@ using System.Collections;
 
 public class JoyTest : MonoBehaviour {
 
-	private Joypad[] joypads = new Joypad[4];
+	private GlobalGameManager ggm;
 
 	// Use this for initialization
 	void Start () {
 		
-		// Création de 4 joypads
-		for (int j = 0; j < 4; j++) {
-			joypads[j] = new Joypad();
-		}
-		
+		ggm = GlobalGameManager.GetInstance();
 		
 		string[] inputNames = Input.GetJoystickNames();
 		
@@ -23,6 +19,8 @@ public class JoyTest : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		
+		Joypad[] joypads = ggm.joypads;
 		
 		// Mise à jour nécessaire pour le D-Pad
 		Joypad.UpdateAll();
