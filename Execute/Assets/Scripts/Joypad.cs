@@ -68,9 +68,6 @@ public class Joypad {
 	 * @return <bool>
 	 */
 	public bool IsDown(string button) {
-		float axis;
-		
-		
 		switch (button) {
 			
 			case "Up":
@@ -79,11 +76,9 @@ public class Joypad {
 			case "Right":
 				// Pour détecter juste une pression
 				return axesButtons[button] == 1;
-			break;
 			
 			default:
 				return Input.GetButtonDown("Joy" + id + button);
-			break;
 		}
 	}
 
@@ -161,5 +156,13 @@ public class Joypad {
 		foreach (Joypad joypad in joypads) {
 			joypad.Update();
 		}
+	}
+	
+	/**
+	 * Retourne un bouton au hasard
+	 * @return <string>
+	 */
+	public static string GetRandomButton() {
+		return AXIS_BUTTONS[Random.Range(0, AXIS_BUTTONS.Length)];
 	}
 }
