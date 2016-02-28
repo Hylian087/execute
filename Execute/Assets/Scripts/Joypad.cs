@@ -15,7 +15,7 @@ public class Joypad {
 	private int vibrationType;
 	private float vibrationTime = 2.0f;
 	private float vibrationDuration = 2.0f;
-	private float vibrationStrength = 0.5f;
+	private float vibrationStrength = 0.3f;
 	
 	// Liste des boutons des axes (const)
 	public static string[] AXIS_BUTTONS = new string[] {"Up", "Down", "Left", "Right", "A", "B", "X", "Y"};
@@ -167,14 +167,16 @@ public class Joypad {
 		
 		if (vibrationTime < vibrationDuration) {
 			
+			PlayerIndex pid = (PlayerIndex) (id - 1);
+			
 			float activate = 1.0f - Mathf.Floor((vibrationTime / vibrationDuration) / (1.0f / (vibrationType * 2.0f - 1.0f))) % 2;
 			
-			GamePad.SetVibration((PlayerIndex) id, activate * vibrationStrength, activate * vibrationStrength);
+			GamePad.SetVibration(pid, activate * vibrationStrength, activate * vibrationStrength);
 			
 			vibrationTime += Time.deltaTime;
 			
 			if (vibrationTime >= vibrationDuration) {
-				GamePad.SetVibration((PlayerIndex) id, 0.0f, 0.0f);
+				GamePad.SetVibration(pid, 0.0f, 0.0f);
 			}
 		}
 	}

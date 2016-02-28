@@ -21,7 +21,7 @@ public class XInputTestCS : MonoBehaviour
         // Will find the first controller that is connected ans use it
         if (!playerIndexSet || !prevState.IsConnected)
         {
-            for (int i = 0; i < 4; ++i)
+            for (int i = 0; i < 4; i++)
             {
                 PlayerIndex testPlayerIndex = (PlayerIndex)i;
                 GamePadState testState = GamePad.GetState(testPlayerIndex);
