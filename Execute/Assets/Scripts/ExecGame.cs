@@ -3,28 +3,49 @@ using System.Collections;
 
 public class ExecGame : MonoBehaviour {
 	
-	// Manche actuelle
-	//Round round;
+	// Joueurs
+	public Player[] players = new Player[4];
 
-	// Tableau qui va retenir les scores des joueurs
-	static float[] playerScores = new float[4];
+	// Manche actuelle
+	Round round;
+
+	/**
+	 * Créer une partie
+	 */
+	public static ExecGame MakeExecGame() {
+		GameObject go = new GameObject("ExecGameInstance");
+		ExecGame execGame = go.AddComponent<ExecGame>();
+		
+	    return execGame;
+	}
 	
 	/**
-	 * Démarrage
+	 * Initialisation
 	 */
 	void Start() {
-		//round = GetComponent<Round> ();
+		
+		GameManager gm = GameManager.GetInstance();
+		
+		// Assignation des joueurs et manettes
+		for (int i = 0; i < 4; i++) {
+			players[i] = new Player(i, gm.joypads[i]);
+		}
+		
+		// Lancement d'un round
+		NewRound();
+		
 	}
-
-	public void newRound(){
-		Round.MakeRound();
+	
+	/**
+	 * Démarrer une nouvelle manche.
+	 */
+	public void NewRound() {
+		round = Round.MakeRound(this);
 	}
 
 	/**
 	 * Mise à jour
 	 */
 	void Update() {
-
 	}
-	
 }

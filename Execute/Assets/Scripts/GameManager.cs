@@ -4,50 +4,65 @@ using System.Collections.Generic;
 
 public class GameManager : MonoBehaviour {
 	
-	/**
-	 * Design Pattern Singleton
-	 */
-
-	// instance du GameManager; static afin que d'autres scripts puisse y accéder
+	// Instance du GameManager; static afin que d'autres scripts puisse y accéder
 	public static GameManager instance = null;
 
-	// reference à ExecGame, qui va mettre en place tout la partie
-	private ExecGame partieExecute;
+	// Gestionnaire d'une partie
+	public ExecGame game;
 
 	// Joypads
-	public static Joypad[] joypads = new Joypad[4];
+	public Joypad[] joypads = new Joypad[4];
 	
-	// Joueurs
-	public static Player[] players = new Player[4];
-
-	// Au démarrage du jeu
-	void Awake(){
+	// Prefabs
+	public Dictionary<string, GameObject> prefabs;
+	
+	/**
+	 * Retourne l'unique instance de GameManager
+	 * @return <GameManager>
+	 */
+	public static GameManager GetInstance() {
+		return instance;
+	}
+	
+	/**
+	 * Initialisation au démarrage du jeu
+	 */
+	public void Awake() {
+		
 		// si instance de GameManager n'existe pas
 		if (instance == null) {
-			// instanciation du GameManager
 			instance = this;
-		} else if (instance != this) { // si l'instance existe déjà
+		}
+		else if (instance != this) { // si l'instance existe déjà
 			Destroy(gameObject); // destruction du GameManager	
 		}
-
-		// Initialisation d'une partie
-		partieExecute = GetComponent<ExecGame> ();
-		InitGame ();
-	}
-
-
-	// Initialisation d'une partie de jeu
-	void InitGame(){
+		
 		// Assignation des joueurs et manettes
 		for (int j = 0; j < 4; j++) {
 			joypads[j] = new Joypad();
-			players[j] = new Player(j, joypads[j]);
 		}
-		// Lancement de la partie
-		partieExecute.newRound ();
+		
+		// Tableau des prefabs
+		prefabs = new Dictionary<string, GameObject>();
+		
+		// Chargement des prefabs des boutons
+		foreach (string button in Joypad.AXIS_BUTTONS) {
+			string name = "Button" + button;
+			prefabs.Add(name, Resources.Load(name, typeof(GameObject)) as GameObject);
+		}
+	}
+	
+	/**
+	 * Démarrage d'une partie
+	 */
+	public void Start() {
+		
+		// Lancement d'une partie
+		game = ExecGame.MakeExecGame();
+		
 	}
 
-	void Update(){
+	public void Update() {
 
 		//Update nécessaire pour le fonctionnement des Joypad
 		Joypad.UpdateAll();

@@ -4,17 +4,13 @@ using System.Collections;
 public class Player {
 	
 	// Identifiant du player (0-3)
-	private int _id;
-	public int Id {
-		get { return _id; }
-		set {}
-	}
+	public int id;
 	
 	// Contrôleur associé au joueur
-	protected Joypad joypad;
+	public Joypad joypad;
 	
 	// Score
-	protected int score = 0;
+	public int score = 0;
 	
 	
 	/**
@@ -23,10 +19,7 @@ public class Player {
 	 * @param <Joypad> joypad
 	 */
 	public Player(int id, Joypad joypad) {
-		this._id = id;
+		this.id = id;
 		this.joypad = joypad;
 	}
-	
-	
-	
 }

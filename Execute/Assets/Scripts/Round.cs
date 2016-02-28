@@ -5,6 +5,9 @@ using System.Collections.Generic;
 
 
 public class Round : MonoBehaviour {
+	
+	// Partie
+	public ExecGame game;
 
 	// Temps avant le début du round
 	public int warmUpTime;
@@ -31,9 +34,11 @@ public class Round : MonoBehaviour {
 	/**
 	 * Créer une manche
 	 */
-	public static Round MakeRound() {
+	public static Round MakeRound(ExecGame game) {
 		GameObject go = new GameObject("RoundInstance");
 		Round round = go.AddComponent<Round>();
+		
+		round.game = game;
 		
 	    return round;
 	}
@@ -42,20 +47,20 @@ public class Round : MonoBehaviour {
 	 * Démarrage
 	 */
 	void Start() {
-
+		
 		state = RoundState.WarmUp;		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
-			sequences[i] = Sequence.MakeSequence(GameManager.players[i], 30.0f);
+			sequences[i] = Sequence.MakeSequence(game.players[i]);
 			sequences[i].transform.parent = gameObject.transform.parent;
 			sequences[i].transform.SetParent (gameObject.transform);
 		}
 
 		// Initialisation de la position des séquences (A REFACTORISER !)
-		sequences [0].transform.position = new Vector3 (-1, 1, 0);
+		sequences [0].transform.position = new Vector3 (-1, 1.5f, 0);
 		sequences [1].transform.position = new Vector3 (1, 1, 0);
-		sequences [2].transform.position = new Vector3 (1, -1, 0);
+		sequences [2].transform.position = new Vector3 (1, -1.5f, 0);
 		sequences [3].transform.position = new Vector3 (-1, -1, 0);
 	}
 	

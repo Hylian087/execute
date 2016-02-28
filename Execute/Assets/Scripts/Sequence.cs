@@ -12,34 +12,33 @@ public class Sequence : MonoBehaviour {
 	public Player player;
 	
 	// Durée totale de la séquence
-	public float sequenceDuration;
-
-	public int buttonCount = 31;
-	public float buttonAdditionalDuration = 5.0f;
-
-	// Choix des boutons
-	int randomBtnId;
-
+	public float duration;
+	
+	// La séquence est terminée
+	public bool done = false;
+	
+	// Nombre de boutons
+	public int buttonCount = 30;
+	
 	// Temps actuel de la séquence
-	float currentTime;
-
-	int currentButtonId;
-	GameObject currentButton;
+	private float currentTime;
+	
+	// Bouton actuel
+	private int currentButtonId = 0;
+	private Button currentButton;
 
 	// Tableau contenant la séquence de boutons
-	SortedList<int, GameObject> buttonSequence = new SortedList<int, GameObject> ();
+	public List<Button> buttons;
 
 	/**
 	 * Créer une séquence
 	 * @param <Player> player : joueur associé
-	 * @param <float> duration : durée totale que doit faire la séquence
 	 */
-	public static Sequence MakeSequence(Player player, float duration) {
-		GameObject go = new GameObject("SequenceJoueur" + player.Id);
+	public static Sequence MakeSequence(Player player) {
+		GameObject go = new GameObject("Player" + player.id + "Sequence");
 		Sequence seq = go.AddComponent<Sequence>();
 		
 		seq.player = player;
-		seq.sequenceDuration = duration;
 
 	    return seq;
 	}
@@ -48,49 +47,44 @@ public class Sequence : MonoBehaviour {
 	 * Démarrage
 	 */
 	void Start() {
-		buttonSequence = new SortedList<int, GameObject> (buttonCount);
+		
+		GameManager gm = GameManager.GetInstance();
+		
+		buttons = new List<Button>();
+		
+		float time = 0.0f;
+		
 		// Création de la séquence
 		for (int j = 0; j < buttonCount; j++) {
 
 			// Sélection aléatoire des boutons
-			randomBtnId = Random.Range (0,8);
-			// Création des boutons
-			GameObject showedButton = Instantiate (ButtonsList.buttonsList [randomBtnId]);
-
-			// Ajout le bouton créé dans le tableau contenant la séquence entière
-			buttonSequence.Add(j,showedButton);
-			// Range les boutons dans des calques d'affichage différents (corrige la superposition des boutons)
-			foreach(var instantiatedButton in buttonSequence){
-				instantiatedButton.Value.GetComponent<SpriteRenderer>().sortingOrder += 1;
-			}
-
-			// Assignation de la position des boutons
-			showedButton.transform.SetParent(gameObject.transform);
-			showedButton.transform.position = gameObject.transform.position;
-
-			// Ajout d'un temps additionnel (pour l'équilibrage)
-			float addDuration = j+buttonAdditionalDuration;
-			showedButton.GetComponent<Button>().buttonDuration += addDuration;
-			buttonAdditionalDuration++;
-		}
-
-		float targetDuration = sequenceDuration;
-		float totalDuration = 0.0f;
-
-		// Initialisation du premier bouton
-		currentButtonId = 0;
-		currentButton = buttonSequence[currentButtonId];
-
-		/*
-		do {
-
-			Button button = Button.MakeButton(1.0f); // TODO temps aléatoire des boutons
-			buttons.Add(totalDuration, button);
+			string randomButtonId = Joypad.GetRandomButton();
 			
-			totalDuration += button.duration;
+			// Création d'un bouton avec son GO
+			Button button = Button.MakeButton(randomButtonId, time, 1.0f);
+			GameObject buttonGO = button.gameObject;
+
+			// Ajout du bouton créé dans le tableau contenant la séquence entière
+			buttons.Add(button);
+			
+			// Assignation de la position des boutons
+			buttonGO.transform.SetParent(gameObject.transform);
+			buttonGO.transform.position = gameObject.transform.position;
+			
+			time += button.duration;
 		}
-		while (totalDuration < targetDuration);
-		*/
+		
+		// Durée totale de la séquence = durée de tous les boutons
+		duration = time;
+		
+		// Premier bouton
+		currentButtonId = 0;
+		currentButton = buttons[currentButtonId];
+
+		// Range les boutons dans des calques d'affichage différents (corrige la superposition des boutons)
+		foreach (var button in buttons) {
+			button.gameObject.GetComponent<SpriteRenderer>().sortingOrder += 1;
+		}
 	}
 	
 	/**
@@ -99,32 +93,56 @@ public class Sequence : MonoBehaviour {
 	void Update() {
 		// Temps actuel de la séquence
 		currentTime += Time.deltaTime;
-
-		// Si le bouton actuel est détruit...
-		if (currentButton == null) {
-			//... on passe au bouton suivant
-			currentButton = buttonSequence[currentButtonId++];
+		
+		// Si la séquence est terminée
+		if (currentTime > duration) {
+			done = true;
 		}
-
-		// Si le joueur appuie sur une touche de son pad...
-		foreach (string button in Joypad.AXIS_BUTTONS) {
-			if(GameManager.joypads[player.Id].IsDown(button)){
-				//... si le bouton correspond à celui qui est affiché...
-				if(button == currentButton.GetComponent<Button>().btnId){
-					Debug.Log ("Execute Success!");
-				}
-				else{
-					Debug.Log ("Execute Fail !");
-				}
-			} else if(GameManager.joypads[player.Id].IsInverseDown(button)){
-				if(button == currentButton.GetComponent<Button>().btnId){
-					Debug.Log ("Resistant Success!");
-				} else{
-					Debug.Log ("Resistant Fail!");
+		else {
+			// Si on a dépassé le bouton actuel
+			if (currentTime > currentButton.time + currentButton.duration) {
+				currentButtonId++;
+				currentButton = buttons[currentButtonId];
+			}
+		}
+		
+		// Mise à jour de la position des boutons
+		float scale = 1.0f;
+		foreach (var button in buttons) {
+			Vector3 position = button.gameObject.transform.position;
+			Renderer renderer = button.gameObject.GetComponent<Renderer>();
+			Color color = renderer.material.color;
+			
+			// Position en fonction du temps
+			position.x = button.time * scale - currentTime + gameObject.transform.position.x;
+			
+			// Opacité en fonction du temps (+-1s)
+			color.a = 1 - Mathf.Abs(Mathf.Clamp(button.time - currentTime, -1.0f, 1.0f));
+			
+			// Application des modifications
+			button.gameObject.transform.position = position;
+			renderer.material.color = color;
+		}
+		
+		
+		// Si le joueur appuie sur une touche de son pad
+		foreach (string buttonName in Joypad.AXIS_BUTTONS) {
+			if (player.joypad.IsDown(buttonName)) {
+				if (!currentButton.pressed) {
+					if (currentButton.buttonName == buttonName) {
+						float precision = currentButton.GetPrecisionFor(currentButton.time - currentTime);
+						
+						Debug.Log("Joueur #" + player.id + " presse " + buttonName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
+						currentButton.SetColor(0.0f, 1.0f, 0.0f);
+					}
+					else {
+						Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonName + ")");
+						currentButton.SetColor(1.0f, 0.0f, 0.0f);
+					}
+					
+					currentButton.pressed = true;
 				}
 			}
-
 		}
-
 	}
 }
