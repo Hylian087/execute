@@ -41,9 +41,14 @@ public class Sequence {
 	public void Start() {
 		buttons = new SortedList<float, Button>();
 		
-		// TODO créer les boutons et les ajouter à buttons
-		//Button button = Button.MakeButton();
-		//buttons.Add(i, button);
+		float targetDuration = duration;
+		float totalDuration = 0.0f;
+		
+		do {
+			Button button = Button.MakeButton(1.0f); // TODO temps aléatoire des boutons
+			buttons.Add(i, button);
+		}
+		while (totalDuration < targetDuration);
 	}
 	
 	/**
