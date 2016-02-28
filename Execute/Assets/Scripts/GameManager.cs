@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
 	// Initialisation d'une partie de jeu
 	void InitGame(){
 		// Assignation des joueurs et manettes
-		for (int j = 0; j < 4; j++) {
+		for (int j = 0; j < 1; j++) {
 			joypads[j] = new Joypad();
 			players[j] = new Player(j, joypads[j]);
 		}

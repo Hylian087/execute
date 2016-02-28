@@ -117,13 +117,13 @@ public class Sequence : MonoBehaviour {
 					Debug.Log ("Execute Fail !");
 				}
 			} else if(GameManager.joypads[player.Id].IsInverseDown(button)){
-				if(button == currentButton.GetComponent<Button>().invertBtnId){
+				if(button == currentButton.GetComponent<Button>().btnId){
 					Debug.Log ("Resistant Success!");
 				} else{
 					Debug.Log ("Resistant Fail!");
 				}
 			}
-			//Debug.Log (button);
+
 		}
 
 	}
