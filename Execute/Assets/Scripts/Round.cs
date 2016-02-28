@@ -2,46 +2,52 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+enum RoundState {
+	WarmUp,
+	Rhythm,
+	Vote
+};
+
 public class Round : MonoBehaviour {
 	
 	// GameManager
-	protected GameManager gm;
+	public GameManager gm;
+	
+	// État actuel de la manche
+	public RoundState state;
 	
 	// Scores des joueurs dans la manche
-	protected int[] scores = new int[4];
+	public int[] scores = new int[4];
 	
 	// Résistant potentiel de la manche
-	protected Player resistant;
-	
-	// Longueur des séquences
-	protected int sequencesLength = 3;
+	public Player resistant;
 	
 	// Séquences de boutons
-	protected Sequence[] sequences = new Sequence[4];
-	
+	public Sequence[] sequences = new Sequence[4];
 	
 	/**
-	 * Constructeur
+	 * Démarrage
 	 */
 	public void Start() {
-		this.gm = GameManager.GetInstance();
+		gm = GameManager.GetInstance();
+		state = RoundState.WarmUp;
 		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
-			sequences[i] = new Sequence();
+			sequences[i] = Sequence.MakeSequence(gm.players[i], 30.0f);
 		}
 	}
-	
 	
 	/**
 	 * Mise à jour
 	 */
 	public void Update() {
-		// Mise à jour des séquences
-		// for (int i = 0; i < 4; i++) {
-		for (int i = 0; i < 1; i++) {
-			sequences[i].Update();
+		if (state == RoundState.Rhythm) {
+			// Mise à jour des séquences
+			for (int i = 0; i < 4; i++) {
+				sequences[i].Update();
+			}
 		}
 	}
 }
