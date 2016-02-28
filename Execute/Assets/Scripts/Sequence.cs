@@ -114,10 +114,10 @@ public class Sequence : MonoBehaviour {
 			Color color = renderer.material.color;
 			
 			// Position en fonction du temps
-			position.x = button.startTime * scale - currentTime + gameObject.transform.position.x;
+			position.x = (button.startTime + button.instant) * scale - currentTime + gameObject.transform.position.x;
 			
 			// Opacité en fonction du temps (+-1s)
-			color.a = 1 - Mathf.Abs(Mathf.Clamp(button.startTime - currentTime, -1.0f, 1.0f));
+			color.a = 1 - Mathf.Abs(Mathf.Clamp(button.startTime + button.instant - currentTime, -1.0f, 1.0f));
 			
 			// Application des modifications
 			button.gameObject.transform.position = position;
@@ -166,7 +166,7 @@ public class Sequence : MonoBehaviour {
 				
 				float precision = button.GetPrecisionFor(currentTime);
 				
-				b.y += 0.5f * (button.startTime - currentTime);
+				b.y += 0.5f * (button.startTime + button.instant - currentTime);
 				
         		Gizmos.color = Color.green;
 	        	Gizmos.DrawLine(a, b);
@@ -174,7 +174,7 @@ public class Sequence : MonoBehaviour {
 	        	a.x += 0.05f;
 	        	b.x += 0.05f;
 	        	
-				b.y += 0.5f * precision;
+				b.y = a.y + 0.5f * precision;
 				
         		Gizmos.color = Color.red;
 	        	Gizmos.DrawLine(a, b);

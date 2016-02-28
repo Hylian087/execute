@@ -73,12 +73,12 @@ public class Button : MonoBehaviour {
 		}
 		
 		// Temps actuel relatif au bouton
-		float t = startTime - currentTime;
+		float t = startTime + instant - currentTime;
 		
-		if (t < instant) {
-			precision = t / instant;
+		if (t < 0) {
+			precision = 1.0f - Mathf.Abs(t) / instant;
 		}
-		else if (t > instant) {
+		else if (t > 0) {
 			precision = t / instant - 1.0f;
 		}
 		else {
