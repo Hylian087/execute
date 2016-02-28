@@ -94,8 +94,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 613541136}
   - 114: {fileID: 613541135}
-  - 114: {fileID: 613541134}
-  - 114: {fileID: 613541137}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -103,17 +101,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &613541134
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 613541133}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1c48bf3c2f0c6a1468649c429e5a0a1d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &613541135
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -138,17 +125,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
---- !u!114 &613541137
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 613541133}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa4f34f1af9f9b344bb16916da03d151, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &2122548519
 GameObject:
   m_ObjectHideFlags: 0
