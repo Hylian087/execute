@@ -4,6 +4,8 @@ using System.Collections.Generic;
 
 public class ButtonsList : MonoBehaviour{
 
+	// Classe permettant de ranger tous les prefabs "Boutons" dans un tableau, qui sera ensuite exploité pour afficher les boutons
+
 	public static List<GameObject> buttonsList = new List<GameObject>();
 	void Start(){
 

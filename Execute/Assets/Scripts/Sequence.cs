@@ -11,15 +11,17 @@ public class Sequence : MonoBehaviour {
 	// Joueur auquel est associé la séquence
 	public Player player;
 	
-	// Temps actuel dans la séquence
-	public float t = 0.0f;
-	
 	// Durée totale de la séquence
 	public float sequenceDuration;
 
-	
+	public int buttonCount = 31;
+	public float buttonAdditionalDuration = 1.0f;
+
 	// Choix des boutons
 	int randomBtnId;
+
+	// Temps actuel de la séquence
+	float currentTime;
 
 	//public List<GameObject> buttons;
 
@@ -46,14 +48,27 @@ public class Sequence : MonoBehaviour {
 	 */
 	void Start() {
 		// Création de la séquence
-		for (int j = 0; j < sequenceDuration; j++) {
-			randomBtnId = Random.Range (0,8);
-			GameObject button = Instantiate (ButtonsList.buttonsList [randomBtnId]);
+		for (float j = 0; j < buttonCount; j++) {
 
-			button.GetComponent<Button>().buttonDuration += j;
+			// Sélection aléatoire des boutons
+			randomBtnId = Random.Range (0,8);
+			// Création des boutons
+			GameObject showedButton = Instantiate (ButtonsList.buttonsList [randomBtnId]);
+
+			// Assignation de la position des boutons
+			showedButton.transform.SetParent(gameObject.transform);
+			showedButton.transform.position = gameObject.transform.position;
+
+			// Ajout d'un temps additionnel (pour l'équilibrage)
+			float addDuration = j+buttonAdditionalDuration;
+			showedButton.GetComponent<Button>().buttonDuration += addDuration;
+			// Détermination de la durée de chaque bouton
+			Debug.Log (showedButton.GetComponent<Button>().buttonDuration += addDuration);
 		}
+
 		float targetDuration = sequenceDuration;
 		float totalDuration = 0.0f;
+
 		/*
 		do {
 
@@ -70,6 +85,17 @@ public class Sequence : MonoBehaviour {
 	 * Mise à jour
 	 */
 	void Update() {
-		t += Time.deltaTime;
+
+		// Temps actuel de la séquence
+		currentTime += Time.deltaTime;
+		//Debug.Log (GameManager.joypads [player.Id]);
+
+
+		// Si le joueur appuie sur une touche de son pad...
+		foreach (string button in Joypad.AXIS_BUTTONS) {
+			if(GameManager.joypads[player.Id].IsDown(button)){
+				//Debug.Log (GameManager.joypads[player.Id].getID() + " a appuyé sur " + button);
+			}
+		}
 	}
 }

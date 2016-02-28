@@ -39,12 +39,18 @@ public class GameManager : MonoBehaviour {
 	// Initialisation d'une partie de jeu
 	void InitGame(){
 		// Assignation des joueurs et manettes
-		for (int j = 0; j < 1; j++) {
+		for (int j = 0; j < 4; j++) {
 			joypads[j] = new Joypad();
 			players[j] = new Player(j, joypads[j]);
 		}
 		// Lancement de la partie
 		partieExecute.newRound ();
+	}
+
+	void Update(){
+
+		//Update nécessaire pour le fonctionnement des Joypad
+		Joypad.UpdateAll();
 	}
 
 }

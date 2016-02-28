@@ -37,9 +37,6 @@ public class Round : MonoBehaviour {
 		
 	    return round;
 	}
-
-	// Durée du round (pour le calcul des boutons)
-	public static float roundDuration = 30.0f;
 	
 	/**
 	 * Démarrage
@@ -52,8 +49,14 @@ public class Round : MonoBehaviour {
 			scores[i] = 0;
 			sequences[i] = Sequence.MakeSequence(GameManager.players[i], 30.0f);
 			sequences[i].transform.parent = gameObject.transform.parent;
+			sequences[i].transform.SetParent (gameObject.transform);
 		}
 
+		// Initialisation de la position des séquences (A REFACTORISER !)
+		sequences [0].transform.position = new Vector3 (-1, 1, 0);
+		sequences [1].transform.position = new Vector3 (1, 1, 0);
+		sequences [2].transform.position = new Vector3 (1, -1, 0);
+		sequences [3].transform.position = new Vector3 (-1, -1, 0);
 	}
 	
 	/**
