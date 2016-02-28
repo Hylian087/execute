@@ -7,9 +7,7 @@ public class JoyTest : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		
-		gm = GameManager.GetInstance();
-		
+			
 		string[] inputNames = Input.GetJoystickNames();
 		
 		foreach (string name in inputNames) {
@@ -20,7 +18,7 @@ public class JoyTest : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 		
-		Joypad[] joypads = gm.joypads;
+		Joypad[] joypads = GameManager.joypads;
 		
 		// Mise à jour nécessaire pour le D-Pad
 		Joypad.UpdateAll();

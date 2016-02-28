@@ -1,35 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GameManager {
+public class GameManager : MonoBehaviour {
 	
 	/**
 	 * Design Pattern Singleton
 	 */
+
+	// instance du GameManager; static afin que d'autres scripts puisse y accéder
+	public static GameManager instance = null;
+
+	// reference à ExecGame, qui va mettre en place tout la partie
+	private ExecGame partieExecute;
+
+	// Joypads
+	public static Joypad[] joypads = new Joypad[4];
 	
-	// Unique instance de l'objet GM
-	static GameManager instance;
-	
-	// Impossible de construire l'objet
-	private GameManager() {
+	// Joueurs
+	public static Player[] players = new Player[4];
+
+	void Awake(){
+		// si instance de GameManager n'existe pas
+		if (instance == null) {
+			// instanciation du GameManager
+			instance = this;
+		} else if (instance != this) { // si l'instance existe déjà
+			Destroy(gameObject); // destruction du GameManager	
+		}
+
+		partieExecute = GetComponent<ExecGame> ();
+		InitGame ();
+	}
+
+
+	// Initialisation d'une partie de jeu
+	void InitGame(){
+		// Assignation des joueurs et manettes
 		for (int j = 0; j < 4; j++) {
 			joypads[j] = new Joypad();
 			players[j] = new Player(j, joypads[j]);
 		}
+		// Lancement de la partie
+		partieExecute.newRound ();
 	}
-	
-	// Retourne l'instance de GM
-	public static GameManager GetInstance() {
-		if (instance == null) {
-			instance = new GameManager();
-		}
-		
-		return instance;
-	}
-	
-	// Joypads
-	public Joypad[] joypads = new Joypad[4];
-	
-	// Joueurs
-	public Player[] players = new Player[4];
+
 }

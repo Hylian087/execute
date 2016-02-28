@@ -3,36 +3,30 @@ using System.Collections;
 
 public class ExecGame : MonoBehaviour {
 	
-	// GameManager
-	protected GameManager gm;
-	
 	// Manche actuelle
-	public Round round;
-	
-	/**
-	 * Constructeur
-	 */
-	public ExecGame() {
-	}
+	Round round;
+
+	// Tableau qui va retenir les scores des joueurs
+	static float[] playerScores = new float[4];
 	
 	/**
 	 * Démarrage
 	 */
-	public void Start() {
-		this.gm = GameManager.GetInstance();
-		
-		
+	void Start() {
+		round = GetComponent<Round> ();
 	}
-	
-	/**
-	 * Mise à jour
-	 */
-	public void Update() {
+
+	public void newRound(){
 		if (round == null) {
 			round = Round.MakeRound();
 		}
-		
-		round.Update();
+	}
+
+	/**
+	 * Mise à jour
+	 */
+	void Update() {
+
 	}
 	
 }

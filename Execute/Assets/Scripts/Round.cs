@@ -5,16 +5,17 @@ using System.Collections.Generic;
 
 
 public class Round : MonoBehaviour {
-	
+
+	// Temps avant le début du round
+	public int warmUpTime;
+
+	// Différents états d'un round
 	public enum RoundState {
 		WarmUp,
 		Rhythm,
 		Vote
 	};
-	
-	// GameManager
-	public GameManager gm;
-	
+
 	// État actuel de la manche
 	public RoundState state;
 	
@@ -24,7 +25,7 @@ public class Round : MonoBehaviour {
 	// Résistant potentiel de la manche
 	public Player resistant;
 	
-	// Séquences de boutons
+	// Séquences de boutons (ici 4 Séquences)
 	public Sequence[] sequences = new Sequence[4];
 	
 	/**
@@ -41,13 +42,12 @@ public class Round : MonoBehaviour {
 	 * Démarrage
 	 */
 	public void Start() {
-		gm = GameManager.GetInstance();
 		state = RoundState.WarmUp;
 		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
-			sequences[i] = Sequence.MakeSequence(gm.players[i], 30.0f);
+			sequences[i] = Sequence.MakeSequence(GameManager.players[i], 30.0f);
 		}
 	}
 	
