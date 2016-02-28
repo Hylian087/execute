@@ -2,13 +2,15 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-enum RoundState {
-	WarmUp,
-	Rhythm,
-	Vote
-};
+
 
 public class Round : MonoBehaviour {
+	
+	public enum RoundState {
+		WarmUp,
+		Rhythm,
+		Vote
+	};
 	
 	// GameManager
 	public GameManager gm;
