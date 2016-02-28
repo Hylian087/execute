@@ -106,7 +106,7 @@ public class Round : MonoBehaviour {
 		if (state == RoundState.WarmUp) {
 			
 			if (currentTime > warmUpDuration) {
-				state = RoundState.Rhythm;
+				StartRhythmState();
 			}
 		}
 		
