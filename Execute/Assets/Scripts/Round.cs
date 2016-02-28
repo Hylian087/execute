@@ -53,7 +53,8 @@ public class Round : MonoBehaviour {
 		
 		state = RoundState.WarmUp;
 		
-		resistant = game.players[0];
+		resistant = game.players[Random.Range(0, 4)];
+		Debug.Log("Résistant : " + resistant.id);
 		
 		foreach (Player player in game.players) {
 			if (player == resistant) {
@@ -71,8 +72,6 @@ public class Round : MonoBehaviour {
 	void StartRhythmState() {
 		
 		state = RoundState.Rhythm;
-		
-		resistant = game.players[0];
 		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
