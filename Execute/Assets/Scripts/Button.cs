@@ -8,11 +8,14 @@ using System.Collections.Generic;
  */
 public class Button : MonoBehaviour {
 	
+	// Séquence
+	public Sequence sequence;
+
 	// Durée totale du bouton (déterminée dans la séquence)
 	public float duration;
 
 	// Position du bouton dans la timeline de la séquence
-	public float time;
+	public float startTime;
 
 	// Instant exact du bouton sur sa propre timeline (entre 0 et duration)
 	public float instant = 0.5f;
@@ -26,17 +29,18 @@ public class Button : MonoBehaviour {
 	/**
 	 * Créer un bouton
 	 * @param <string> buttonName
-	 * @param <float> time : Position du bouton dans la timeline de la séquence
+	 * @param <float> startTime : Position du bouton dans la timeline de la séquence
 	 * @param <float> duration : durée du bouton
 	 */
-	public static Button MakeButton(string buttonName, float time, float duration) {
+	public static Button MakeButton(Sequence sequence, string buttonName, float startTime, float duration) {
 		GameManager gm = GameManager.GetInstance();
 		
 		GameObject go = Instantiate(gm.prefabs["Button" + buttonName]);
 		Button button = go.GetComponent<Button>();
 		
+		button.sequence = sequence;
 		button.buttonName = buttonName;
-		button.time = time;
+		button.startTime = startTime;
 		button.duration = duration;
 
 	    return button;
@@ -58,22 +62,30 @@ public class Button : MonoBehaviour {
 	/**
 	 * Retourne la précision pour le bouton actuel (-1..1)
 	 * (si le joueur appuie sur une touche à ce moment, par exemple)
+	 * @param <float> currentTime : le temps actuel global
 	 * @return <float>
 	 */
-	public float GetPrecisionFor(float t) {
+	public float GetPrecisionFor(float currentTime) {
 		float precision;
 		
-		if (t < instant) {
-			precision = - (1 - t / instant);
-		}
-		else if (t > instant) {
-			precision = (t - instant) / (duration - instant);
-		}
-		else {
-			precision = 0.0f;
+		if (currentTime < startTime || currentTime > startTime + duration) {
+			return 0.0f;
 		}
 		
-		return 1.0f - Mathf.Abs(precision);
+		// Temps actuel relatif au bouton
+		float t = startTime - currentTime;
+		
+		if (t < instant) {
+			precision = t / instant;
+		}
+		else if (t > instant) {
+			precision = t / instant - 1.0f;
+		}
+		else {
+			precision = 1.0f;
+		}
+		
+		return Mathf.Abs(precision);
 	}
 	
 	/**

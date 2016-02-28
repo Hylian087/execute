@@ -61,7 +61,7 @@ public class Sequence : MonoBehaviour {
 			string randomButtonId = Joypad.GetRandomButton();
 			
 			// Création d'un bouton avec son GO
-			Button button = Button.MakeButton(randomButtonId, time, 1.0f);
+			Button button = Button.MakeButton(this, randomButtonId, time, 1.0f);
 			GameObject buttonGO = button.gameObject;
 
 			// Ajout du bouton créé dans le tableau contenant la séquence entière
@@ -100,7 +100,7 @@ public class Sequence : MonoBehaviour {
 		}
 		else {
 			// Si on a dépassé le bouton actuel
-			if (currentTime > currentButton.time + currentButton.duration) {
+			if (currentTime > currentButton.startTime + currentButton.duration) {
 				currentButtonId++;
 				currentButton = buttons[currentButtonId];
 			}
@@ -114,10 +114,10 @@ public class Sequence : MonoBehaviour {
 			Color color = renderer.material.color;
 			
 			// Position en fonction du temps
-			position.x = button.time * scale - currentTime + gameObject.transform.position.x;
+			position.x = button.startTime * scale - currentTime + gameObject.transform.position.x;
 			
 			// Opacité en fonction du temps (+-1s)
-			color.a = 1 - Mathf.Abs(Mathf.Clamp(button.time - currentTime, -1.0f, 1.0f));
+			color.a = 1 - Mathf.Abs(Mathf.Clamp(button.startTime - currentTime, -1.0f, 1.0f));
 			
 			// Application des modifications
 			button.gameObject.transform.position = position;
@@ -130,7 +130,7 @@ public class Sequence : MonoBehaviour {
 			if (player.joypad.IsDown(buttonName)) {
 				if (!currentButton.pressed) {
 					if (currentButton.buttonName == buttonName) {
-						float precision = currentButton.GetPrecisionFor(currentButton.time - currentTime);
+						float precision = currentButton.GetPrecisionFor(currentTime);
 						
 						Debug.Log("Joueur #" + player.id + " presse " + buttonName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
 						currentButton.SetColor(0.0f, 1.0f, 0.0f);
@@ -145,4 +145,45 @@ public class Sequence : MonoBehaviour {
 			}
 		}
 	}
+	
+	
+    void OnDrawGizmos() {
+    	
+    	Vector3 seqPosA = gameObject.transform.position;
+    	seqPosA.y -= 0.5f;
+		Vector3 seqPosB = new Vector3(seqPosA.x, seqPosA.y + 1.0f);
+    	
+		Gizmos.color = Color.black;
+    	Gizmos.DrawLine(seqPosA, seqPosB);
+        
+        if (player.id == 0) {
+			foreach (var button in buttons) {
+				Vector3 a = button.gameObject.transform.position;
+				
+				a.y += 0.5f;
+				
+				Vector3 b = new Vector3(a.x, a.y);
+				
+				float precision = button.GetPrecisionFor(currentTime);
+				
+				b.y += 0.5f * (button.startTime - currentTime);
+				
+        		Gizmos.color = Color.green;
+	        	Gizmos.DrawLine(a, b);
+	        	
+	        	a.x += 0.05f;
+	        	b.x += 0.05f;
+	        	
+				b.y += 0.5f * precision;
+				
+        		Gizmos.color = Color.red;
+	        	Gizmos.DrawLine(a, b);
+	        	
+	        	if (currentButton == button) {
+	        		Gizmos.color = Color.blue;
+		        	Gizmos.DrawLine(new Vector3(a.x - 0.2f, a.y - 1f), new Vector3(a.x + 0.2f, a.y - 1f));
+	        	}
+			}
+        }
+    }
 }
