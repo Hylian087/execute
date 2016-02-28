@@ -9,8 +9,11 @@ public class Round : MonoBehaviour {
 	// Partie
 	public ExecGame game;
 
-	// Temps avant le début du round
-	public int warmUpTime;
+	// Temps avant le début de la phase de rythme
+	public float warmUpDuration = 5.0f;
+
+	// Temps depuis le début du round
+	public float currentTime = 0.0f;
 
 	// Différents états d'un round
 	public enum RoundState {
@@ -28,9 +31,9 @@ public class Round : MonoBehaviour {
 	// Résistant potentiel de la manche
 	public Player resistant;
 	
-	// Séquences de boutons (ici 4 Séquences)
+	// Séquences de boutons
 	public Sequence[] sequences = new Sequence[4];
-
+	
 	/**
 	 * Créer une manche
 	 */
@@ -52,6 +55,25 @@ public class Round : MonoBehaviour {
 		
 		resistant = game.players[0];
 		
+		foreach (Player player in game.players) {
+			if (player == resistant) {
+				player.joypad.VibrateThrice();
+			}
+			else {
+				player.joypad.VibrateTwice();
+			}
+		}
+	}
+	
+	/**
+	 * Démarrage de la phase de rythme
+	 */
+	void StartRhythmState() {
+		
+		state = RoundState.Rhythm;
+		
+		resistant = game.players[0];
+		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
@@ -68,20 +90,27 @@ public class Round : MonoBehaviour {
 	}
 	
 	/**
+	 * Démarrage de la phase de rythme
+	 */
+	void StartVoteState() {
+		
+		state = RoundState.Vote;
+		
+	}
+	
+	/**
 	 * Mise à jour
 	 */
 	void Update() {
-		/*
-		if (Time.deltaTime != warmUpTime) {
-			state = RoundState.Rhythm;
-		}
-
-		if (state != RoundState.WarmUp && state == RoundState.Rhythm) {
-			// Mise à jour des séquences
-			for (int i = 0; i < 4; i++) {
-				sequences[i].Update();
+		currentTime += Time.deltaTime;
+		
+		if (state == RoundState.WarmUp) {
+			
+			if (currentTime > warmUpDuration) {
+				state = RoundState.Rhythm;
 			}
 		}
-	*/
+		
+		
 	}
 }

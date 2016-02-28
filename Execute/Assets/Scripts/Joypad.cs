@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using XInputDotNetPure;
 
 /**
  * Classe représentant une manette.
@@ -9,6 +10,12 @@ public class Joypad {
 	
 	// Liste des joypads instanciés
 	private static List<Joypad> joypads = new List<Joypad>();
+	
+	// Temps de vibration restant
+	private int vibrationType;
+	private float vibrationTime = 2.0f;
+	private float vibrationDuration = 2.0f;
+	private float vibrationStrength = 0.5f;
 	
 	// Liste des boutons des axes (const)
 	public static string[] AXIS_BUTTONS = new string[] {"Up", "Down", "Left", "Right", "A", "B", "X", "Y"};
@@ -157,6 +164,19 @@ public class Joypad {
 				break;
 			}
 		}
+		
+		if (vibrationTime < vibrationDuration) {
+			
+			float activate = 1.0f - Mathf.Floor((vibrationTime / vibrationDuration) / (1.0f / (vibrationType * 2.0f - 1.0f))) % 2;
+			
+			GamePad.SetVibration((PlayerIndex) id, activate * vibrationStrength, activate * vibrationStrength);
+			
+			vibrationTime += Time.deltaTime;
+			
+			if (vibrationTime >= vibrationDuration) {
+				GamePad.SetVibration((PlayerIndex) id, 0.0f, 0.0f);
+			}
+		}
 	}
 	
 	
@@ -176,5 +196,25 @@ public class Joypad {
 	 */
 	public static string GetRandomButton() {
 		return AXIS_BUTTONS[Random.Range(0, AXIS_BUTTONS.Length)];
+	}
+	
+	/**
+	 * Faire vibrer la manette deux fois
+	 * @param <float> 
+	 */
+	public void VibrateTwice(float vibrationValue = 0.5f) {
+		vibrationType = 2;
+		vibrationTime = 0.0f;
+		vibrationDuration = 2.0f;
+	}
+	
+	/**
+	 * Faire vibrer la manette trois fois
+	 * @param <float> 
+	 */
+	public void VibrateThrice(float vibrationValue = 0.5f) {
+		vibrationType = 3;
+		vibrationTime = 0.0f;
+		vibrationDuration = 2.0f;
 	}
 }
