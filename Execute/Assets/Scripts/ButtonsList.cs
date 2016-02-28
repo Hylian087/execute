@@ -14,7 +14,7 @@ public class ButtonsList : MonoBehaviour{
 		buttonsList.Add (Resources.Load (("ButtonUp"), typeof(GameObject)) as GameObject);
 		buttonsList.Add (Resources.Load (("ButtonDown"), typeof(GameObject)) as GameObject);
 		buttonsList.Add (Resources.Load (("ButtonLeft"), typeof(GameObject)) as GameObject);
-		buttonsList.Add (Resources.Load (("ButtonYRight"), typeof(GameObject)) as GameObject);
+		buttonsList.Add (Resources.Load (("ButtonRight"), typeof(GameObject)) as GameObject);
 
 
 		Debug.Log (buttonsList);

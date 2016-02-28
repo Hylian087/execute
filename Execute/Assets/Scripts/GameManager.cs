@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour {
 	// Joueurs
 	public static Player[] players = new Player[4];
 
+	// Au démarrage du jeu
 	void Awake(){
 		// si instance de GameManager n'existe pas
 		if (instance == null) {
@@ -29,6 +30,7 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject); // destruction du GameManager	
 		}
 
+		// Initialisation d'une partie
 		partieExecute = GetComponent<ExecGame> ();
 		InitGame ();
 	}
@@ -37,7 +39,7 @@ public class GameManager : MonoBehaviour {
 	// Initialisation d'une partie de jeu
 	void InitGame(){
 		// Assignation des joueurs et manettes
-		for (int j = 0; j < 4; j++) {
+		for (int j = 0; j < 1; j++) {
 			joypads[j] = new Joypad();
 			players[j] = new Player(j, joypads[j]);
 		}

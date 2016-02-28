@@ -27,7 +27,7 @@ public class Round : MonoBehaviour {
 	
 	// Séquences de boutons (ici 4 Séquences)
 	public Sequence[] sequences = new Sequence[4];
-	
+
 	/**
 	 * Créer une manche
 	 */
@@ -37,6 +37,9 @@ public class Round : MonoBehaviour {
 		
 	    return round;
 	}
+
+	// Durée du round (pour le calcul des boutons)
+	public static float roundDuration = 30.0f;
 	
 	/**
 	 * Démarrage
@@ -57,7 +60,7 @@ public class Round : MonoBehaviour {
 	 * Mise à jour
 	 */
 	void Update() {
-
+		/*
 		if (Time.deltaTime != warmUpTime) {
 			state = RoundState.Rhythm;
 		}
@@ -68,6 +71,6 @@ public class Round : MonoBehaviour {
 				sequences[i].Update();
 			}
 		}
-
+	*/
 	}
 }
