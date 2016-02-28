@@ -85,6 +85,74 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &613541133
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 613541136}
+  - 114: {fileID: 613541135}
+  - 114: {fileID: 613541134}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &613541134
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 613541133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c48bf3c2f0c6a1468649c429e5a0a1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &613541135
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 613541133}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de12e5a40f9176f4a850287e0bca6832, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buttons:
+  - btnId: 0
+    button: {fileID: 119048, guid: d6b468e991bd0eb42b241747ef81fe93, type: 2}
+  - btnId: 1
+    button: {fileID: 158938, guid: 53d1f64162f98334dbd9f57a0ad5d4b8, type: 2}
+  - btnId: 2
+    button: {fileID: 148432, guid: 290dbf111555ba344b28caba473549ba, type: 2}
+  - btnId: 3
+    button: {fileID: 181362, guid: 540337a0911183c418d39c613bd6bf16, type: 2}
+  - btnId: 4
+    button: {fileID: 160404, guid: 0988bef4ee83c2746ad5786e4e79060f, type: 2}
+  - btnId: 5
+    button: {fileID: 147570, guid: 5bc6ab1687aa0be42bd87213043006d3, type: 2}
+  - btnId: 6
+    button: {fileID: 194952, guid: f542edc1cd9d5df4181e321621667609, type: 2}
+  - btnId: 7
+    button: {fileID: 101208, guid: fb798f2afeac5334d8f74ad935382654, type: 2}
+--- !u!4 &613541136
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 613541133}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.08704758, y: .691126704, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 1
 --- !u!1 &2122548519
 GameObject:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using System.Collections;
 public class ExecGame : MonoBehaviour {
 	
 	// Manche actuelle
-	Round round;
+	//Round round;
 
 	// Tableau qui va retenir les scores des joueurs
 	static float[] playerScores = new float[4];
@@ -13,13 +13,11 @@ public class ExecGame : MonoBehaviour {
 	 * Démarrage
 	 */
 	void Start() {
-		round = GetComponent<Round> ();
+		//round = GetComponent<Round> ();
 	}
 
 	public void newRound(){
-		if (round == null) {
-			round = Round.MakeRound();
-		}
+		Round.MakeRound();
 	}
 
 	/**

@@ -41,25 +41,33 @@ public class Round : MonoBehaviour {
 	/**
 	 * Démarrage
 	 */
-	public void Start() {
-		state = RoundState.WarmUp;
-		
+	void Start() {
+
+		state = RoundState.WarmUp;		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
 			sequences[i] = Sequence.MakeSequence(GameManager.players[i], 30.0f);
+			sequences[i].transform.parent = gameObject.transform.parent;
 		}
+
 	}
 	
 	/**
 	 * Mise à jour
 	 */
-	public void Update() {
-		if (state == RoundState.Rhythm) {
+	void Update() {
+
+		if (Time.deltaTime != warmUpTime) {
+			state = RoundState.Rhythm;
+		}
+
+		if (state != RoundState.WarmUp && state == RoundState.Rhythm) {
 			// Mise à jour des séquences
 			for (int i = 0; i < 4; i++) {
 				sequences[i].Update();
 			}
 		}
+
 	}
 }

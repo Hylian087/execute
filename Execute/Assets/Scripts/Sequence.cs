@@ -16,41 +16,48 @@ public class Sequence : MonoBehaviour {
 	
 	// Durée totale de la séquence
 	public float duration;
-	
+
+	//public List<GameObject> buttons;
+	int random;
+
 	// Séquences de boutons (<float> key : instant de début du bouton)
-	public SortedList<float, Button> buttons;
-	
+
+
 	/**
 	 * Créer une séquence
 	 * @param <Player> player : joueur associé
 	 * @param <float> duration : durée totale que doit faire la séquence
 	 */
 	public static Sequence MakeSequence(Player player, float duration) {
-		GameObject go = new GameObject("SequenceInstance");
+		GameObject go = new GameObject("SequenceJoueur" + player.Id);
 		Sequence seq = go.AddComponent<Sequence>();
 		
 		seq.player = player;
 		seq.duration = duration;
-		
+
 	    return seq;
 	}
 	
 	/**
 	 * Démarrage
 	 */
-	public void Start() {
-		buttons = new SortedList<float, Button>();
-		
+	void Start() {
+		random = Random.Range (0, 9);
+
+		Instantiate (ButtonsList.buttonsList [0]);
+
 		float targetDuration = duration;
 		float totalDuration = 0.0f;
-		
+		/*
 		do {
+
 			Button button = Button.MakeButton(1.0f); // TODO temps aléatoire des boutons
 			buttons.Add(totalDuration, button);
 			
 			totalDuration += button.duration;
 		}
 		while (totalDuration < targetDuration);
+		*/
 	}
 	
 	/**

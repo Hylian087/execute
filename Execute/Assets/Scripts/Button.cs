@@ -13,19 +13,22 @@ public class Button : MonoBehaviour {
 	
 	// Instant exact du bouton sur sa propre timeline (entre 0 et duration)
 	public float instant = 0.5f;
-	
+
+	public int btnId;
+
 	/**
 	 * Créer un bouton
 	 * @param <float> duration : durée que doit faire le bouton
 	 */
-	public static Button MakeButton(float duration) {
+	/*public static Button MakeButton(float duration) {
+
 		GameObject go = new GameObject("ButtonInstance");
 		Button button = go.AddComponent<Button>();
 		
 		button.duration = duration;
 		
 	    return button;
-	}
+	}*/
 	
 	/**
 	 * Démarrage
