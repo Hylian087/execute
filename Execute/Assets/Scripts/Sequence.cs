@@ -8,77 +8,48 @@ using System.Collections.Generic;
  */
 public class Sequence {
 	
+	// Joueur auquel est associé la séquence
+	public Player player;
+	
 	// Temps actuel dans la séquence
-	private float t = 0.0f;
+	public float t = 0.0f;
 	
 	// Durée totale de la séquence
-	private float duration = 4.0f;
+	public float duration;
 	
-	// Longueur des séquences
-	private int _length;
-	public int Length {
-		get { return buttons.Count; }
-		set {}
-	}
-	
-	// Séquences de boutons
-	protected SortedList<int, string> buttons;
-	
+	// Séquences de boutons (<float> key : instant de début du bouton)
+	public SortedList<float, Button> buttons;
 	
 	/**
-	 * Constructeur
+	 * Créer une séquence
+	 * @param <Player> player : joueur associé
+	 * @param <float> duration : durée totale que doit faire la séquence
 	 */
-	public Sequence(int length = 3) {
-		buttons = new SortedList<int, string>();
+	public static Sequence MakeSequence(Player player, float duration) {
+		GameObject go = new GameObject("SequenceInstance");
+		Sequence seq = go.AddComponent<Sequence>();
 		
-		for (int i = 0; i < length; i++) {
-			buttons.Add(i, Joypad.GetRandomButton());
-		}
+		seq.player = player;
+		seq.duration = duration;
+		
+	    return seq;
 	}
 	
+	/**
+	 * Démarrage
+	 */
+	public void Start() {
+		buttons = new SortedList<float, Button>();
+		
+		// TODO créer les boutons et les ajouter à buttons
+		//Button button = Button.MakeButton();
+		//buttons.Add(i, button);
+	}
 	
 	/**
 	 * Mise à jour
 	 */
 	public void Update() {
 		t += Time.deltaTime;
-		Debug.Log(t);
-	}
-	
-	/**
-	 * Retourne un nombre entre 0 et 1 représentant la progression du curseur dans cette séquence.
-	 * Si le nombre est supérieur à 1, alors la séquence est terminée.
-	 * @return <float>
-	 */
-	public float GetNormalizedProgression() {
-		return t / duration;
-	}
-	
-	/**
-	 * Retourne le numéro de la touche actuelle dans la séquence.
-	 * @return <int>
-	 */
-	public int GetCurrentButtonNumber() {
-		return (int) Mathf.Ceil(t / duration * Length);
-	}
-	
-	
-	/**
-	 * Retourne le nom de la touche actuelle dans la séquence.
-	 * @return <string>
-	 */
-	public string GetCurrentButtonName() {
-		return buttons[GetCurrentButtonNumber()];
-	}
-	
-	
-	/**
-	 * Retourne la précision pour le bouton actuel (0..1)
-	 * (si le joueur appuie sur une touche à ce moment, par exemple)
-	 * @return <float>
-	 */
-	public float GetCurrentPrecision() {
-		float buttonDuration = duration / Length;
-		return 1 - Mathf.Abs((float) (t % buttonDuration / buttonDuration - 0.5)) * 2;
 	}
 }
