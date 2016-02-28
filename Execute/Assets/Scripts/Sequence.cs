@@ -8,6 +8,9 @@ using System.Collections.Generic;
  */
 public class Sequence : MonoBehaviour {
 	
+	// Manche à laquelle est associé la séquence
+	public Round round;
+	
 	// Joueur auquel est associé la séquence
 	public Player player;
 	
@@ -34,10 +37,11 @@ public class Sequence : MonoBehaviour {
 	 * Créer une séquence
 	 * @param <Player> player : joueur associé
 	 */
-	public static Sequence MakeSequence(Player player) {
+	public static Sequence MakeSequence(Round round, Player player) {
 		GameObject go = new GameObject("Player" + player.id + "Sequence");
 		Sequence seq = go.AddComponent<Sequence>();
 		
+		seq.round = round;
 		seq.player = player;
 
 	    return seq;
@@ -126,23 +130,37 @@ public class Sequence : MonoBehaviour {
 		
 		
 		// Si le joueur appuie sur une touche de son pad
+		string buttonDownName = null;
+		
 		foreach (string buttonName in Joypad.AXIS_BUTTONS) {
 			if (player.joypad.IsDown(buttonName)) {
-				if (!currentButton.pressed) {
-					if (currentButton.buttonName == buttonName) {
-						float precision = currentButton.GetPrecisionFor(currentTime);
-						
-						Debug.Log("Joueur #" + player.id + " presse " + buttonName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
-						currentButton.SetColor(0.0f, 1.0f, 0.0f);
-					}
-					else {
-						Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonName + ")");
-						currentButton.SetColor(1.0f, 0.0f, 0.0f);
-					}
-					
-					currentButton.pressed = true;
-				}
+				buttonDownName = buttonName;
+				break;
 			}
+		}
+		
+		if (buttonDownName != null && !currentButton.pressed) {
+			float precision = currentButton.GetPrecisionFor(currentTime);
+			
+			if (currentButton.buttonName == buttonDownName) {
+				
+				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
+				currentButton.SetColor(0.0f, 1.0f, 0.0f);
+				
+			}
+			else if (
+				player == round.resistant &&
+				player.joypad.IsInverse(currentButton.buttonName, buttonDownName)
+			) {
+				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
+				currentButton.SetColor(0.0f, 0.0f, 1.0f);
+			}
+			else {
+				Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
+				currentButton.SetColor(1.0f, 0.0f, 0.0f);
+			}
+			
+			currentButton.pressed = true;
 		}
 	}
 	

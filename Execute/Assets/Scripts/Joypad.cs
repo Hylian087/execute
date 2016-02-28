@@ -95,6 +95,18 @@ public class Joypad {
 	}
 
 	/**
+	 * Tester si un bouton est l'inverse d'un autre
+	 * (ne fonctionne que pour les touches directionnelles et ABXY)
+	 * 
+	 * @param <string> le nom de la touche ("A", "B", "Up", ...)
+	 * @param <string> le nom de la touche ("A", "B", "Up", ...)
+	 * @return <bool>
+	 */
+	public bool IsInverse(string button1, string button2) {
+		return button2 == inverses[button1];
+	}
+
+	/**
 	 * Retourne l'ID du joypad
 	 * 
 	 * @return <int>

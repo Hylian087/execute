@@ -48,13 +48,16 @@ public class Round : MonoBehaviour {
 	 */
 	void Start() {
 		
-		state = RoundState.WarmUp;		
+		state = RoundState.WarmUp;
+		
+		resistant = game.players[0];
+		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
-			sequences[i] = Sequence.MakeSequence(game.players[i]);
+			sequences[i] = Sequence.MakeSequence(this, game.players[i]);
 			sequences[i].transform.parent = gameObject.transform.parent;
-			sequences[i].transform.SetParent (gameObject.transform);
+			sequences[i].transform.SetParent(gameObject.transform);
 		}
 
 		// Initialisation de la position des séquences (A REFACTORISER !)
