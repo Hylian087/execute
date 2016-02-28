@@ -29,7 +29,7 @@ public class ExecGame : MonoBehaviour {
 	 */
 	public void Update() {
 		if (round == null) {
-			round = (Round) Instantiate(Round);
+			round = Round.MakeRound();
 		}
 		
 		round.Update();

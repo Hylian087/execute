@@ -28,6 +28,16 @@ public class Round : MonoBehaviour {
 	public Sequence[] sequences = new Sequence[4];
 	
 	/**
+	 * Créer une manche
+	 */
+	public static Round MakeRound() {
+		GameObject go = new GameObject("RoundInstance");
+		Round round = go.AddComponent<Round>();
+		
+	    return round;
+	}
+	
+	/**
 	 * Démarrage
 	 */
 	public void Start() {
