@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * Représente une séquence de boutons
  * Permet de calculer la précision du joueur 
  */
-public class Sequence {
+public class Sequence : MonoBehaviour {
 	
 	// Joueur auquel est associé la séquence
 	public Player player;

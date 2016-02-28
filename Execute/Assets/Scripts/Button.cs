@@ -6,7 +6,7 @@ using System.Collections.Generic;
  * Représente une séquence de boutons
  * Permet de calculer la précision du joueur 
  */
-public class Button {
+public class Button : MonoBehaviour {
 	
 	// Durée totale du bouton
 	public float duration = 1.0f;
