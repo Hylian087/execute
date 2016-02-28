@@ -40,9 +40,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 645c7904df8ca714480772eeae39ff35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  duration: 1
+  buttonDuration: 0
+  buttonTime: 0
   instant: .5
-  btnId: 7
+  btnId: Right
 --- !u!212 &21274828
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -75,7 +76,11 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: btnId
+      value: Right
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 101208}
