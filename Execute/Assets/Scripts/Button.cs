@@ -39,7 +39,7 @@ public class Button {
 	 * (si le joueur appuie sur une touche à ce moment, par exemple)
 	 * @return <float>
 	 */
-	public float GetCurrentPrecision(float t) {
+	public float GetPrecisionFor(float t) {
 		if (t < instant) {
 			return - (1 - t / instant);
 		}
