@@ -44,6 +44,7 @@ MonoBehaviour:
   buttonTime: 0
   instant: .5
   btnId: Down
+  invertBtnId: Up
 --- !u!212 &21235988
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -80,6 +81,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: btnId
       value: Down
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: invertBtnId
+      value: Up
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

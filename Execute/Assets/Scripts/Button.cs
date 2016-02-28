@@ -19,6 +19,7 @@ public class Button : MonoBehaviour {
 
 	// Id du bouton (pour les prefabs : Up Down Left Right...)
 	public string btnId;
+	public string invertBtnId;
 
 	/**
 	 * Démarrage

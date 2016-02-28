@@ -15,7 +15,7 @@ public class Sequence : MonoBehaviour {
 	public float sequenceDuration;
 
 	public int buttonCount = 31;
-	public float buttonAdditionalDuration = 0.0f;
+	public float buttonAdditionalDuration = 5.0f;
 
 	// Choix des boutons
 	int randomBtnId;
@@ -71,7 +71,7 @@ public class Sequence : MonoBehaviour {
 			// Ajout d'un temps additionnel (pour l'équilibrage)
 			float addDuration = j+buttonAdditionalDuration;
 			showedButton.GetComponent<Button>().buttonDuration += addDuration;
-			// Détermination de la durée de chaque bouton
+			buttonAdditionalDuration++;
 		}
 
 		float targetDuration = sequenceDuration;
@@ -106,19 +106,24 @@ public class Sequence : MonoBehaviour {
 			currentButton = buttonSequence[currentButtonId++];
 		}
 
-		//Debug.Log (GameManager.joypads [player.Id]);
-
-
 		// Si le joueur appuie sur une touche de son pad...
 		foreach (string button in Joypad.AXIS_BUTTONS) {
 			if(GameManager.joypads[player.Id].IsDown(button)){
 				//... si le bouton correspond à celui qui est affiché...
 				if(button == currentButton.GetComponent<Button>().btnId){
-					Debug.Log ("Success!");
+					Debug.Log ("Execute Success!");
+				}
+				else{
+					Debug.Log ("Execute Fail !");
+				}
+			} else if(GameManager.joypads[player.Id].IsInverseDown(button)){
+				if(button == currentButton.GetComponent<Button>().invertBtnId){
+					Debug.Log ("Resistant Success!");
 				} else{
-					Debug.Log ("Fail !");
+					Debug.Log ("Resistant Fail!");
 				}
 			}
+			//Debug.Log (button);
 		}
 
 	}
