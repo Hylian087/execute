@@ -46,7 +46,9 @@ public class Sequence : MonoBehaviour {
 		
 		do {
 			Button button = Button.MakeButton(1.0f); // TODO temps aléatoire des boutons
-			buttons.Add(i, button);
+			buttons.Add(totalDuration, button);
+			
+			totalDuration += button.duration;
 		}
 		while (totalDuration < targetDuration);
 	}
