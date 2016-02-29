@@ -8,7 +8,7 @@ public class VoteState : MonoBehaviour {
 	/**
 	 * Créer une voteState
 	 */
-	public static Sequence MakeVoteState(Round round) {
+	public static VoteState MakeVoteState(Round round) {
 		GameObject go = new GameObject("VoteState");
 		VoteState vs = go.AddComponent<VoteState>();
 		
