@@ -123,10 +123,10 @@ public class Sequence : MonoBehaviour {
 			Color color = renderer.material.color;
 			
 			// Position en fonction du temps
-			position.x = (button.startTime + button.instant) * scale - currentTime + gameObject.transform.position.x;
+			position.x = (button.startTime + button.instant - currentTime) * scale + gameObject.transform.position.x;
 			
 			// Opacité en fonction du temps (+-1s)
-			color.a = 1 - Mathf.Abs(Mathf.Clamp(button.startTime + button.instant - currentTime, -1.0f, 1.0f));
+			//color.a = 1 - Mathf.Abs(Mathf.Clamp(button.startTime + button.instant - currentTime, -1.0f, 1.0f));
 			
 			// Application des modifications
 			button.gameObject.transform.position = position;
@@ -174,8 +174,6 @@ public class Sequence : MonoBehaviour {
 			}
 			
 			currentButton.pressed = true;
-
-			Debug.Log ("Score du joueur #"+player.id+" = "+player.score);
 		}
 
 	}
@@ -187,7 +185,7 @@ public class Sequence : MonoBehaviour {
     	seqPosA.y -= 0.5f;
 		Vector3 seqPosB = new Vector3(seqPosA.x, seqPosA.y + 1.0f);
     	
-		Gizmos.color = Color.black;
+		Gizmos.color = Color.magenta;
     	Gizmos.DrawLine(seqPosA, seqPosB);
         
         if (player.id == 0) {
@@ -215,7 +213,7 @@ public class Sequence : MonoBehaviour {
 	        	
 	        	if (currentButton == button) {
 	        		Gizmos.color = Color.blue;
-		        	Gizmos.DrawLine(new Vector3(a.x - 0.2f, a.y - 1f), new Vector3(a.x + 0.2f, a.y - 1f));
+		        	Gizmos.DrawLine(new Vector3(a.x - 5f, a.y - 5f), new Vector3(a.x + 5f, a.y - 5f));
 	        	}
 			}
         }
