@@ -50,6 +50,8 @@ public class Button : MonoBehaviour {
 	 * Démarrage
 	 */
 	void Start() {
+		GetComponent<SpriteRenderer>().sortingLayerName = "Buttons";
+		GetComponent<SpriteRenderer> ().sortingOrder = 5;
 	}
 	
 	/**

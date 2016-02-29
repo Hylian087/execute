@@ -82,7 +82,7 @@ public class Round : MonoBehaviour {
 		}
 
 		// Initialisation de la position des séquences (A REFACTORISER !)
-		sequences [0].transform.position = new Vector3 (-1, 1.5f, 0);
+		sequences [0].transform.position = new Vector3 (-59, 69, 0);
 		sequences [1].transform.position = new Vector3 (1, 1, 0);
 		sequences [2].transform.position = new Vector3 (1, -1.5f, 0);
 		sequences [3].transform.position = new Vector3 (-1, -1, 0);
@@ -94,6 +94,7 @@ public class Round : MonoBehaviour {
 	void StartVoteState() {
 		
 		state = RoundState.Vote;
+
 		
 	}
 	
@@ -109,10 +110,5 @@ public class Round : MonoBehaviour {
 				StartRhythmState();
 			}
 		}
-
-		if (state == RoundState.Vote) {
-			
-		}
-		
 	}
 }

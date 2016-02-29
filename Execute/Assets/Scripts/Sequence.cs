@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 5;
+	public int buttonCount = 30;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -116,7 +116,7 @@ public class Sequence : MonoBehaviour {
 
 
 		// Mise à jour de la position des boutons
-		float scale = 1.0f;
+		float scale = 30.0f;
 		foreach (var button in buttons) {
 			Vector3 position = button.gameObject.transform.position;
 			Renderer renderer = button.gameObject.GetComponent<Renderer>();
