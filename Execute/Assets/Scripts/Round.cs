@@ -91,11 +91,8 @@ public class Round : MonoBehaviour {
 	/**
 	 * Démarrage de la phase de rythme
 	 */
-	void StartVoteState() {
-		
+	public void StartVoteState() {
 		state = RoundState.Vote;
-
-		
 	}
 	
 	/**

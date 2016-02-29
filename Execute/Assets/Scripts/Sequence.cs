@@ -101,7 +101,7 @@ public class Sequence : MonoBehaviour {
 		// Si la séquence est terminée
 		if (currentTime > duration) {
 			done = true;
-			round.state = Round.RoundState.Vote;
+			round.StartVoteState();
 			Debug.Log (round.state);
 		}
 		else {
