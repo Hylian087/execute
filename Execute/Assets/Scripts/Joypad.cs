@@ -58,12 +58,14 @@ public class Joypad {
 		axesButtons.Add("Left", 	0);
 		axesButtons.Add("Right", 	0);
 		
-		// Changement de Joy pour la prochaine instance
-		lastId++;
-
 		// Initialisation de l'identifiant
 		id = lastId;
 		
+		Debug.Log ("manette "+ lastId);
+
+		// Changement de Joy pour la prochaine instance
+		lastId++;
+
 		// Ajout de ce joypad à la liste des joypads
 		joypads.Add(this);
 	}
@@ -85,7 +87,7 @@ public class Joypad {
 				return axesButtons[button] == 1;
 			
 			default:
-				return Input.GetButtonDown("Joy" + id + button);
+				return Input.GetButtonDown("Joy" + (id+1) + button);
 		}
 	}
 
@@ -136,7 +138,7 @@ public class Joypad {
 			switch (button) {
 				case "Up":
 				case "Down":
-					axis = Input.GetAxis("Joy" + id + "UpDown");
+					axis = Input.GetAxis("Joy" + (id+1) + "UpDown");
 					
 					// Le bouton Haut ou Bas est pressé
 					if ((button == "Up" 	&& axis == 1) ^
@@ -151,7 +153,7 @@ public class Joypad {
 					
 				case "Left":
 				case "Right":
-					axis = Input.GetAxis("Joy" + id + "RightLeft");
+					axis = Input.GetAxis("Joy" + (id+1) + "RightLeft");
 					
 					// Le bouton Droite ou Gauche est pressé
 					if ((button == "Left" 	&& axis == -1) ^
@@ -167,7 +169,7 @@ public class Joypad {
 		
 		if (vibrationTime < vibrationDuration) {
 			
-			PlayerIndex pid = (PlayerIndex) (id - 1);
+			PlayerIndex pid = (PlayerIndex) id;
 			
 			float activate = 1.0f - Mathf.Floor((vibrationTime / vibrationDuration) / (1.0f / (vibrationType * 2.0f - 1.0f))) % 2;
 			
