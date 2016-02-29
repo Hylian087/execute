@@ -109,7 +109,10 @@ public class Round : MonoBehaviour {
 				StartRhythmState();
 			}
 		}
-		
+
+		if (state == RoundState.Vote) {
+			
+		}
 		
 	}
 }

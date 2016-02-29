@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 30;
+	public int buttonCount = 5;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -101,6 +101,8 @@ public class Sequence : MonoBehaviour {
 		// Si la séquence est terminée
 		if (currentTime > duration) {
 			done = true;
+			round.state = Round.RoundState.Vote;
+			Debug.Log (round.state);
 		}
 		else {
 			// Si on a dépassé le bouton actuel
@@ -109,7 +111,10 @@ public class Sequence : MonoBehaviour {
 				currentButton = buttons[currentButtonId];
 			}
 		}
-		
+
+		//Debug.Log ("currentButtonId : "+ currentButtonId);
+
+
 		// Mise à jour de la position des boutons
 		float scale = 1.0f;
 		foreach (var button in buttons) {
@@ -141,27 +146,38 @@ public class Sequence : MonoBehaviour {
 		
 		if (buttonDownName != null && !currentButton.pressed) {
 			float precision = currentButton.GetPrecisionFor(currentTime);
-			
+
+			// Le joueur exécute et réussit
 			if (currentButton.buttonName == buttonDownName) {
 				
-				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
+				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
 				currentButton.SetColor(0.0f, 1.0f, 0.0f);
-				
+
+				player.score +=Mathf.RoundToInt(precision * 10);
+
 			}
+			// Le joueur résiste et réussit
 			else if (
 				player == round.resistant &&
 				player.joypad.IsInverse(currentButton.buttonName, buttonDownName)
 			) {
-				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
+				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
 				currentButton.SetColor(0.0f, 0.0f, 1.0f);
+
+
+				player.score +=Mathf.RoundToInt(precision * 10);
 			}
+			// Le joueur se trompe
 			else {
-				Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
+				//Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
 				currentButton.SetColor(1.0f, 0.0f, 0.0f);
 			}
 			
 			currentButton.pressed = true;
+
+			Debug.Log ("Score du joueur #"+player.id+" = "+player.score);
 		}
+
 	}
 	
 	

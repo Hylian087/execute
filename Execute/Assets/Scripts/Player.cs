@@ -10,7 +10,7 @@ public class Player {
 	public Joypad joypad;
 	
 	// Score
-	public int score = 0;
+	public float score = 0;
 	
 	
 	/**

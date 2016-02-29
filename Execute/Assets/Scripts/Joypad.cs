@@ -59,9 +59,8 @@ public class Joypad {
 		axesButtons.Add("Right", 	0);
 		
 		// Initialisation de l'identifiant
-		id = lastId;
-		
-		Debug.Log ("manette "+ lastId);
+		id = lastId;	
+
 
 		// Changement de Joy pour la prochaine instance
 		lastId++;
