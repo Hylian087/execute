@@ -1,0 +1,1 @@
+aseprite -b --split-layers VoteBoards.ase --sheet ../VoteBoards.png
