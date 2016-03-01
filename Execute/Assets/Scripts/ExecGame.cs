@@ -37,10 +37,6 @@ public class ExecGame : MonoBehaviour {
 		players[2].voteID = "A";
 		players[3].voteID = "X";
 
-		for (int i = 0; i < 4; i++) {
-			Debug.Log (players[i].voteID);
-		}
-
 		// Lancement d'un round
 		NewRound();
 		

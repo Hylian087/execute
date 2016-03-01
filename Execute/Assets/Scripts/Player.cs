@@ -20,7 +20,8 @@ public class Player {
 	public string hasVotedFor;
 	// Nombre de votes que le joueur a reçu contre lui
 	public int hasVotes;
-	
+	//
+	public bool hasAlreadyVoted;
 	/**
 	 * Constructeur
 	 * @param <int> id
