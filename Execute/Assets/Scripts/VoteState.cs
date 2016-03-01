@@ -22,6 +22,12 @@ public class VoteState : MonoBehaviour {
 	// Personnes qui ont voté
 	public int hasVoted;
 
+	// Compteurs de scores de PARTIE
+	public Dictionary<int, GameObject> globalScoreCounter = new Dictionary<int, GameObject>();
+
+	// Compteurs de scores de ROUND
+	public Dictionary<int, GameObject> roundScoreCounter = new Dictionary<int, GameObject>();
+
 	// Compteurs de votes (un pour chaque joueur), string = nom du joueur, GameObject = objet créé en jeu pour afficher le compteur
 	public Dictionary<string,GameObject> voteCounter = new Dictionary<string,GameObject>();
 
@@ -59,22 +65,57 @@ public class VoteState : MonoBehaviour {
 		// Création du tableau comptant les votes
 		votes = new Dictionary<string, int> (4);
 
-		// Création des compteurs de votes
+
 		foreach(Player player in game.players){
+			// Création des compteurs de votes
 			votes.Add (player.voteID,0);
 			voteCounter.Add(player.voteID, Instantiate (Resources.Load ("VoteCounter"+player.id)) as GameObject);
+			// Création des compteurs de scores GLOBAUX
+			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
+			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
+			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
+			globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString();
+			// Création des compteurs de scores DE ROUND
+			roundScoreCounter.Add (player.id, Instantiate (Resources.Load ("RoundScoreCounter"+player.id)) as GameObject);
+			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
+			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
+			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 		}
 
 		foreach (var counter in voteCounter) {
 			counter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
 			counter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
+			counter.Value.transform.SetParent (gameObject.transform);
+		}
+
+		foreach (var gSCounter in globalScoreCounter) {
+			gSCounter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
+			gSCounter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
+			gSCounter.Value.transform.SetParent (gameObject.transform);
+		}
+
+		foreach (var rSCounter in roundScoreCounter) {
+			rSCounter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
+			rSCounter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
+			rSCounter.Value.transform.SetParent (gameObject.transform);
 		}
 
 		// Placement des compteurs de vote dans l'écran de jeu
 		voteCounter ["Y"].transform.position = new Vector3 (-225, 48, 0);
+		globalScoreCounter [0].transform.position = new Vector3 (-225, 110, 0);
+		roundScoreCounter [0].transform.position = new Vector3 (-225, 82, 0);
+
 		voteCounter ["B"].transform.position = new Vector3 (225, 48, 0);
+		globalScoreCounter [1].transform.position = new Vector3 (225, 110, 0);
+		roundScoreCounter [1].transform.position = new Vector3 (225, 82, 0);
+
 		voteCounter ["A"].transform.position = new Vector3 (225, -48, 0);
+		globalScoreCounter [2].transform.position = new Vector3 (225, -110, 0);
+		roundScoreCounter [2].transform.position = new Vector3 (225, -82, 0);
+
 		voteCounter ["X"].transform.position = new Vector3 (-225, -48, 0);
+		globalScoreCounter [3].transform.position = new Vector3 (-225, -110, 0);
+		roundScoreCounter [3].transform.position = new Vector3 (-225, -82, 0);
 
 
 	}
