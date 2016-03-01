@@ -59,9 +59,11 @@ public class Round : MonoBehaviour {
 		foreach (Player player in game.players) {
 			if (player == resistant) {
 				player.joypad.VibrateThrice();
+				player.isResistant = true;
 			}
 			else {
 				player.joypad.VibrateTwice();
+				player.isResistant = false;
 			}
 		}
 	}
@@ -93,6 +95,7 @@ public class Round : MonoBehaviour {
 	 */
 	public void StartVoteState() {
 		state = RoundState.Vote;
+		VoteState.MakeVoteState (this,game);		
 	}
 	
 	/**
@@ -104,8 +107,11 @@ public class Round : MonoBehaviour {
 		if (state == RoundState.WarmUp) {
 			
 			if (currentTime > warmUpDuration) {
-				StartRhythmState();
-			}
+				StartRhythmState ();
+			} 
+		} else if(state == RoundState.Vote){
+			StartVoteState();
 		}
+
 	}
 }

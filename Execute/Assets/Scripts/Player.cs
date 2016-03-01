@@ -11,8 +11,17 @@ public class Player {
 	
 	// Score
 	public float score = 0;
-	
-	
+
+	// Le joueur est-il résistant?
+	public bool isResistant;
+	// Vote ID
+	public string voteID;
+	// Celui pour qui le joueur a voté
+	public string hasVotedFor;
+	// Nombre de votes que le joueur a reçu contre lui
+	public int hasVotes;
+	//
+	public bool hasAlreadyVoted;
 	/**
 	 * Constructeur
 	 * @param <int> id
