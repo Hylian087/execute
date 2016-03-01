@@ -83,20 +83,14 @@ public class VoteState : MonoBehaviour {
 		}
 
 		foreach (var counter in voteCounter) {
-			counter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
-			counter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
 			counter.Value.transform.SetParent (gameObject.transform);
 		}
 
 		foreach (var gSCounter in globalScoreCounter) {
-			gSCounter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
-			gSCounter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
 			gSCounter.Value.transform.SetParent (gameObject.transform);
 		}
 
 		foreach (var rSCounter in roundScoreCounter) {
-			rSCounter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
-			rSCounter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
 			rSCounter.Value.transform.SetParent (gameObject.transform);
 		}
 
@@ -130,8 +124,6 @@ public class VoteState : MonoBehaviour {
 				voteSkull.Add (_player.id,Instantiate(Resources.Load ("skullVote")) as GameObject);
 				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
 				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
-				voteSkull[_player.id].GetComponent<SpriteRenderer>().sortingLayerName = "Vote";
-				voteSkull[_player.id].GetComponent<SpriteRenderer>().sortingOrder = 6;
 				// Le joueur a donc voté
 				_player.hasAlreadyVoted = true;
 				}
