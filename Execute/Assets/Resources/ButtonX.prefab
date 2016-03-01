@@ -24,7 +24,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 148432}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -.649119794, y: .00485627726, z: 0}
+  m_LocalPosition: {x: -0.6491198, y: 0.0048562773, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MonoBehaviour:
   sequence: {fileID: 0}
   duration: 0
   startTime: 0
-  instant: .5
+  instant: 0.5
   buttonName: 
   pressed: 0
 --- !u!212 &21212978
@@ -64,14 +64,18 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_AutoUVMaxDistance: .5
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 789713061
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300036, guid: c86d017a95bfaca488264221bcf88974, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -92,6 +96,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300036, guid: c86d017a95bfaca488264221bcf88974,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: 789713061
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 148432}

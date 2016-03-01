@@ -1,0 +1,1 @@
+aseprite -b *.ase --sheet-pack --sheet-width=48 --sheet-height=128 --sheet ../../AxesButtons.png

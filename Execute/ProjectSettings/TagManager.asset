@@ -44,17 +44,17 @@ TagManager:
   - name: Background
     uniqueID: 2358447439
     locked: 0
-  - name: MachineBody
-    uniqueID: 4242993175
-    locked: 0
-  - name: AnimatedObjects
-    uniqueID: 190777167
-    locked: 0
   - name: Buttons
     uniqueID: 789713061
     locked: 0
   - name: ButtonsFrames
     uniqueID: 1126000301
+    locked: 0
+  - name: MachineBody
+    uniqueID: 4242993175
+    locked: 0
+  - name: AnimatedObjects
+    uniqueID: 190777167
     locked: 0
   - name: Vote
     uniqueID: 1364600223

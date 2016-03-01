@@ -1,0 +1,129 @@
+fileFormatVersion: 2
+guid: 97f3a0fa273eff34f8f4213900f463ba
+timeCreated: 1456853827
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: VoteBoards_0
+    21300002: VoteBoards_1
+    21300004: VoteBoards_2
+    21300006: VoteBoards_3
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: VoteBoards_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 102
+        width: 129
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51.5, y: 17}
+        - {x: -64.5, y: 4}
+        - {x: -64.5, y: -4}
+        - {x: -51.5, y: -17}
+        - {x: 64.5, y: -17}
+        - {x: 64.5, y: 17}
+    - name: VoteBoards_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 68
+        width: 129
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64.5, y: 17}
+        - {x: -64.5, y: -17}
+        - {x: 52.5, y: -17}
+        - {x: 64.5, y: -9}
+        - {x: 64.5, y: 5}
+        - {x: 58.5, y: 17}
+    - name: VoteBoards_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 34
+        width: 129
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -64.5, y: 17}
+        - {x: -64.5, y: -17}
+        - {x: 52.5, y: -17}
+        - {x: 64.5, y: -9}
+        - {x: 64.5, y: 5}
+        - {x: 58.5, y: 17}
+    - name: VoteBoards_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 129
+        height: 34
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -51.5, y: 17}
+        - {x: -64.5, y: 4}
+        - {x: -64.5, y: -4}
+        - {x: -51.5, y: -17}
+        - {x: 64.5, y: -17}
+        - {x: 64.5, y: 17}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
