@@ -18,7 +18,7 @@ public class Button : MonoBehaviour {
 	public float startTime;
 
 	// Instant exact du bouton sur sa propre timeline (entre 0 et duration)
-	public float instant = 0.5f;
+	public float instant;
 	
 	// Temps où le bouton est cliquable autour de son "instant".
 	public float clickableRadius = 0.5f;
@@ -34,8 +34,9 @@ public class Button : MonoBehaviour {
 	 * @param <string> buttonName
 	 * @param <float> startTime : Position du bouton dans la timeline de la séquence
 	 * @param <float> duration : durée du bouton
+	 * @param <float> instant : instant où le bouton est cliquable (instant < duration !!!)
 	 */
-	public static Button MakeButton(Sequence sequence, string buttonName, float startTime, float duration) {
+	public static Button MakeButton(Sequence sequence, string buttonName, float startTime, float duration = 1.0f, float instant = 0.5f) {
 		GameManager gm = GameManager.GetInstance();
 		
 		GameObject go = Instantiate(gm.prefabs["Button" + buttonName]);
@@ -45,6 +46,7 @@ public class Button : MonoBehaviour {
 		button.buttonName = buttonName;
 		button.startTime = startTime;
 		button.duration = duration;
+		button.instant = instant;
 
 	    return button;
 	}
@@ -89,6 +91,8 @@ public class Button : MonoBehaviour {
 		else if (t < 0) {
 			precision = Mathf.Abs(t) / Mathf.Clamp(clickableRadius, 0.0f, instant);
 		}
+		
+		// Perfection !
 		else {
 			precision = 0.0f;
 		}

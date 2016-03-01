@@ -18,10 +18,10 @@ public class Sequence : MonoBehaviour {
 	public float duration;
 	
 	// La séquence est terminée
-	public static bool done = false;
+	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 1;
+	public int buttonCount = 30;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -65,8 +65,21 @@ public class Sequence : MonoBehaviour {
 			string randomButtonId = Joypad.GetRandomButton();
 			
 			// Création d'un bouton avec son GO
-			Button button = Button.MakeButton(this, randomButtonId, time, 1.0f);
+			float bDuration;
+			float bInstant;
+			
+			if (j == 0) {
+				bDuration = 4.0f;
+				bInstant = 3.0f;
+			}
+			else {
+				bDuration = Random.Range(0.5f, 2.0f);
+				bInstant = bDuration / 2;
+			}
+			
+			Button button = Button.MakeButton(this, randomButtonId, time, bDuration, bInstant);
 			GameObject buttonGO = button.gameObject;
+			button.gameObject.GetComponent<Renderer>().enabled = false;
 
 			// Ajout du bouton créé dans le tableau contenant la séquence entière
 			buttons.Add(button);
@@ -101,7 +114,6 @@ public class Sequence : MonoBehaviour {
 		// Si la séquence est terminée
 		if (currentTime > duration) {
 			done = true;
-			round.state = Round.RoundState.Vote;
 		}
 		else {
 			// Si on a dépassé le bouton actuel
@@ -151,10 +163,10 @@ public class Sequence : MonoBehaviour {
 			// Le joueur exécute et réussit
 			if (currentButton.buttonName == buttonDownName) {
 				
-				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
+				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
 				currentButton.SetColor(0.0f, 1.0f, 0.0f);
 
-				player.score +=Mathf.RoundToInt(precision * 10);
+				player.score += Mathf.RoundToInt(precision * 10);
 
 			}
 			// Le joueur résiste et réussit
@@ -162,15 +174,15 @@ public class Sequence : MonoBehaviour {
 				player == round.resistant &&
 				player.joypad.IsInverse(currentButton.buttonName, buttonDownName)
 			) {
-				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
+				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
 				currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
 
-				player.score +=Mathf.RoundToInt(precision * 10);
+				player.score += Mathf.RoundToInt(precision * 10);
 			}
 			// Le joueur se trompe
 			else {
-				//Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
+				Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
 				currentButton.SetColor(1.0f, 0.0f, 0.0f);
 			}
 			
@@ -181,7 +193,7 @@ public class Sequence : MonoBehaviour {
 	
 	
     void OnDrawGizmos() {
-    	/*
+    	
     	Vector3 seqPosA = gameObject.transform.position;
     	seqPosA.y -= 0.5f;
 		Vector3 seqPosB = new Vector3(seqPosA.x, seqPosA.y + 1.0f);
@@ -189,7 +201,7 @@ public class Sequence : MonoBehaviour {
 		Gizmos.color = Color.magenta;
     	Gizmos.DrawLine(seqPosA, seqPosB);
         
-        if (player.id == 1) {
+        if (player.id == 0) {
 			foreach (var button in buttons) {
 				Vector3 a = button.gameObject.transform.position;
 				
@@ -217,6 +229,6 @@ public class Sequence : MonoBehaviour {
 		        	Gizmos.DrawLine(new Vector3(a.x - 5f, a.y - 5f), new Vector3(a.x + 5f, a.y - 5f));
 	        	}
 			}
-        }*/
+        }
     }
 }

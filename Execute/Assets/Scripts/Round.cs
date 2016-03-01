@@ -109,8 +109,17 @@ public class Round : MonoBehaviour {
 			if (currentTime > warmUpDuration) {
 				StartRhythmState ();
 			} 
-		} else if(state == RoundState.Vote){
-			StartVoteState();
+		}
+		else if (state == RoundState.Rhythm) {
+			bool done = true;
+			
+			foreach (Sequence seq in sequences) {
+				done = done && seq.done;
+			}
+			
+			if (done) {
+				StartVoteState();
+			}
 		}
 
 	}
