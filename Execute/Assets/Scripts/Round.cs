@@ -133,6 +133,7 @@ public class Round : MonoBehaviour {
 			}
 			
 			if (done) {
+				clockArm.transform.localEulerAngles = new Vector3(0, 0, 0);
 				StartVoteState();
 			}
 			else {
