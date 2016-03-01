@@ -67,12 +67,12 @@ public class VoteState : MonoBehaviour {
 				if(_player.hasVotedFor == vote.Key && _player.hasAlreadyVoted == false){
 				voteObject.Add (_player.id,Instantiate(Resources.Load ("skullVote")) as GameObject);
 				voteObject[_player.id].transform.SetParent (vote.Value.transform);
-				voteObject[_player.id].transform.position = vote.Value.transform.position;
+				voteObject[_player.id].transform.position = vote.Value.transform.position + new Vector3((_player.id+1)*30,0,0);
 				_player.hasAlreadyVoted = true;
 				}
 				else if(_player.hasVotedFor == vote.Key && _player.hasAlreadyVoted == true){
 				voteObject[_player.id].transform.SetParent (vote.Value.transform);
-				voteObject[_player.id].transform.position = vote.Value.transform.position;
+				voteObject[_player.id].transform.position = vote.Value.transform.position + new Vector3((_player.id+1)*30,0,0);
 				}
 		} 
 		
