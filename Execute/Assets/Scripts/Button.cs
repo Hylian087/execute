@@ -19,6 +19,9 @@ public class Button : MonoBehaviour {
 
 	// Instant exact du bouton sur sa propre timeline (entre 0 et duration)
 	public float instant = 0.5f;
+	
+	// Temps où le bouton est cliquable autour de son "instant".
+	public float clickableRadius = 0.5f;
 
 	// ID du bouton
 	public string buttonName;
@@ -62,7 +65,7 @@ public class Button : MonoBehaviour {
 	
 	
 	/**
-	 * Retourne la précision pour le bouton actuel (-1..1)
+	 * Retourne la précision pour le bouton actuel (0..1)
 	 * (si le joueur appuie sur une touche à ce moment, par exemple)
 	 * @param <float> currentTime : le temps actuel global
 	 * @return <float>
@@ -77,17 +80,20 @@ public class Button : MonoBehaviour {
 		// Temps actuel relatif au bouton
 		float t = startTime + instant - currentTime;
 		
-		if (t < 0) {
-			precision = 1.0f - Mathf.Abs(t) / instant;
-		}
-		else if (t > 0) {
-			precision = t / instant - 1.0f;
-		}
-		else {
-			precision = 1.0f;
+		// Trop tôt
+		if (t > 0) {
+			precision = t / Mathf.Clamp(clickableRadius, 0.0f, duration - instant);
 		}
 		
-		return Mathf.Abs(precision);
+		// Trop tard
+		else if (t < 0) {
+			precision = Mathf.Abs(t) / Mathf.Clamp(clickableRadius, 0.0f, instant);
+		}
+		else {
+			precision = 0.0f;
+		}
+		
+		return 1.0f - Mathf.Clamp01(Mathf.Abs(precision));
 	}
 	
 	/**
