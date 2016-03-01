@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 30;
+	public int buttonCount = 3;
 	
 	// Temps actuel de la séquence
 	private float currentTime;

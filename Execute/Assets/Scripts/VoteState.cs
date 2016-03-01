@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -62,14 +62,19 @@ public class VoteState : MonoBehaviour {
 		// Création des compteurs de votes
 		foreach(Player player in game.players){
 			votes.Add (player.voteID,0);
-			voteCounter.Add(player.voteID, new GameObject("VoteCounter"+player.id));
+			voteCounter.Add(player.voteID, Instantiate (Resources.Load ("VoteCounter"+player.id)) as GameObject);
+		}
+
+		foreach (var counter in voteCounter) {
+			counter.Value.GetComponent<SpriteRenderer>().sortingLayerName="Vote";
+			counter.Value.GetComponent<SpriteRenderer>().sortingOrder = 5;
 		}
 
 		// Placement des compteurs de vote dans l'écran de jeu
-		voteCounter ["Y"].transform.position = new Vector3 (-59, 69, 0);
-		voteCounter ["B"].transform.position = new Vector3 (59, 69, 0);
-		voteCounter ["A"].transform.position = new Vector3 (59, -69, 0);
-		voteCounter ["X"].transform.position = new Vector3 (-59, -69, 0);
+		voteCounter ["Y"].transform.position = new Vector3 (-225, 48, 0);
+		voteCounter ["B"].transform.position = new Vector3 (225, 48, 0);
+		voteCounter ["A"].transform.position = new Vector3 (225, -48, 0);
+		voteCounter ["X"].transform.position = new Vector3 (-225, -48, 0);
 
 
 	}
@@ -83,7 +88,9 @@ public class VoteState : MonoBehaviour {
 				// Création d'un crane et placement dans le compteur
 				voteSkull.Add (_player.id,Instantiate(Resources.Load ("skullVote")) as GameObject);
 				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
-				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*30,0,0);
+				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
+				voteSkull[_player.id].GetComponent<SpriteRenderer>().sortingLayerName = "Vote";
+				voteSkull[_player.id].GetComponent<SpriteRenderer>().sortingOrder = 6;
 				// Le joueur a donc voté
 				_player.hasAlreadyVoted = true;
 				}
@@ -91,7 +98,7 @@ public class VoteState : MonoBehaviour {
 				else if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == true){
 				// Changement de la place du crane vers le joueur pour lequel il change son vote
 				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
-				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*30,0,0);
+				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
 				}
 		} 
 		
@@ -188,7 +195,19 @@ public class VoteState : MonoBehaviour {
 		}
 					
 		// A la fin du vote...
-		if (votesCounted == false && currentTime > voteDuration || hasVoted == 4) {
+		foreach(Player player in game.players){
+			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
+				hasVoted+=1;
+				player.hasPushedStart=true;
+				Debug.Log (hasVoted);
+			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
+				hasVoted-=1;
+				player.hasPushedStart=false;
+				Debug.Log (hasVoted);
+			}
+		}
+
+		if (hasVoted > 3) {
 			countVotes();
 		}
 

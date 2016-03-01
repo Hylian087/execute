@@ -20,8 +20,11 @@ public class Player {
 	public string hasVotedFor;
 	// Nombre de votes que le joueur a reçu contre lui
 	public int hasVotes;
-	//
+	// Le joueur a-t-il déjà voté?
 	public bool hasAlreadyVoted;
+	// Le joueur a-t-il appuyé sur Start pour terminer le vote?
+	public bool hasPushedStart;
+
 	/**
 	 * Constructeur
 	 * @param <int> id
