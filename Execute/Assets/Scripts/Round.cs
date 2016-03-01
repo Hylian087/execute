@@ -15,6 +15,9 @@ public class Round : MonoBehaviour {
 	// Temps depuis le début du round
 	public float currentTime = 0.0f;
 
+	// Durée totale de la phase de rythme
+	public float rhythmDuration;
+
 	// Différents états d'un round
 	public enum RoundState {
 		WarmUp,
@@ -34,6 +37,9 @@ public class Round : MonoBehaviour {
 	// Séquences de boutons
 	public Sequence[] sequences = new Sequence[4];
 	
+	// Aiguille de l'horloge
+	private GameObject clockArm;
+	
 	/**
 	 * Créer une manche
 	 */
@@ -52,6 +58,8 @@ public class Round : MonoBehaviour {
 	void Start() {
 		
 		state = RoundState.WarmUp;
+		
+        clockArm = GameObject.Find("ClockArm");
 		
 		resistant = game.players[Random.Range(0, 4)];
 		Debug.Log("Résistant : " + resistant.id);
@@ -75,19 +83,26 @@ public class Round : MonoBehaviour {
 		
 		state = RoundState.Rhythm;
 		
+		Sequence seq;
+		rhythmDuration = 0.0f;
+		
 		// Initialisation des scores et séquences
 		for (int i = 0; i < 4; i++) {
 			scores[i] = 0;
-			sequences[i] = Sequence.MakeSequence(this, game.players[i]);
-			sequences[i].transform.parent = gameObject.transform.parent;
-			sequences[i].transform.SetParent(gameObject.transform);
+			seq = Sequence.MakeSequence(this, game.players[i]);
+			seq.transform.parent = gameObject.transform.parent;
+			seq.transform.SetParent(gameObject.transform);
+			
+			rhythmDuration = Mathf.Max(rhythmDuration, seq.duration);
+			
+			sequences[i] = seq;
 		}
 
-		// Initialisation de la position des séquences (A REFACTORISER !)
-		sequences [0].transform.position = new Vector3 (-59, 68, 0);
-		sequences [1].transform.position = new Vector3 (37, 68, 0);
-		sequences [2].transform.position = new Vector3 (37, -29, 0);
-		sequences [3].transform.position = new Vector3 (-59, -29, 0);
+		// Initialisation de la position des séquences (valeurs en dur)
+		sequences [0].transform.position = new Vector3(-59, 68, 0);
+		sequences [1].transform.position = new Vector3(37, 68, 0);
+		sequences [2].transform.position = new Vector3(37, -29, 0);
+		sequences [3].transform.position = new Vector3(-59, -29, 0);
 	}
 	
 	/**
@@ -95,7 +110,7 @@ public class Round : MonoBehaviour {
 	 */
 	public void StartVoteState() {
 		state = RoundState.Vote;
-		VoteState.MakeVoteState (this,game);		
+		VoteState.MakeVoteState (this, game);		
 	}
 	
 	/**
@@ -107,7 +122,7 @@ public class Round : MonoBehaviour {
 		if (state == RoundState.WarmUp) {
 			
 			if (currentTime > warmUpDuration) {
-				StartRhythmState ();
+				StartRhythmState();
 			} 
 		}
 		else if (state == RoundState.Rhythm) {
@@ -119,6 +134,15 @@ public class Round : MonoBehaviour {
 			
 			if (done) {
 				StartVoteState();
+			}
+			else {
+				if (rhythmDuration == 0) {
+					foreach (Sequence seq in sequences) {
+						rhythmDuration = Mathf.Max(rhythmDuration, seq.duration);
+					}
+				}
+				
+				clockArm.transform.localEulerAngles = new Vector3(0, 0, - (currentTime - warmUpDuration) / rhythmDuration * 360);
 			}
 		}
 
