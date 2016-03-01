@@ -10,7 +10,7 @@ public class Round : MonoBehaviour {
 	public ExecGame game;
 
 	// Temps avant le début de la phase de rythme
-	public float warmUpDuration = 5.0f;
+	public float warmUpDuration = 1.0f;
 
 	// Temps depuis le début du round
 	public float currentTime = 0.0f;
@@ -93,6 +93,7 @@ public class Round : MonoBehaviour {
 	 */
 	public void StartVoteState() {
 		state = RoundState.Vote;
+		VoteState.MakeVoteState (this,game);		
 	}
 	
 	/**
@@ -104,8 +105,11 @@ public class Round : MonoBehaviour {
 		if (state == RoundState.WarmUp) {
 			
 			if (currentTime > warmUpDuration) {
-				StartRhythmState();
-			}
+				StartRhythmState ();
+			} 
+		} else if(state == RoundState.Vote){
+			StartVoteState();
 		}
+
 	}
 }

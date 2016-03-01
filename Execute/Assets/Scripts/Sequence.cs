@@ -18,10 +18,10 @@ public class Sequence : MonoBehaviour {
 	public float duration;
 	
 	// La séquence est terminée
-	public bool done = false;
+	public static bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 30;
+	public int buttonCount = 1;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -101,8 +101,7 @@ public class Sequence : MonoBehaviour {
 		// Si la séquence est terminée
 		if (currentTime > duration) {
 			done = true;
-			round.StartVoteState();
-			Debug.Log (round.state);
+			round.state = Round.RoundState.Vote;
 		}
 		else {
 			// Si on a dépassé le bouton actuel

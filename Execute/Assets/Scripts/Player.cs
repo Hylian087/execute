@@ -11,7 +11,11 @@ public class Player {
 	
 	// Score
 	public float score = 0;
-	
+
+	// Vote ID
+	public string voteID;
+
+	public string hasVotedFor;
 	
 	/**
 	 * Constructeur
