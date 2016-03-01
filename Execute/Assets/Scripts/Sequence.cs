@@ -125,8 +125,10 @@ public class Sequence : MonoBehaviour {
 			// Position en fonction du temps
 			position.x = (button.startTime + button.instant - currentTime) * scale + gameObject.transform.position.x;
 			
-			// Opacité en fonction du temps (+-1s)
-			//color.a = 1 - Mathf.Abs(Mathf.Clamp(button.startTime + button.instant - currentTime, -1.0f, 1.0f));
+			// Visible ou non (valeurs en dur dans le code)
+			renderer.enabled = 
+				position.x > gameObject.transform.position.x - 32
+				&& position.x < gameObject.transform.position.x + 48;
 			
 			// Application des modifications
 			button.gameObject.transform.position = position;
@@ -180,7 +182,7 @@ public class Sequence : MonoBehaviour {
 	
 	
     void OnDrawGizmos() {
-    	
+    	/*
     	Vector3 seqPosA = gameObject.transform.position;
     	seqPosA.y -= 0.5f;
 		Vector3 seqPosB = new Vector3(seqPosA.x, seqPosA.y + 1.0f);
@@ -188,7 +190,7 @@ public class Sequence : MonoBehaviour {
 		Gizmos.color = Color.magenta;
     	Gizmos.DrawLine(seqPosA, seqPosB);
         
-        if (player.id == 0) {
+        if (player.id == 1) {
 			foreach (var button in buttons) {
 				Vector3 a = button.gameObject.transform.position;
 				
@@ -216,6 +218,6 @@ public class Sequence : MonoBehaviour {
 		        	Gizmos.DrawLine(new Vector3(a.x - 5f, a.y - 5f), new Vector3(a.x + 5f, a.y - 5f));
 	        	}
 			}
-        }
+        }*/
     }
 }

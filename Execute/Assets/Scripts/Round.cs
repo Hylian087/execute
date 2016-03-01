@@ -10,7 +10,7 @@ public class Round : MonoBehaviour {
 	public ExecGame game;
 
 	// Temps avant le début de la phase de rythme
-	public float warmUpDuration = 5.0f;
+	public float warmUpDuration = 3.0f;
 
 	// Temps depuis le début du round
 	public float currentTime = 0.0f;
@@ -82,10 +82,10 @@ public class Round : MonoBehaviour {
 		}
 
 		// Initialisation de la position des séquences (A REFACTORISER !)
-		sequences [0].transform.position = new Vector3 (-59, 69, 0);
-		sequences [1].transform.position = new Vector3 (1, 1, 0);
-		sequences [2].transform.position = new Vector3 (1, -1.5f, 0);
-		sequences [3].transform.position = new Vector3 (-1, -1, 0);
+		sequences [0].transform.position = new Vector3 (-59, 68, 0);
+		sequences [1].transform.position = new Vector3 (37, 68, 0);
+		sequences [2].transform.position = new Vector3 (37, -29, 0);
+		sequences [3].transform.position = new Vector3 (-59, -29, 0);
 	}
 	
 	/**
