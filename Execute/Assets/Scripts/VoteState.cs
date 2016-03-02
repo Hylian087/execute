@@ -65,7 +65,8 @@ public class VoteState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Instantiate((Resources.Load ("VoteStateMask")));
+		GameObject mask = Instantiate(Resources.Load ("VoteStateMask") as GameObject);
+		mask.transform.SetParent (gameObject.transform);
 
 		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
 		continueButtons.transform.SetParent (gameObject.transform);

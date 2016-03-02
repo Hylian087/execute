@@ -29,6 +29,10 @@ public class Button : MonoBehaviour {
 	// Bouton pressé ou non (un bouton ne peut être pressé qu'une fois)
 	public bool pressed = false;
 
+	public AudioSource buttonAudioSource;
+	public AudioClip okSound;
+	public AudioClip errorSound;
+
 	/**
 	 * Créer un bouton
 	 * @param <string> buttonName
@@ -55,6 +59,7 @@ public class Button : MonoBehaviour {
 	 * Démarrage
 	 */
 	void Start() {
+		buttonAudioSource = gameObject.GetComponent<AudioSource> ();
 		GetComponent<SpriteRenderer>().sortingLayerName = "Buttons";
 		GetComponent<SpriteRenderer> ().sortingOrder = 5;
 	}
