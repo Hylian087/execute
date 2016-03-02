@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 3;
+	public int buttonCount = 30;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -167,7 +167,7 @@ public class Sequence : MonoBehaviour {
 				currentButton.SetColor(0.0f, 1.0f, 0.0f);
 
 				round.scores[player.id] += Mathf.RoundToInt(precision * 10);
-
+				player.joypad.VibrateOnce(0.1f);
 			}
 			// Le joueur résiste et réussit
 			else if (
@@ -179,11 +179,13 @@ public class Sequence : MonoBehaviour {
 
 
 				round.scores[player.id] += Mathf.RoundToInt(precision * 10);
+				player.joypad.VibrateTwice(0.4f);
 			}
 			// Le joueur se trompe
 			else {
 				Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
 				currentButton.SetColor(1.0f, 0.0f, 0.0f);
+				player.joypad.VibrateOnce(0.5f, 1.0f);
 			}
 			
 			currentButton.pressed = true;

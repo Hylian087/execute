@@ -170,7 +170,11 @@ public class Joypad {
 			
 			PlayerIndex pid = (PlayerIndex) id;
 			
-			float activate = 1.0f - Mathf.Floor((vibrationTime / vibrationDuration) / (1.0f / (vibrationType * 2.0f - 1.0f))) % 2;
+			float activate = 1.0f;
+			
+			if (vibrationType != 1) {
+				activate = 1.0f - Mathf.Floor((vibrationTime / vibrationDuration) / (1.0f / (vibrationType * 2.0f - 1.0f))) % 2;
+			}
 			
 			GamePad.SetVibration(pid, activate * vibrationStrength, activate * vibrationStrength);
 			
@@ -205,19 +209,32 @@ public class Joypad {
 	 * Faire vibrer la manette deux fois
 	 * @param <float> 
 	 */
-	public void VibrateTwice(float vibrationValue = 0.5f) {
-		vibrationType = 2;
-		vibrationTime = 0.0f;
-		vibrationDuration = 2.0f;
+	public void VibrateOnce(float vibrationDuration = 2.0f, float vibrationStrength = 0.5f) {
+		this.vibrationType = 1;
+		this.vibrationTime = 0.0f;
+		this.vibrationDuration = vibrationDuration;
+		this.vibrationStrength = vibrationStrength;
+	}
+	
+	/**
+	 * Faire vibrer la manette deux fois
+	 * @param <float> 
+	 */
+	public void VibrateTwice(float vibrationDuration = 2.0f, float vibrationStrength = 0.5f) {
+		this.vibrationType = 2;
+		this.vibrationTime = 0.0f;
+		this.vibrationDuration = vibrationDuration;
+		this.vibrationStrength = vibrationStrength;
 	}
 	
 	/**
 	 * Faire vibrer la manette trois fois
 	 * @param <float> 
 	 */
-	public void VibrateThrice(float vibrationValue = 0.5f) {
-		vibrationType = 3;
-		vibrationTime = 0.0f;
-		vibrationDuration = 2.0f;
+	public void VibrateThrice(float vibrationDuration = 2.0f, float vibrationStrength = 0.5f) {
+		this.vibrationType = 3;
+		this.vibrationTime = 0.0f;
+		this.vibrationDuration = vibrationDuration;
+		this.vibrationStrength = vibrationStrength;
 	}
 }
