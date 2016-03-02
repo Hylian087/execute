@@ -238,11 +238,11 @@ public class VoteState : MonoBehaviour {
 		foreach(Player player in game.players){
 			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 				hasVoted+=1;
-				//player.hasPushedStart=true;
+				player.hasPushedStart=true;
 				Debug.Log (hasVoted);
 			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 				hasVoted-=1;
-				//player.hasPushedStart=false;
+				player.hasPushedStart=false;
 				Debug.Log (hasVoted);
 			}
 		}
