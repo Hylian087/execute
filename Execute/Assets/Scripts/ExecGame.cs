@@ -9,6 +9,9 @@ public class ExecGame : MonoBehaviour {
 	// Manche actuelle
 	Round round;
 
+	// Round terminé après le vote
+	public bool hasEnded;
+
 	/**
 	 * Créer une partie
 	 */
@@ -53,5 +56,10 @@ public class ExecGame : MonoBehaviour {
 	 * Mise à jour
 	 */
 	void Update() {
+		if (hasEnded) {
+			round.DestroyRound();
+			NewRound ();
+			hasEnded = false;
+		}
 	}
 }

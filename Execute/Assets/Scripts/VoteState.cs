@@ -36,11 +36,9 @@ public class VoteState : MonoBehaviour {
 	Dictionary<int, GameObject> voteSkull = new Dictionary<int, GameObject>();
 
 	// Tableau décomptant les votes : string = nom du joueur, int = nombre de votes
-	public Dictionary<string, int> votes;
+	public Dictionary<string, int> votes = new Dictionary<string, int> (4);
 
 	public GameObject continueButtons;
-	Animator continueButtonsAC;
-
 	// Instance du script
 	static VoteState vs;
 
@@ -54,6 +52,7 @@ public class VoteState : MonoBehaviour {
 		
 			GameObject go = new GameObject ("VoteState");
 			vs = go.AddComponent<VoteState> ();
+			vs.transform.SetParent (round.transform);
 		
 			vs.round = round;
 			vs.game = game;
@@ -66,10 +65,8 @@ public class VoteState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		// Création du tableau comptant les votes
-		votes = new Dictionary<string, int> (4);
-
 		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
+		continueButtons.transform.SetParent (gameObject.transform);
 
 		foreach(Player player in game.players){
 			// Création des compteurs de votes
@@ -201,7 +198,7 @@ public class VoteState : MonoBehaviour {
 	void Update () {
 		// Temps passé sur la manche de vote
 		currentTime += Time.deltaTime;
-
+		// Animation des boutons start
 		continueButtons.GetComponent<Animator>().SetInteger("hasVoted", hasVoted);
 
 		// Quand un joueur appuie sur un bouton
@@ -238,11 +235,11 @@ public class VoteState : MonoBehaviour {
 		foreach(Player player in game.players){
 			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 				hasVoted+=1;
-				player.hasPushedStart=true;
+				//player.hasPushedStart=true;
 				Debug.Log (hasVoted);
 			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 				hasVoted-=1;
-				player.hasPushedStart=false;
+				//player.hasPushedStart=false;
 				Debug.Log (hasVoted);
 			}
 		}
@@ -255,6 +252,10 @@ public class VoteState : MonoBehaviour {
 					player.score+=round.scores[player.id];
 					round.scores[player.id]-=round.scores[player.id];
 					scoreCounted = true;
+					voteStarted = false;
+
+					// Reload une manche!
+					game.hasEnded = true;
 				}
 			}
 		}

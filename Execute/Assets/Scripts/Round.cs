@@ -39,7 +39,8 @@ public class Round : MonoBehaviour {
 	
 	// Aiguille de l'horloge
 	private GameObject clockArm;
-	
+
+
 	/**
 	 * Créer une manche
 	 */
@@ -111,6 +112,10 @@ public class Round : MonoBehaviour {
 	public void StartVoteState() {
 		state = RoundState.Vote;
 		VoteState.MakeVoteState (this, game);		
+	}
+
+	public void DestroyRound(){
+		Destroy (gameObject,3);
 	}
 	
 	/**
