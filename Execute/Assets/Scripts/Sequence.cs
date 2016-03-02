@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 30;
+	public int buttonCount = 3;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -40,7 +40,7 @@ public class Sequence : MonoBehaviour {
 	public static Sequence MakeSequence(Round round, Player player) {
 		GameObject go = new GameObject("Player" + player.id + "Sequence");
 		Sequence seq = go.AddComponent<Sequence>();
-		
+
 		seq.round = round;
 		seq.player = player;
 
@@ -53,7 +53,6 @@ public class Sequence : MonoBehaviour {
 	void Start() {
 		
 		GameManager gm = GameManager.GetInstance();
-		
 		buttons = new List<Button>();
 		
 		float time = 0.0f;

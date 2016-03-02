@@ -65,6 +65,8 @@ public class VoteState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
+		Instantiate((Resources.Load ("VoteStateMask")));
+
 		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
 		continueButtons.transform.SetParent (gameObject.transform);
 
@@ -76,12 +78,12 @@ public class VoteState : MonoBehaviour {
 			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
 			// Code NECESSAIRE pour l'affichage du score de partie
 			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
-			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
+			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 7;
 			// Création des compteurs de scores DE ROUND
 			roundScoreCounter.Add (player.id, Instantiate (Resources.Load ("RoundScoreCounter"+player.id)) as GameObject);
 			// Code NECESSAIRE pour l'affichage du score de round
-			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
-			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
+			roundScoreCounter[player.id].GetComponent<MeshRenderer>().sortingLayerName = "Vote";
+			roundScoreCounter[player.id].GetComponent<MeshRenderer>().sortingOrder=7;
 		}
 
 		foreach (var counter in voteCounter) {
@@ -95,23 +97,6 @@ public class VoteState : MonoBehaviour {
 		foreach (var rSCounter in roundScoreCounter) {
 			rSCounter.Value.transform.SetParent (gameObject.transform);
 		}
-
-		// Placement des compteurs de vote dans l'écran de jeu
-		voteCounter ["Y"].transform.position = new Vector3 (-225, 48, 0);
-		globalScoreCounter [0].transform.position = new Vector3 (-225, 110, 0);
-		roundScoreCounter [0].transform.position = new Vector3 (-225, 82, 0);
-
-		voteCounter ["B"].transform.position = new Vector3 (225, 48, 0);
-		globalScoreCounter [1].transform.position = new Vector3 (225, 110, 0);
-		roundScoreCounter [1].transform.position = new Vector3 (225, 82, 0);
-
-		voteCounter ["A"].transform.position = new Vector3 (225, -48, 0);
-		globalScoreCounter [2].transform.position = new Vector3 (225, -110, 0);
-		roundScoreCounter [2].transform.position = new Vector3 (225, -82, 0);
-
-		voteCounter ["X"].transform.position = new Vector3 (-225, -48, 0);
-		globalScoreCounter [3].transform.position = new Vector3 (-225, -110, 0);
-		roundScoreCounter [3].transform.position = new Vector3 (-225, -82, 0);
 
 
 	}
@@ -204,7 +189,7 @@ public class VoteState : MonoBehaviour {
 		// Quand un joueur appuie sur un bouton
 		foreach(Player player in game.players){
 
-			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
+			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();
 			globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
 
 			foreach (string buttonName in Joypad.AXIS_BUTTONS) {
