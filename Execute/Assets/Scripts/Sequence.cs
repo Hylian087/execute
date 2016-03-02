@@ -166,9 +166,10 @@ public class Sequence : MonoBehaviour {
 				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
 				currentButton.SetColor(0.0f, 1.0f, 0.0f);
 
-				round.scores[player.id] += Mathf.RoundToInt(precision * 10);
 				player.joypad.VibrateOnce(0.1f);
+				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 			}
+			
 			// Le joueur résiste et réussit
 			else if (
 				player == round.resistant &&
@@ -177,8 +178,7 @@ public class Sequence : MonoBehaviour {
 				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
 				currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
-
-				round.scores[player.id] += Mathf.RoundToInt(precision * 10);
+				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 				player.joypad.VibrateTwice(0.4f);
 			}
 			// Le joueur se trompe
