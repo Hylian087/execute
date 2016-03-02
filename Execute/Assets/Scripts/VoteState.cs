@@ -38,6 +38,9 @@ public class VoteState : MonoBehaviour {
 	// Tableau décomptant les votes : string = nom du joueur, int = nombre de votes
 	public Dictionary<string, int> votes;
 
+	public GameObject continueButtons;
+	Animator continueButtonsAC;
+
 	// Instance du script
 	static VoteState vs;
 
@@ -66,6 +69,7 @@ public class VoteState : MonoBehaviour {
 		// Création du tableau comptant les votes
 		votes = new Dictionary<string, int> (4);
 
+		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
 
 		foreach(Player player in game.players){
 			// Création des compteurs de votes
@@ -73,10 +77,12 @@ public class VoteState : MonoBehaviour {
 			voteCounter.Add(player.voteID, Instantiate (Resources.Load ("VoteCounter"+player.id)) as GameObject);
 			// Création des compteurs de scores GLOBAUX
 			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
+			// Code NECESSAIRE pour l'affichage du score de partie
 			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
 			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
 			// Création des compteurs de scores DE ROUND
 			roundScoreCounter.Add (player.id, Instantiate (Resources.Load ("RoundScoreCounter"+player.id)) as GameObject);
+			// Code NECESSAIRE pour l'affichage du score de round
 			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
 			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
 		}
@@ -196,7 +202,7 @@ public class VoteState : MonoBehaviour {
 		// Temps passé sur la manche de vote
 		currentTime += Time.deltaTime;
 
-
+		continueButtons.GetComponent<Animator>().SetInteger("hasVoted", hasVoted);
 
 		// Quand un joueur appuie sur un bouton
 		foreach(Player player in game.players){
