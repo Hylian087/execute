@@ -115,4 +115,18 @@ public class Button : MonoBehaviour {
 		
 		renderer.material.color = color;
 	}
+	
+	/**
+	 * Lancer le feedback
+	 */
+	public void LaunchFeedback(float precision) {
+		GameManager gm = GameManager.GetInstance();
+		
+		if (precision > 0) {
+			// Feedback
+			GameObject feedbackGO = Instantiate(gm.prefabs["ButtonFeedbackOK"]);
+			feedbackGO.transform.position = gameObject.transform.position;
+		}
+	}
 }
+

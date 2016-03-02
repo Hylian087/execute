@@ -50,6 +50,9 @@ public class GameManager : MonoBehaviour {
 			string name = "Button" + button;
 			prefabs.Add(name, Resources.Load(name, typeof(GameObject)) as GameObject);
 		}
+		
+		// Prefabs des feedbacks
+		prefabs.Add("ButtonFeedbackOK", Resources.Load("ButtonFeedbackOK", typeof(GameObject)) as GameObject);
 	}
 	
 	/**

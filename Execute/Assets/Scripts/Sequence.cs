@@ -102,6 +102,7 @@ public class Sequence : MonoBehaviour {
 		foreach (var button in buttons) {
 			button.gameObject.GetComponent<SpriteRenderer>().sortingOrder += 1;
 		}
+		
 	}
 	
 	/**
@@ -165,7 +166,9 @@ public class Sequence : MonoBehaviour {
 				
 				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
 				currentButton.SetColor(0.0f, 1.0f, 0.0f);
-
+				
+				currentButton.LaunchFeedback(precision);
+				
 				player.joypad.VibrateOnce(0.1f);
 				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 			}
