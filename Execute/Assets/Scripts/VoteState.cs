@@ -18,6 +18,7 @@ public class VoteState : MonoBehaviour {
 	public static bool voteStarted = false;
 	// Les votes ont-ils été comptés? (Vote terminé?)
 	public bool votesCounted;
+	public bool scoreCounted;
 
 	// Personnes qui ont voté
 	public int hasVoted;
@@ -74,12 +75,10 @@ public class VoteState : MonoBehaviour {
 			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
 			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
 			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
-			globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString();
 			// Création des compteurs de scores DE ROUND
 			roundScoreCounter.Add (player.id, Instantiate (Resources.Load ("RoundScoreCounter"+player.id)) as GameObject);
 			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
 			roundScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 6;
-			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 		}
 
 		foreach (var counter in voteCounter) {
@@ -142,57 +141,53 @@ public class VoteState : MonoBehaviour {
 	void countVotes(){
 		votesCounted = false;
 
-		// Comptage des votes pour chaque joueur
-		foreach(Player player in game.players){
-			if(player.hasVotedFor == "A" && votes.ContainsKey("A")){
-				votes["A"]+=1;
-			}else if(player.hasVotedFor == "B" && votes.ContainsKey("B")){
-				votes["B"]+=1;
-			}else if(player.hasVotedFor == "X" && votes.ContainsKey("X")){
-				votes["X"]+=1;
-			}else if(player.hasVotedFor == "Y" && votes.ContainsKey("Y")){
-				votes["Y"]+=1;
+			// Comptage des votes pour chaque joueur
+			foreach (Player player in game.players) {
+				if (player.hasVotedFor == "A" && votes.ContainsKey ("A")) {
+					votes ["A"] += 1;
+				} else if (player.hasVotedFor == "B" && votes.ContainsKey ("B")) {
+					votes ["B"] += 1;
+				} else if (player.hasVotedFor == "X" && votes.ContainsKey ("X")) {
+					votes ["X"] += 1;
+				} else if (player.hasVotedFor == "Y" && votes.ContainsKey ("Y")) {
+					votes ["Y"] += 1;
+				}
 			}
-		}
 
-		// Attribution des votes et impact sur le score des joueurs
+			// Attribution des votes et impact sur le score des joueurs
 			// Pour chaque vote dans la liste votes
-		foreach(var vote in votes){
+			foreach (var vote in votes) {
 				// Pour chaque joueur dans la partie
-			foreach(Player player in game.players){
-				// Si l'ID du joueur = le vote
-				if(player.voteID == vote.Key){
-					// Nombre de vote contre le joueur +=1
-					player.hasVotes+=vote.Value;
-					Debug.Log (" -Joueur # "+player.id+" a reçu "+player.hasVotes+" votes contre lui.");
+				foreach (Player player in game.players) {
+					// Si l'ID du joueur = le vote
+					if (player.voteID == vote.Key) {
+						// Nombre de vote contre le joueur +=1
+						player.hasVotes += vote.Value;
+						Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");
 
-
-					// Comptage des scores, différentes conditions de victoire et défaite
-
-					// Si le joueur a >3 votes et n'était pas résistant, score /2
-					if(player.hasVotes > 3 && !player.isResistant){
-						player.score = player.score /2;
-						Debug.Log ("Joueur "+player.id+" n'était pas résistant et voit son score divisé par 2. Score actuel :"+player.score);
-						// Si le joueur a >3 votes et était résistant, score /4
-					} else if(player.hasVotes > 3 && player.isResistant){
-						player.score = player.score /4;
-						Debug.Log ("Joueur "+player.id+" était un résistant et voit son score divisé par 4. Score actuel :"+player.score);
-						// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
-					} else if(player.hasVotes < 3 && !player.isResistant){
-						Debug.Log ("Joueur "+player.id+ " n'a pas reçu suffisamment de vote pour etre pénalisé. Score actuel :"+player.score);
-						// Si le joueur a < 3 votes et était résistant, score *4
-					} else if(player.hasVotes < 3 && player.isResistant){
-						player.score = player.score * 4;
-						Debug.Log ("Joueur "+player.id+" était résistant et voit son score multiplié par 4. Score actuel :"+player.score);
+						// Comptage des scores, différentes conditions de victoire et défaite
+						// Si le joueur a >3 votes et n'était pas résistant, score /2
+						if (player.hasVotes > 3 && !player.isResistant) {
+							player.score = player.score / 2;
+							Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score actuel :" + player.score);
+							// Si le joueur a >3 votes et était résistant, score /4
+						} else if (player.hasVotes > 3 && player.isResistant) {
+							player.score = player.score / 4;
+							Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score actuel :" + player.score);
+							// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
+						} else if (player.hasVotes < 3 && !player.isResistant) {
+							Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score actuel :" + player.score);
+							// Si le joueur a < 3 votes et était résistant, score *4
+						} else if (player.hasVotes < 3 && player.isResistant) {
+							player.score = player.score * 4;
+							Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score actuel :" + player.score);
+						}
 					}
 
 				}
-
 			}
-
-		}
-		// Les votes ont été comptés !
-		votesCounted = true;
+			// Les votes ont été comptés !
+			votesCounted = true;
 	}
 
 
@@ -201,8 +196,14 @@ public class VoteState : MonoBehaviour {
 		// Temps passé sur la manche de vote
 		currentTime += Time.deltaTime;
 
+
+
 		// Quand un joueur appuie sur un bouton
 		foreach(Player player in game.players){
+
+			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
+			globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
+
 			foreach (string buttonName in Joypad.AXIS_BUTTONS) {
 
 				if (player.joypad.IsDown (buttonName)) {
@@ -231,17 +232,25 @@ public class VoteState : MonoBehaviour {
 		foreach(Player player in game.players){
 			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 				hasVoted+=1;
-				player.hasPushedStart=true;
+				//player.hasPushedStart=true;
 				Debug.Log (hasVoted);
 			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 				hasVoted-=1;
-				player.hasPushedStart=false;
+				//player.hasPushedStart=false;
 				Debug.Log (hasVoted);
 			}
 		}
 
-		if (hasVoted > 3) {
-			countVotes();
+		if (hasVoted >= 3 && !votesCounted) {
+			countVotes ();
+		} else if (hasVoted >= 3 && votesCounted){
+			foreach(Player player in game.players){
+				if(!scoreCounted){
+					player.score+=round.scores[player.id];
+					round.scores[player.id]-=round.scores[player.id];
+					scoreCounted = true;
+				}
+			}
 		}
 
 	}

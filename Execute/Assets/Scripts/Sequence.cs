@@ -166,7 +166,7 @@ public class Sequence : MonoBehaviour {
 				Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
 				currentButton.SetColor(0.0f, 1.0f, 0.0f);
 
-				round.scores[player.id] += Mathf.RoundToInt(precision * 10);
+				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 
 			}
 			// Le joueur résiste et réussit
@@ -178,7 +178,7 @@ public class Sequence : MonoBehaviour {
 				currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
 
-				round.scores[player.id] += Mathf.RoundToInt(precision * 10);
+				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 			}
 			// Le joueur se trompe
 			else {
