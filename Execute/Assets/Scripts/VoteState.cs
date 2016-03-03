@@ -195,8 +195,9 @@ public class VoteState : MonoBehaviour {
 						//Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
 						}
 					}
-
+				player.hasPushedStart = false;
 				}
+
 			}
 
 			// Les votes ont été comptés !
@@ -250,7 +251,7 @@ public class VoteState : MonoBehaviour {
 			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 				hasVoted+=1;
 				player.hasPushedStart=true;
-				//Debug.Log (hasVoted);
+				Debug.Log (hasVoted);
 			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 				hasVoted-=1;
 				player.hasPushedStart=false;
@@ -261,8 +262,10 @@ public class VoteState : MonoBehaviour {
 		if (hasVoted >= 3 && !votesCounted) {
 			countVotes ();
 		} else if (hasVoted >= 3 && votesCounted){
+			votesCounted = false;
 			// A refactoriser, petite erreur de manip
 				if(!scoreCounted){
+				hasVoted=0;
 				scoreCounted = true;
 				voteStarted = false;
 				
