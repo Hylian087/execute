@@ -66,12 +66,13 @@ public class VoteState : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
+		// refacto
 		if(globalScoreCounter!=null && roundScoreCounter !=null && voteCounter !=null && voteSkull != null && votes !=null){
-			globalScoreCounter = null;
-			roundScoreCounter = null;
-			voteCounter = null;
-			voteSkull = null;
-			votes = null;
+			globalScoreCounter.Clear();
+			roundScoreCounter.Clear();
+			voteCounter.Clear();
+			voteSkull.Clear();
+			votes.Clear();
 		} else if(globalScoreCounter==null && roundScoreCounter ==null && voteCounter ==null && voteSkull == null && votes ==null){
 				globalScoreCounter = new Dictionary<int, GameObject> ();
 				roundScoreCounter = new Dictionary<int, GameObject>();
@@ -80,10 +81,11 @@ public class VoteState : MonoBehaviour {
 				votes = new Dictionary<string, int> ();
 		}
 		
-
+		// création du mask
 		GameObject mask = Instantiate(Resources.Load ("VoteStateMask") as GameObject);
 		mask.transform.SetParent (gameObject.transform);
 
+		// création du start
 		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
 		continueButtons.transform.SetParent (gameObject.transform);
 
@@ -114,7 +116,6 @@ public class VoteState : MonoBehaviour {
 		foreach (var rSCounter in roundScoreCounter) {
 			rSCounter.Value.transform.SetParent (gameObject.transform);
 		}
-
 
 	}
 
@@ -157,6 +158,7 @@ public class VoteState : MonoBehaviour {
 				} else if (player.hasVotedFor == "Y" && votes.ContainsKey ("Y")) {
 					votes ["Y"] += 1;
 				}
+			player.hasAlreadyVoted = false;
 			}
 
 			// Attribution des votes et impact sur le score des joueurs
@@ -169,30 +171,27 @@ public class VoteState : MonoBehaviour {
 						// Nombre de vote contre le joueur +=1
 						player.hasVotes += vote.Value;
 						Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");
+						player.hasVotes = 0;
 
 						// Comptage des scores, différentes conditions de victoire et défaite
 						// Si le joueur a >3 votes et n'était pas résistant, score /2
 						if (player.hasVotes > 3 && !player.isResistant) {
 							player.score = player.score / 2;
-						player.score+=round.scores[player.id];
-						round.scores[player.id]-=round.scores[player.id];
+						countScores (player);
 							//Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score GLOBAL actuel :" + player.score);
 							// Si le joueur a >3 votes et était résistant, score /4
 						} else if (player.hasVotes > 3 && player.isResistant) {
 							player.score = player.score / 4;
-						player.score+=round.scores[player.id];
-						round.scores[player.id]-=round.scores[player.id];
+						countScores (player);
 						//Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score GLOBAL actuel :" + player.score);
 							// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
 						} else if (player.hasVotes < 3 && !player.isResistant) {
-						player.score+=round.scores[player.id];
-						round.scores[player.id]-=round.scores[player.id];
+						countScores (player);
 						//Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score GLOBAL actuel :" + player.score);
 							// Si le joueur a < 3 votes et était résistant, score *4
 						} else if (player.hasVotes < 3 && player.isResistant) {
 							player.score = player.score * 4;
-						player.score+=round.scores[player.id];
-						round.scores[player.id]-=round.scores[player.id];
+						countScores (player);
 						//Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
 						}
 					}
@@ -204,6 +203,10 @@ public class VoteState : MonoBehaviour {
 			votesCounted = true;
 	}
 
+	void countScores(Player _player){
+		Mathf.Lerp (_player.score,_player.score+=round.scores[_player.id],3);
+		Mathf.Lerp(round.scores[_player.id],round.scores[_player.id]-=round.scores[_player.id],3);
+	}
 
 	// Update is called once per frame
 	void Update () {
@@ -246,11 +249,11 @@ public class VoteState : MonoBehaviour {
 		foreach(Player player in game.players){
 			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 				hasVoted+=1;
-				//player.hasPushedStart=true;
+				player.hasPushedStart=true;
 				//Debug.Log (hasVoted);
 			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 				hasVoted-=1;
-				//player.hasPushedStart=false;
+				player.hasPushedStart=false;
 				//Debug.Log (hasVoted);
 			}
 		}
@@ -258,11 +261,8 @@ public class VoteState : MonoBehaviour {
 		if (hasVoted >= 3 && !votesCounted) {
 			countVotes ();
 		} else if (hasVoted >= 3 && votesCounted){
+			// A refactoriser, petite erreur de manip
 				if(!scoreCounted){
-				foreach(Player player in game.players){
-					player.hasVotes = 0;
-					Debug.Log (player.hasVotes);
-				}
 				scoreCounted = true;
 				voteStarted = false;
 				// Reload une manche!
