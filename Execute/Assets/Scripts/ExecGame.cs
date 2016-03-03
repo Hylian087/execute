@@ -91,9 +91,9 @@ public class ExecGame : MonoBehaviour {
 				// Un joueur est enregistré, mais la manette est débranchée
 				if (alreadyRegistred && !joypad.IsConnected()) {
 					// Destruction du joueur si manette débranchée
+					objects["Executer" + associatedPlayer.id].GetComponent<Renderer>().enabled = false;
 					players[associatedPlayer.id] = null;
 					associatedPlayer = null;
-					objects["Executer" + associatedPlayer.id].GetComponent<Renderer>().enabled = false;
 					Debug.Log("Manette #" + joypad.playerIndex + " déconnectée : Joueur #" + associatedPlayer.id + " supprimé.");
 				}
 				
