@@ -40,6 +40,13 @@ public class Round : MonoBehaviour {
 	// Aiguille de l'horloge
 	private GameObject clockArm;
 
+	public AudioClip machineStart = (AudioClip)Resources.Load ("machine_start", typeof(AudioClip));
+	public AudioClip machineWork = (AudioClip)Resources.Load ("machine_working", typeof(AudioClip));
+	public AudioClip machineIdle = (AudioClip)Resources.Load ("machine_idle", typeof(AudioClip));
+	public AudioClip machineStop = (AudioClip)Resources.Load ("machine_stop", typeof(AudioClip));
+
+	public bool soundPlayed;
+
 
 	/**
 	 * Créer une manche
@@ -47,6 +54,7 @@ public class Round : MonoBehaviour {
 	public static Round MakeRound(ExecGame game) {
 		GameObject go = new GameObject("RoundInstance");
 		Round round = go.AddComponent<Round>();
+		AudioSource machineSound = go.AddComponent<AudioSource> ();
 		
 		round.game = game;
 		
@@ -83,6 +91,13 @@ public class Round : MonoBehaviour {
 	void StartRhythmState() {
 		
 		state = RoundState.Rhythm;
+		gameObject.GetComponent<AudioSource> ().PlayOneShot (machineStart);
+		if (machineStart.length>1) {
+			gameObject.GetComponent<AudioSource> ().clip = machineWork;
+			gameObject.GetComponent<AudioSource> ().Play ();
+		}
+
+			
 		
 		Sequence seq;
 		rhythmDuration = 0.0f;
@@ -111,7 +126,10 @@ public class Round : MonoBehaviour {
 	 */
 	public void StartVoteState() {
 		state = RoundState.Vote;
-		VoteState.MakeVoteState (this, game);		
+		VoteState.MakeVoteState (this, game);
+
+		gameObject.GetComponent<AudioSource> ().clip = machineStop;
+		gameObject.GetComponent<AudioSource> ().Play ();
 	}
 
 	public void DestroyRound(){
@@ -125,7 +143,14 @@ public class Round : MonoBehaviour {
 		currentTime += Time.deltaTime;
 		
 		if (state == RoundState.WarmUp) {
-			
+
+			if(!soundPlayed){
+				gameObject.GetComponent<AudioSource>().loop = true;
+				gameObject.GetComponent<AudioSource>().PlayOneShot(machineIdle);
+				soundPlayed = true;
+			}
+
+
 			if (currentTime > warmUpDuration) {
 				StartRhythmState();
 			} 

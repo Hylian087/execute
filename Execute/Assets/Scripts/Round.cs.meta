@@ -1,10 +1,15 @@
 fileFormatVersion: 2
 guid: 8afdd70723ec4994799905a668d5d1f4
-timeCreated: 1455923718
+timeCreated: 1456960981
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - game: {instanceID: 0}
+  - machineStart: {fileID: 8300000, guid: ef1b28d4a17cbf046af07ecbd9f2d32d, type: 3}
+  - machineWork: {fileID: 8300000, guid: 0b24470dff7cd3f4e84132b2987aae4f, type: 3}
+  - machineIdle: {fileID: 8300000, guid: 226d17412b479a24983343723486c004, type: 3}
+  - machineStop: {fileID: 8300000, guid: 2d8acba75710d2642be3c80866a0906b, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
