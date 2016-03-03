@@ -11,6 +11,9 @@ public class Joypad {
 	// Liste des joypads instanciés
 	private static List<Joypad> joypads = new List<Joypad>();
 	
+	// Player associé
+	public Player player = null;
+	
 	// Temps de vibration restant
 	private int vibrationType;
 	private float vibrationTime = 2.0f;
@@ -24,11 +27,11 @@ public class Joypad {
 	private Dictionary<string, string> inverses;
     
 	// Identifiant du joueur
-    private PlayerIndex playerIndex;
+    public PlayerIndex playerIndex;
 	
 	// États des boutons
-    private GamePadState state;
-    private GamePadState prevState;
+    public GamePadState state;
+    public GamePadState prevState;
     
     private int updatesCounter = 0;
     
@@ -114,6 +117,75 @@ public class Joypad {
 		}
 		
 		return pressed;
+	}
+
+
+	/**
+	 * Tester si un bouton est appuyé
+	 * 
+	 * @param <string> le nom de la touche ("A", "B", "Up", ...)
+	 * @return <bool>
+	 */
+	public bool IsCurrentlyDown(string buttonName) {
+		bool pressed = false;
+		
+		if (updatesCounter < 2) {
+			return false;
+		}
+		
+		switch (buttonName) {
+			
+			case "Up":
+				pressed = state.DPad.Up == ButtonState.Pressed;
+			break;
+			
+			case "Down":
+				pressed = state.DPad.Down == ButtonState.Pressed;
+			break;
+			
+			case "Left":
+				pressed = state.DPad.Left == ButtonState.Pressed;
+			break;
+			
+			case "Right":
+				pressed = state.DPad.Right == ButtonState.Pressed;
+			break;
+			
+			case "A":
+				pressed = state.Buttons.A == ButtonState.Pressed;
+			break;
+			
+			case "B":
+				pressed = state.Buttons.B == ButtonState.Pressed;
+			break;
+			
+			case "X":
+				pressed = state.Buttons.X == ButtonState.Pressed;
+			break;
+			
+			case "Y":
+				pressed = state.Buttons.Y == ButtonState.Pressed;
+			break;
+			
+			case "Start":
+				pressed = state.Buttons.Start == ButtonState.Pressed;
+			break;
+			
+			default:
+				pressed = false;
+			break;
+		}
+		
+		return pressed;
+	}
+
+
+	/**
+	 * Tester si la manette est connectée
+	 * @return <bool>
+	 */
+	public bool IsConnected() {
+		return state.IsConnected;
 	}
 
 

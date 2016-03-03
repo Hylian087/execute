@@ -265,8 +265,8 @@ public class VoteState : MonoBehaviour {
 				if(!scoreCounted){
 				scoreCounted = true;
 				voteStarted = false;
-				// Reload une manche!
-				game.hasEnded = true;
+				
+				GameManager.GetInstance().game.NextRound();
 			}
 		}
 

@@ -96,8 +96,8 @@ public class Round : MonoBehaviour {
 			gameObject.GetComponent<AudioSource> ().clip = machineWork;
 			gameObject.GetComponent<AudioSource> ().Play ();
 		}
-
-		game.hasStarted = true;
+		
+		game.StartMachineAnims();
 		
 		Sequence seq;
 		rhythmDuration = 0.0f;
@@ -163,8 +163,10 @@ public class Round : MonoBehaviour {
 			}
 			
 			if (done) {
-				StartVoteState();
+				game.StopMachineAnims();
 				clockArm.transform.localEulerAngles = new Vector3(0, 0, 0);
+				
+				StartVoteState();
 			}
 			else {
 				if (rhythmDuration == 0) {

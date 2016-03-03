@@ -37,11 +37,6 @@ public class GameManager : MonoBehaviour {
 			Destroy(gameObject); // destruction du GameManager	
 		}
 		
-		// Assignation des joueurs et manettes
-		for (int j = 0; j < 4; j++) {
-			joypads[j] = new Joypad(j);
-		}
-		
 		// Tableau des prefabs
 		prefabs = new Dictionary<string, GameObject>();
 		
@@ -59,6 +54,10 @@ public class GameManager : MonoBehaviour {
 	 * Démarrage d'une partie
 	 */
 	public void Start() {
+		
+		for (int i = 0; i < 4; i++) {
+			joypads[i] = new Joypad(i);
+		}
 		
 		// Lancement d'une partie
 		game = ExecGame.MakeExecGame();
