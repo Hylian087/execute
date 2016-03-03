@@ -2,25 +2,22 @@
 using System.Collections;
 
 public class JoyTest : MonoBehaviour {
-
-	private GameManager gm;
+	
+	// Joypads
+	public Joypad[] joypads = new Joypad[4];
+	
 
 	// Use this for initialization
 	void Start () {
 		
-		gm = GameManager.GetInstance();
-			
-		string[] inputNames = Input.GetJoystickNames();
-		
-		foreach (string name in inputNames) {
-			Debug.Log(name);
+		// Assignation des joueurs et manettes
+		for (int j = 0; j < 4; j++) {
+			joypads[j] = new Joypad(j);
 		}
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		
-		Joypad[] joypads = gm.joypads;
 		
 		// Mise à jour nécessaire pour le D-Pad
 		Joypad.UpdateAll();
