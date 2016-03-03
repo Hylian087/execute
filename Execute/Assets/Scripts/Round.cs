@@ -97,7 +97,7 @@ public class Round : MonoBehaviour {
 			gameObject.GetComponent<AudioSource> ().Play ();
 		}
 
-			
+		game.hasStarted = true;
 		
 		Sequence seq;
 		rhythmDuration = 0.0f;
