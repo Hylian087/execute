@@ -6,9 +6,12 @@ public class ExecGame : MonoBehaviour {
 	// Joueurs
 	public Player[] players = new Player[4];
 
+	GameObject machineBody;
+
 	// Manche actuelle
 	Round round;
 
+	public bool hasStarted = false;
 	// Round terminé après le vote
 	public bool hasEnded;
 
@@ -26,7 +29,7 @@ public class ExecGame : MonoBehaviour {
 	 * Initialisation
 	 */
 	void Start() {
-		
+		machineBody = GameObject.Find ("MachineBody");
 		GameManager gm = GameManager.GetInstance();
 		
 		// Assignation des joueurs et manettes
@@ -56,7 +59,11 @@ public class ExecGame : MonoBehaviour {
 	 * Mise à jour
 	 */
 	void Update() {
+		foreach (Transform child in machineBody.transform) {
+			child.GetComponent<Animator>().SetBool ("hasStarted", hasStarted);
+		}
 		if (hasEnded) {
+			hasStarted=false;
 			round.DestroyRound();
 			NewRound ();
 			hasEnded = false;

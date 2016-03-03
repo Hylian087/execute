@@ -71,7 +71,7 @@ public class Round : MonoBehaviour {
         clockArm = GameObject.Find("ClockArm");
 		
 		resistant = game.players[Random.Range(0, 4)];
-		Debug.Log("Résistant : " + resistant.id);
+		//Debug.Log("Résistant : " + resistant.id);
 		
 		foreach (Player player in game.players) {
 			if (player == resistant) {
@@ -97,7 +97,7 @@ public class Round : MonoBehaviour {
 			gameObject.GetComponent<AudioSource> ().Play ();
 		}
 
-			
+		game.hasStarted = true;
 		
 		Sequence seq;
 		rhythmDuration = 0.0f;
