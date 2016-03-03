@@ -23,19 +23,19 @@ public class Joypad {
 	// Tableau des touches inversées
 	private Dictionary<string, string> inverses;
     
-	// Identifiant de la dernière instance
-	private static int lastId = 0;
+	// Identifiant du joueur
+    private PlayerIndex playerIndex;
 	
-	// Identifiant de l'instance actuelle
-	private int id;
-	
-	// Axes à traiter comme des boutons (D-Pad)
-	private Dictionary<string, int> axesButtons;
-
+	// États des boutons
+    private GamePadState state;
+    private GamePadState prevState;
+    
+    private int updatesCounter = 0;
+    
 	/**
 	 * Initialisation de l'objet
 	 */
-	public Joypad() {
+	public Joypad(int playerIndex) {
 		
 		// Tableau associatif des touches inverses
 		inverses = new Dictionary<string, string>();
@@ -50,21 +50,9 @@ public class Joypad {
 		inverses.Add("X", 		"B");
 		inverses.Add("Y", 		"A");
 		
-		// Initialisation des axes à traiter comme des boutons (D-Pad)
-		axesButtons = new Dictionary<string, int>();
-		
-		axesButtons.Add("Up", 		0);
-		axesButtons.Add("Down", 	0);
-		axesButtons.Add("Left", 	0);
-		axesButtons.Add("Right", 	0);
-		
 		// Initialisation de l'identifiant
-		id = lastId;	
-
-
-		// Changement de Joy pour la prochaine instance
-		lastId++;
-
+		this.playerIndex = (PlayerIndex) playerIndex;
+		
 		// Ajout de ce joypad à la liste des joypads
 		joypads.Add(this);
 	}
@@ -75,19 +63,57 @@ public class Joypad {
 	 * @param <string> le nom de la touche ("A", "B", "Up", ...)
 	 * @return <bool>
 	 */
-	public bool IsDown(string button) {
-		switch (button) {
+	public bool IsDown(string buttonName) {
+		bool pressed = false;
+		
+		if (updatesCounter < 2) {
+			return false;
+		}
+		
+		switch (buttonName) {
 			
 			case "Up":
+				pressed = (prevState.DPad.Up == ButtonState.Pressed && state.DPad.Up == ButtonState.Released);
+			break;
+			
 			case "Down":
+				pressed = (prevState.DPad.Down == ButtonState.Pressed && state.DPad.Down == ButtonState.Released);
+			break;
+			
 			case "Left":
+				pressed = (prevState.DPad.Left == ButtonState.Pressed && state.DPad.Left == ButtonState.Released);
+			break;
+			
 			case "Right":
-				// Pour détecter juste une pression
-				return axesButtons[button] == 1;
+				pressed = (prevState.DPad.Right == ButtonState.Pressed && state.DPad.Right == ButtonState.Released);
+			break;
+			
+			case "A":
+				pressed = (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Released);
+			break;
+			
+			case "B":
+				pressed = (prevState.Buttons.B == ButtonState.Pressed && state.Buttons.B == ButtonState.Released);
+			break;
+			
+			case "X":
+				pressed = (prevState.Buttons.X == ButtonState.Pressed && state.Buttons.X == ButtonState.Released);
+			break;
+			
+			case "Y":
+				pressed = (prevState.Buttons.Y == ButtonState.Pressed && state.Buttons.Y == ButtonState.Released);
+			break;
+			
+			case "Start":
+				pressed = (prevState.Buttons.Start == ButtonState.Pressed && state.Buttons.Start == ButtonState.Released);
+			break;
 			
 			default:
-				return Input.GetButtonDown("Joy" + (id+1) + button);
+				pressed = false;
+			break;
 		}
+		
+		return pressed;
 	}
 
 
@@ -120,7 +146,7 @@ public class Joypad {
 	 * @return <int>
 	 */
 	public int getID() {
-		return id;
+		return (int) playerIndex;
 	}
 	
 	
@@ -128,47 +154,13 @@ public class Joypad {
 	 * Mise à jour
 	 */
 	public void Update() {
-		// Met à jour le tableau des axes utilisées
-		List<string> buttons = new List<string> (axesButtons.Keys);
 		
-		foreach (string button in buttons) {
-			float axis;
-			
-			switch (button) {
-				case "Up":
-				case "Down":
-					axis = Input.GetAxis("Joy" + (id+1) + "UpDown");
-					
-					// Le bouton Haut ou Bas est pressé
-					if ((button == "Up" 	&& axis == 1) ^
-						(button == "Down" 	&& axis == -1)) {
-						axesButtons[button]++;
-					}
-					else {
-						axesButtons[button] = 0;
-					}
-					
-				break;
-					
-				case "Left":
-				case "Right":
-					axis = Input.GetAxis("Joy" + (id+1) + "RightLeft");
-					
-					// Le bouton Droite ou Gauche est pressé
-					if ((button == "Left" 	&& axis == -1) ^
-						(button == "Right" 	&& axis == 1)) {
-						axesButtons[button]++;
-					}
-					else {
-						axesButtons[button] = 0;
-					}
-				break;
-			}
-		}
-		
+        prevState = state;
+        state = GamePad.GetState(playerIndex);
+        
+        updatesCounter++;
+        
 		if (vibrationTime < vibrationDuration) {
-			
-			PlayerIndex pid = (PlayerIndex) id;
 			
 			float activate = 1.0f;
 			
@@ -176,12 +168,12 @@ public class Joypad {
 				activate = 1.0f - Mathf.Floor((vibrationTime / vibrationDuration) / (1.0f / (vibrationType * 2.0f - 1.0f))) % 2;
 			}
 			
-			GamePad.SetVibration(pid, activate * vibrationStrength, activate * vibrationStrength);
+			GamePad.SetVibration(playerIndex, activate * vibrationStrength, activate * vibrationStrength);
 			
 			vibrationTime += Time.deltaTime;
 			
 			if (vibrationTime >= vibrationDuration) {
-				GamePad.SetVibration(pid, 0.0f, 0.0f);
+				GamePad.SetVibration(playerIndex, 0.0f, 0.0f);
 			}
 		}
 	}

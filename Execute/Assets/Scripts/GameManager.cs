@@ -39,7 +39,7 @@ public class GameManager : MonoBehaviour {
 		
 		// Assignation des joueurs et manettes
 		for (int j = 0; j < 4; j++) {
-			joypads[j] = new Joypad();
+			joypads[j] = new Joypad(j);
 		}
 		
 		// Tableau des prefabs
