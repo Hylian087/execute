@@ -22,7 +22,7 @@ public class ExecGame : MonoBehaviour {
 	
 	// Manche actuelle
 	Round round;
-	
+
 	/**
 	 * Créer une partie
 	 */
@@ -117,7 +117,11 @@ public class ExecGame : MonoBehaviour {
 				foreach (string button in Joypad.AXIS_BUTTONS) {
 					if (associatedPlayer != null && joypad.IsCurrentlyDown(button)) {
 						aButtonIsDown = true;
-						
+
+						AudioSource audioSource = objects["TVScreen"+associatedPlayer.id].GetComponent<AudioSource>();
+						AudioClip audioClip = (AudioClip)Resources.Load ("static", typeof(AudioClip));
+						audioSource.clip = audioClip;
+						audioSource.Play ();
 						Renderer renderer = objects["TVScreen" + associatedPlayer.id].GetComponent<Renderer>();
 						renderer.enabled = true;
 						Color color = renderer.material.color;
@@ -143,6 +147,7 @@ public class ExecGame : MonoBehaviour {
 				
 				if (!aButtonIsDown && associatedPlayer != null) {
 					objects["TVScreen" + associatedPlayer.id].GetComponent<Renderer>().enabled = false;
+					objects["TVScreen"+associatedPlayer.id].GetComponent<AudioSource>().Pause();
 				}
 				
 				
