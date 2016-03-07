@@ -118,10 +118,13 @@ public class ExecGame : MonoBehaviour {
 					if (associatedPlayer != null && joypad.IsCurrentlyDown(button)) {
 						aButtonIsDown = true;
 
+						// Feedback sonore 
 						AudioSource audioSource = objects["TVScreen"+associatedPlayer.id].GetComponent<AudioSource>();
 						AudioClip audioClip = (AudioClip)Resources.Load ("static", typeof(AudioClip));
 						audioSource.clip = audioClip;
-						audioSource.Play ();
+						if(!audioSource.isPlaying){
+							audioSource.Play ();}
+
 						Renderer renderer = objects["TVScreen" + associatedPlayer.id].GetComponent<Renderer>();
 						renderer.enabled = true;
 						Color color = renderer.material.color;

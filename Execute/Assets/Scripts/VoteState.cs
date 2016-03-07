@@ -62,6 +62,61 @@ public class VoteState : MonoBehaviour {
 		return vs;
 	}
 
+	IEnumerator voteDisplay(){
+		// création du mask
+		GameObject mask = Instantiate(Resources.Load ("VoteStateMask") as GameObject);
+		mask.transform.SetParent (gameObject.transform);
+		yield return new WaitForSeconds (0.25f);
+
+		foreach (Player player in game.players) {
+			// Création des compteurs de scores GLOBAUX
+			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
+			// Code NECESSAIRE pour l'affichage du score de partie
+			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
+			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 7;
+			// Affichage du score global
+			globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
+		}
+
+		yield return new WaitForSeconds(0.75f);
+		// Création des différents compteurs
+		foreach(Player player in game.players){
+
+			// Création des compteurs de scores DE ROUND
+			roundScoreCounter.Add (player.id, Instantiate (Resources.Load ("RoundScoreCounter"+player.id)) as GameObject);
+			// Code NECESSAIRE pour l'affichage du score de round
+			roundScoreCounter[player.id].GetComponent<MeshRenderer>().sortingLayerName = "Vote";
+			roundScoreCounter[player.id].GetComponent<MeshRenderer>().sortingOrder=7;
+			// Affichage du score de round
+			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();						
+		}
+						
+
+		yield return new WaitForSeconds(0.75f);	
+		foreach (Player player in game.players) {
+			// Création des compteurs de votes
+			votes.Add (player.voteID,0);
+			voteCounter.Add(player.voteID, Instantiate (Resources.Load ("VoteCounter"+player.id)) as GameObject);
+		}
+
+		// Rangement des compteurs dans leur parent (le GO VoteState)
+		foreach (var counter in voteCounter) {
+			counter.Value.transform.SetParent (gameObject.transform);
+		}
+		
+		foreach (var gSCounter in globalScoreCounter) {
+			gSCounter.Value.transform.SetParent (gameObject.transform);
+		}
+		
+		foreach (var rSCounter in roundScoreCounter) {
+			rSCounter.Value.transform.SetParent (gameObject.transform);
+		}
+
+		// création du start
+		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
+		continueButtons.transform.SetParent (gameObject.transform);
+
+	}
 
 	// Use this for initialization
 	void Start () {
@@ -80,42 +135,8 @@ public class VoteState : MonoBehaviour {
 				voteSkull = new Dictionary<int, GameObject>();
 				votes = new Dictionary<string, int> ();
 		}
-		
-		// création du mask
-		GameObject mask = Instantiate(Resources.Load ("VoteStateMask") as GameObject);
-		mask.transform.SetParent (gameObject.transform);
 
-		// création du start
-		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
-		continueButtons.transform.SetParent (gameObject.transform);
-
-		foreach(Player player in game.players){
-			// Création des compteurs de votes
-			votes.Add (player.voteID,0);
-			voteCounter.Add(player.voteID, Instantiate (Resources.Load ("VoteCounter"+player.id)) as GameObject);
-			// Création des compteurs de scores GLOBAUX
-			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
-			// Code NECESSAIRE pour l'affichage du score de partie
-			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
-			globalScoreCounter[player.id].GetComponentInChildren<MeshRenderer>().sortingOrder = 7;
-			// Création des compteurs de scores DE ROUND
-			roundScoreCounter.Add (player.id, Instantiate (Resources.Load ("RoundScoreCounter"+player.id)) as GameObject);
-			// Code NECESSAIRE pour l'affichage du score de round
-			roundScoreCounter[player.id].GetComponent<MeshRenderer>().sortingLayerName = "Vote";
-			roundScoreCounter[player.id].GetComponent<MeshRenderer>().sortingOrder=7;
-		}
-
-		foreach (var counter in voteCounter) {
-			counter.Value.transform.SetParent (gameObject.transform);
-		}
-
-		foreach (var gSCounter in globalScoreCounter) {
-			gSCounter.Value.transform.SetParent (gameObject.transform);
-		}
-
-		foreach (var rSCounter in roundScoreCounter) {
-			rSCounter.Value.transform.SetParent (gameObject.transform);
-		}
+		StartCoroutine (voteDisplay ());
 
 	}
 
@@ -219,11 +240,7 @@ public class VoteState : MonoBehaviour {
 		// Quand un joueur appuie sur un bouton
 		foreach(Player player in game.players){
 
-			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();
-			globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
-
 			foreach (string buttonName in Joypad.AXIS_BUTTONS) {
-
 				if (player.joypad.IsDown (buttonName)) {
 
 					// Si le bouton != lui-meme & que ce n'est pas les touches fléchées
