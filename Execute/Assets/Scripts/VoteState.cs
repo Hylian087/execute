@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class VoteState : MonoBehaviour {
 
+	// Références aux Instances
 	public Round round;
 	public ExecGame game;
 	public Player player;
@@ -11,11 +12,12 @@ public class VoteState : MonoBehaviour {
 	// Timer du vote
 	public float voteDuration = 5.0f;
 
+	bool voteDisplayed;
+	GameObject timerText;
+
 	// Temps passé sur le vote
 	public float currentTime;
 
-	// Le vote a-t-il commencé?
-	public static bool voteStarted = false;
 	// Les votes ont-ils été comptés? (Vote terminé?)
 	public bool votesCounted;
 	public bool scoreCounted;
@@ -48,6 +50,7 @@ public class VoteState : MonoBehaviour {
 	 * Créer une voteState
 	 */
 	public static VoteState MakeVoteState(Round round, ExecGame game) {
+		bool voteStarted = false;
 		if (voteStarted == false) {
 		
 			GameObject go = new GameObject ("VoteState");
@@ -63,11 +66,14 @@ public class VoteState : MonoBehaviour {
 	}
 
 	IEnumerator voteDisplay(){
+		if (!voteDisplayed) {
+		
 		// création du mask
 		GameObject mask = Instantiate(Resources.Load ("VoteStateMask") as GameObject);
 		mask.transform.SetParent (gameObject.transform);
-		yield return new WaitForSeconds (0.25f);
 
+		yield return new WaitForSeconds (0.25f);
+		//Compteur de scores de partie pour chaque joueur
 		foreach (Player player in game.players) {
 			// Création des compteurs de scores GLOBAUX
 			globalScoreCounter.Add (player.id, Instantiate (Resources.Load ("GlobalScoreCounter"+player.id)) as GameObject);
@@ -79,7 +85,7 @@ public class VoteState : MonoBehaviour {
 		}
 
 		yield return new WaitForSeconds(0.75f);
-		// Création des différents compteurs
+		// Compteur de scores Round pour chaque joueur
 		foreach(Player player in game.players){
 
 			// Création des compteurs de scores DE ROUND
@@ -90,9 +96,9 @@ public class VoteState : MonoBehaviour {
 			// Affichage du score de round
 			roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();						
 		}
-						
 
 		yield return new WaitForSeconds(0.75f);	
+		// Compteur de votes pour chaque joueur
 		foreach (Player player in game.players) {
 			// Création des compteurs de votes
 			votes.Add (player.voteID,0);
@@ -111,10 +117,22 @@ public class VoteState : MonoBehaviour {
 		foreach (var rSCounter in roundScoreCounter) {
 			rSCounter.Value.transform.SetParent (gameObject.transform);
 		}
+		
+			yield return new WaitForSeconds(0.75f);
+			timerText = Instantiate (Resources.Load ("VoteTimer") as GameObject);
+			timerText.transform.SetParent (gameObject.transform);
+			timerText.GetComponent<MeshRenderer>().sortingLayerName = "Vote";
+			timerText.GetComponent<MeshRenderer>().sortingOrder = 7;
+			timerText.GetComponent<TextMesh>().text = voteDuration.ToString();
 
 		// création du start
 		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
 		continueButtons.transform.SetParent (gameObject.transform);
+
+			yield return new WaitForSeconds(0.75f);
+
+		voteDisplayed = true;
+		}
 
 	}
 
@@ -232,62 +250,65 @@ public class VoteState : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		// Temps passé sur la manche de vote
-		currentTime += Time.deltaTime;
-		// Animation des boutons start
-		continueButtons.GetComponent<Animator>().SetInteger("hasVoted", hasVoted);
+		if (voteDisplayed) {
 
-		// Quand un joueur appuie sur un bouton
-		foreach(Player player in game.players){
-
-			foreach (string buttonName in Joypad.AXIS_BUTTONS) {
-				if (player.joypad.IsDown (buttonName)) {
-
-					// Si le bouton != lui-meme & que ce n'est pas les touches fléchées
-					if(buttonName != player.voteID && new List<string>(){"A","B","X","Y"}.Contains(buttonName)){
-					player.hasVotedFor = buttonName;
-						// Création / déplacement des skulls dans les compteurs
-					AddVote (player);
-					Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
-
-						// Si le joueur vote pour lui-meme, NOPE TODO : FEEDBACK
-					}else if(buttonName == player.voteID){
-						Debug.Log("Vous ne pouvez pas voter contre vous-meme !");
-
-						// Si le joueur appuie sur une touche fléchée, NOPE TODO : FEEDBACK
-					}else if(new List<string>(){"Up", "Down", "Left", "Right"}.Contains(buttonName)){
-						Debug.Log ("Vote invalide !");
+			// Temps passé sur la manche de vote
+			currentTime += Time.deltaTime;
+			// Animation des boutons start
+			continueButtons.GetComponent<Animator>().SetInteger("hasVoted", hasVoted);
+			if(currentTime < voteDuration){
+			timerText.GetComponent<TextMesh>().text = (Mathf.RoundToInt(voteDuration-currentTime)).ToString();
+			}else{
+				timerText.GetComponent<TextMesh>().text = "TIME'S UP";
+			}
+			
+			// Quand un joueur appuie sur un bouton
+			foreach(Player player in game.players){				
+				foreach (string buttonName in Joypad.AXIS_BUTTONS) {
+					if (player.joypad.IsDown (buttonName)) {
+						
+						// Si le bouton != lui-meme & que ce n'est pas les touches fléchées
+						if(buttonName != player.voteID && new List<string>(){"A","B","X","Y"}.Contains(buttonName)){
+							player.hasVotedFor = buttonName;
+							// Création / déplacement des skulls dans les compteurs
+							AddVote (player);
+							Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
+							
+							// Si le joueur vote pour lui-meme, NOPE TODO : FEEDBACK
+						}else if(buttonName == player.voteID){
+							Debug.Log("Vous ne pouvez pas voter contre vous-meme !");
+							
+							// Si le joueur appuie sur une touche fléchée, NOPE TODO : FEEDBACK
+						}else if(new List<string>(){"Up", "Down", "Left", "Right"}.Contains(buttonName)){
+							Debug.Log ("Vote invalide !");
+						}
+						break;
 					}
-					break;
 				}
-			}
-		}
-					
-		// A la fin du vote...
-		foreach(Player player in game.players){
-			if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
-				hasVoted+=1;
-				player.hasPushedStart=true;
-				Debug.Log (hasVoted);
-			}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
-				hasVoted-=1;
-				player.hasPushedStart=false;
-				//Debug.Log (hasVoted);
+
+				// Les joueurs appuient sur Start
+				if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
+					hasVoted+=1;
+					player.hasPushedStart=true;
+					//Debug.Log (hasVoted);
+				}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
+					hasVoted-=1;
+					player.hasPushedStart=false;
+					//Debug.Log (hasVoted);
+				}
+
 			}
 		}
 
-		if (hasVoted >= 3 && !votesCounted) {
+		if (hasVoted >= 3 && !votesCounted || currentTime >= voteDuration && !votesCounted) {
 			countVotes ();
-		} else if (hasVoted >= 3 && votesCounted){
-			votesCounted = false;
-			// A refactoriser, petite erreur de manip
-				if(!scoreCounted){
-				hasVoted=0;
-				scoreCounted = true;
-				voteStarted = false;
-				
+		} else if (hasVoted >= 3 && votesCounted || currentTime > voteDuration && votesCounted){
+
+			if(!scoreCounted){
+				scoreCounted = true;				
 				GameManager.GetInstance().game.NextRound();
 			}
+
 		}
 
 	}
