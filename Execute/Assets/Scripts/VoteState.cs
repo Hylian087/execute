@@ -21,6 +21,12 @@ public class VoteState : MonoBehaviour {
 	// Les votes ont-ils été comptés? (Vote terminé?)
 	public bool votesCounted;
 	public bool scoreCounted;
+	// Resistant montré
+	public bool resistantShown = false;
+	// Tous les calculs sont-ils faits?
+	public bool done;
+	// Next round launched?
+	public bool nextRound;
 
 	// Personnes qui ont voté
 	public int hasVoted;
@@ -136,6 +142,131 @@ public class VoteState : MonoBehaviour {
 
 	}
 
+
+	IEnumerator countVotes(){
+		if (!done) {
+		
+		if (!votesCounted) {
+			// Comptage des votes pour chaque joueur
+			foreach (Player player in game.players) {			
+				if (player.hasVotedFor == "A" && votes.ContainsKey ("A")) {
+					votes ["A"] += 1;
+					//Debug.Log (votes ["A"]);
+				} else if (player.hasVotedFor == "B" && votes.ContainsKey ("B")) {
+					votes ["B"] += 1;
+					//Debug.Log (votes ["B"]);
+				} else if (player.hasVotedFor == "X" && votes.ContainsKey ("X")) {
+					votes ["X"] += 1;
+					//Debug.Log (votes ["X"]);
+				} else if (player.hasVotedFor == "Y" && votes.ContainsKey ("Y")) {
+					votes ["Y"] += 1;
+					//Debug.Log (votes ["Y"]);
+				}
+			}
+			votesCounted = true;
+		}
+		
+			yield return new WaitForSeconds (1.0f);
+
+			foreach(Player player in game.players){
+				if(player.isResistant && !resistantShown){
+					GameObject resistantStamp = Instantiate(Resources.Load ("ResistantStamp")) as GameObject; 
+					resistantStamp.transform.SetParent(gameObject.transform);
+					resistantStamp.transform.position = game.objects["Executer"+player.id].transform.position + new Vector3(0,-25,0);
+					resistantShown = true;
+				}
+			}
+
+			yield return new WaitForSeconds(1.0f);
+		
+		// Attribution des votes et impact sur le score des joueurs
+		// Pour chaque vote dans la liste votes
+		foreach (var vote in votes) {
+			// Pour chaque joueur dans la partie
+			foreach (Player player in game.players) {
+				// Si l'ID du joueur = le vote
+				if (player.voteID == vote.Key && votesCounted == true) {
+					// Nombre de vote contre le joueur +=1
+					player.hasVotes += vote.Value;
+					Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");					
+
+
+						//if(!scoreCounted){
+						// Comptage des scores, différentes conditions de victoire et défaite
+						// Si le joueur a >3 votes et n'était pas résistant, score /2
+						if (player.hasVotes > 3 && !player.isResistant && !player.scoreCounted) {
+							countScores (player);
+							yield return new WaitForSeconds(1.0f);
+							player.score = player.score / 2;
+							player.scoreCounted = true;
+							Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score GLOBAL actuel :" + player.score);
+							// Si le joueur a >3 votes et était résistant, score /4
+						} else if (player.hasVotes > 3 && player.isResistant && !player.scoreCounted) {
+							countScores (player);
+							yield return new WaitForSeconds(1.0f);
+							player.score = player.score / 4;
+							player.scoreCounted = true;
+							Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score GLOBAL actuel :" + player.score);
+							// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
+						} else if (player.hasVotes < 3 && !player.isResistant && !player.scoreCounted) {
+							countScores (player);
+							player.scoreCounted = true;
+							yield return new WaitForSeconds(1.0f);
+							Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score GLOBAL actuel :" + player.score);
+							// Si le joueur a < 3 votes et était résistant, score *4
+						} else if (player.hasVotes < 3 && player.isResistant && !player.scoreCounted) {
+							countScores (player);
+							yield return new WaitForSeconds(1.0f);
+							player.score = player.score * 4;
+							player.scoreCounted = true;
+							Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
+						}
+						//scoreCounted = true;
+						//}
+
+				}
+				
+				
+
+					// Reinit
+				player.hasVotedFor = "";
+				player.hasVotes = 0;
+				player.hasAlreadyVoted = false;
+				player.hasPushedStart = false;
+				player.scoreCounted = false;
+			}
+			
+		}	
+		
+		yield return new WaitForSeconds(2.0f);
+			done = true;
+		}
+	}
+
+
+	// Fonction d'affichage des votes dans les compteurs
+	void AddSkull(Player _player){
+		// Pour chaque compteur dans voteCounter
+		foreach(var counter in voteCounter){
+			// Si un joueur a voté pour un joueur et qu'il n'avait pas voté avant...
+			if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == false){
+				// Création d'un crane et placement dans le compteur
+				voteSkull.Add (_player.id,Instantiate(Resources.Load ("skullVote")) as GameObject);
+				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
+				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,-25,0);
+				// Le joueur a donc voté
+				_player.hasAlreadyVoted = true;
+			}
+			// Si le joueur change son vote (s'il a déjà voté mais qu'il vote encore une fois)
+			else if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == true){
+				// Changement de la place du crane vers le joueur pour lequel il change son vote
+				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
+				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
+			}
+		} 	
+		
+	}
+
 	// Use this for initialization
 	void Start () {
 
@@ -158,90 +289,7 @@ public class VoteState : MonoBehaviour {
 
 	}
 
-	// Fonction d'affichage des votes dans les compteurs
-	void AddVote(Player _player){
-		// Pour chaque compteur dans voteCounter
-			foreach(var counter in voteCounter){
-			// Si un joueur a voté pour un joueur et qu'il n'avait pas voté avant...
-				if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == false){
-				// Création d'un crane et placement dans le compteur
-				voteSkull.Add (_player.id,Instantiate(Resources.Load ("skullVote")) as GameObject);
-				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
-				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
-				// Le joueur a donc voté
-				_player.hasAlreadyVoted = true;
-				}
-			// Si le joueur change son vote (s'il a déjà voté mais qu'il vote encore une fois)
-				else if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == true){
-				// Changement de la place du crane vers le joueur pour lequel il change son vote
-				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
-				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
-				}
-		} 
-		
 
-	}
-
-	// Comptage des votes à la fin du vote
-	void countVotes(){
-		votesCounted = false;
-
-			// Comptage des votes pour chaque joueur
-			foreach (Player player in game.players) {
-				if (player.hasVotedFor == "A" && votes.ContainsKey ("A")) {
-					votes ["A"] += 1;
-				} else if (player.hasVotedFor == "B" && votes.ContainsKey ("B")) {
-					votes ["B"] += 1;
-				} else if (player.hasVotedFor == "X" && votes.ContainsKey ("X")) {
-					votes ["X"] += 1;
-				} else if (player.hasVotedFor == "Y" && votes.ContainsKey ("Y")) {
-					votes ["Y"] += 1;
-				}
-			player.hasAlreadyVoted = false;
-			}
-
-			// Attribution des votes et impact sur le score des joueurs
-			// Pour chaque vote dans la liste votes
-			foreach (var vote in votes) {
-				// Pour chaque joueur dans la partie
-				foreach (Player player in game.players) {
-					// Si l'ID du joueur = le vote
-					if (player.voteID == vote.Key) {
-						// Nombre de vote contre le joueur +=1
-						player.hasVotes += vote.Value;
-						Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");
-						player.hasVotes = 0;
-
-						// Comptage des scores, différentes conditions de victoire et défaite
-						// Si le joueur a >3 votes et n'était pas résistant, score /2
-						if (player.hasVotes > 3 && !player.isResistant) {
-							player.score = player.score / 2;
-						countScores (player);
-							//Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score GLOBAL actuel :" + player.score);
-							// Si le joueur a >3 votes et était résistant, score /4
-						} else if (player.hasVotes > 3 && player.isResistant) {
-							player.score = player.score / 4;
-						countScores (player);
-						//Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score GLOBAL actuel :" + player.score);
-							// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
-						} else if (player.hasVotes < 3 && !player.isResistant) {
-						countScores (player);
-						//Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score GLOBAL actuel :" + player.score);
-							// Si le joueur a < 3 votes et était résistant, score *4
-						} else if (player.hasVotes < 3 && player.isResistant) {
-							player.score = player.score * 4;
-						countScores (player);
-						//Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
-						}
-					}
-				player.hasPushedStart = false;
-				}
-
-			}
-
-			// Les votes ont été comptés !
-			votesCounted = true;
-	}
 
 	void countScores(Player _player){
 		Mathf.Lerp (_player.score,_player.score+=round.scores[_player.id],3);
@@ -250,20 +298,29 @@ public class VoteState : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+
 		if (voteDisplayed) {
+			foreach(Player player in game.players){
+				globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
+				roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();
+			}
+		}
+
+		if (voteDisplayed && !votesCounted) {
 
 			// Temps passé sur la manche de vote
 			currentTime += Time.deltaTime;
 			// Animation des boutons start
 			continueButtons.GetComponent<Animator>().SetInteger("hasVoted", hasVoted);
+
 			if(currentTime < voteDuration){
-			timerText.GetComponent<TextMesh>().text = (Mathf.RoundToInt(voteDuration-currentTime)).ToString();
+				timerText.GetComponent<TextMesh>().text = (Mathf.RoundToInt(voteDuration-currentTime)).ToString();
 			}else{
 				timerText.GetComponent<TextMesh>().text = "TIME'S UP";
 			}
-			
+
 			// Quand un joueur appuie sur un bouton
-			foreach(Player player in game.players){				
+			foreach(Player player in game.players){		
 				foreach (string buttonName in Joypad.AXIS_BUTTONS) {
 					if (player.joypad.IsDown (buttonName)) {
 						
@@ -271,7 +328,7 @@ public class VoteState : MonoBehaviour {
 						if(buttonName != player.voteID && new List<string>(){"A","B","X","Y"}.Contains(buttonName)){
 							player.hasVotedFor = buttonName;
 							// Création / déplacement des skulls dans les compteurs
-							AddVote (player);
+							AddSkull (player);
 							Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
 							
 							// Si le joueur vote pour lui-meme, NOPE TODO : FEEDBACK
@@ -285,7 +342,7 @@ public class VoteState : MonoBehaviour {
 						break;
 					}
 				}
-
+				
 				// Les joueurs appuient sur Start
 				if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 					hasVoted+=1;
@@ -296,19 +353,19 @@ public class VoteState : MonoBehaviour {
 					player.hasPushedStart=false;
 					//Debug.Log (hasVoted);
 				}
-
+				
 			}
-		}
+		}			
 
-		if (hasVoted >= 3 && !votesCounted || currentTime >= voteDuration && !votesCounted) {
-			countVotes ();
-		} else if (hasVoted >= 3 && votesCounted || currentTime > voteDuration && votesCounted){
 
-			if(!scoreCounted){
-				scoreCounted = true;				
+		if (hasVoted >= 3 && !votesCounted  || currentTime >= voteDuration && !votesCounted) {
+			StartCoroutine(countVotes ());
+		} else if (hasVoted >= 3 && votesCounted  || currentTime > voteDuration && votesCounted){
+			if(done && !nextRound){
 				GameManager.GetInstance().game.NextRound();
+				nextRound=true;
 			}
-
+				
 		}
 
 	}

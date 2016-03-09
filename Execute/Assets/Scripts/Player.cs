@@ -24,6 +24,8 @@ public class Player {
 	public bool hasAlreadyVoted;
 	// Le joueur a-t-il appuyé sur Start pour terminer le vote?
 	public bool hasPushedStart;
+	// Score du joueur compté?
+	public bool scoreCounted;
 
 	/**
 	 * Constructeur
