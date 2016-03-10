@@ -11,7 +11,6 @@ GameObject:
   - 212: {fileID: 21294998}
   - 114: {fileID: 11478468}
   - 82: {fileID: 8224792}
-  - 111: {fileID: 11177728}
   - 95: {fileID: 9535252}
   m_Layer: 0
   m_Name: ButtonY
@@ -119,20 +118,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!111 &11177728
-Animation:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 181362}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Animation: {fileID: 7400000, guid: b5af1c7803c6e1e4a9b92859c9715a41, type: 2}
-  m_Animations: []
-  m_WrapMode: 0
-  m_PlayAutomatically: 1
-  m_AnimatePhysics: 0
-  m_CullingType: 0
 --- !u!114 &11478468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -224,6 +209,10 @@ Prefab:
       propertyPath: m_Animation
       value: 
       objectReference: {fileID: 7400000, guid: b5af1c7803c6e1e4a9b92859c9715a41, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181362}

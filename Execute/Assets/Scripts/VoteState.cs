@@ -195,7 +195,7 @@ public class VoteState : MonoBehaviour {
 				
 			}				
 
-			yield return new WaitForSeconds(2.0f);
+			yield return new WaitForSeconds(1.0f);
 
 			foreach(Player player in game.players){
 				//if(!scoreCounted){
@@ -231,7 +231,7 @@ public class VoteState : MonoBehaviour {
 				player.scoreCounted = false;
 			}	
 				
-		yield return new WaitForSeconds(2.0f);
+		yield return new WaitForSeconds(1.0f);
 			done = true;
 		}
 	}
