@@ -164,7 +164,7 @@ public class Sequence : MonoBehaviour {
 			if (currentButton.buttonName == buttonDownName) {
 				
 				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
-				currentButton.SetColor(0.0f, 1.0f, 0.0f);
+				//currentButton.SetColor(0.0f, 1.0f, 0.0f);
 				
 				currentButton.LaunchFeedback(precision);
 				
@@ -181,7 +181,7 @@ public class Sequence : MonoBehaviour {
 				player.joypad.IsInverse(currentButton.buttonName, buttonDownName)
 			) {
 				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
-				currentButton.SetColor(0.0f, 0.0f, 1.0f);
+				//currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
 				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 				player.joypad.VibrateTwice(0.4f);
@@ -192,7 +192,7 @@ public class Sequence : MonoBehaviour {
 			// Le joueur se trompe
 			else {
 				//Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
-				currentButton.SetColor(1.0f, 0.0f, 0.0f);
+				//currentButton.SetColor(1.0f, 0.0f, 0.0f);
 				player.joypad.VibrateOnce(0.5f, 1.0f);
 				currentButton.buttonAudioSource.clip = currentButton.errorSound;
 				currentButton.buttonAudioSource.Play ();

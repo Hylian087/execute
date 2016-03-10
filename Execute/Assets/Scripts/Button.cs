@@ -68,8 +68,12 @@ public class Button : MonoBehaviour {
 	 * Mise à jour
 	 */
 	void Update() {
+		if (pressed) {
+			gameObject.GetComponent<Animator>().SetBool ("Pressed", true);
+		}
 	}
-	
+
+
 	
 	/**
 	 * Retourne la précision pour le bouton actuel (0..1)

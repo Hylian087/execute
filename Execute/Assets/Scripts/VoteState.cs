@@ -316,7 +316,7 @@ public class VoteState : MonoBehaviour {
 			if(currentTime < voteDuration){
 				timerText.GetComponent<TextMesh>().text = (Mathf.RoundToInt(voteDuration-currentTime)).ToString();
 			}else{
-				timerText.GetComponent<TextMesh>().text = "TIME'S UP";
+				timerText.GetComponent<TextMesh>().text = "TEMPS ÉCOULÉ";
 			}
 
 			// Quand un joueur appuie sur un bouton

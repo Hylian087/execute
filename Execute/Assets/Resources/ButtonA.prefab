@@ -12,6 +12,8 @@ GameObject:
   - 114: {fileID: 11465484}
   - 82: {fileID: 8277992}
   - 82: {fileID: 8218850}
+  - 111: {fileID: 11101960}
+  - 95: {fileID: 9577066}
   m_Layer: 0
   m_Name: ButtonA
   m_TagString: Untagged
@@ -171,6 +173,37 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!95 &9577066
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119048}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: cfa26b4c7ce39f54b8ec17047364ac1a, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!111 &11101960
+Animation:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119048}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: b88123afb68e2f944b919e770b6cd9d5, type: 2}
+  m_Animations: []
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!114 &11465484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -258,6 +291,10 @@ Prefab:
       propertyPath: errorSound
       value: 
       objectReference: {fileID: 8300000, guid: 0e733e7ec6c1e3e4ba48700ed6734f8a, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: b88123afb68e2f944b919e770b6cd9d5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 119048}
