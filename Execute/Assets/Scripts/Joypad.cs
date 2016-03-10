@@ -76,39 +76,39 @@ public class Joypad {
 		switch (buttonName) {
 			
 			case "Up":
-				pressed = (prevState.DPad.Up == ButtonState.Pressed && state.DPad.Up == ButtonState.Released);
+				pressed = (prevState.DPad.Up == ButtonState.Pressed);
 			break;
 			
 			case "Down":
-				pressed = (prevState.DPad.Down == ButtonState.Pressed && state.DPad.Down == ButtonState.Released);
+				pressed = (prevState.DPad.Down == ButtonState.Pressed);
 			break;
 			
 			case "Left":
-				pressed = (prevState.DPad.Left == ButtonState.Pressed && state.DPad.Left == ButtonState.Released);
+				pressed = (prevState.DPad.Left == ButtonState.Pressed);
 			break;
 			
 			case "Right":
-				pressed = (prevState.DPad.Right == ButtonState.Pressed && state.DPad.Right == ButtonState.Released);
+				pressed = (prevState.DPad.Right == ButtonState.Pressed);
 			break;
 			
 			case "A":
-				pressed = (prevState.Buttons.A == ButtonState.Pressed && state.Buttons.A == ButtonState.Released);
+				pressed = (prevState.Buttons.A == ButtonState.Pressed);
 			break;
 			
 			case "B":
-				pressed = (prevState.Buttons.B == ButtonState.Pressed && state.Buttons.B == ButtonState.Released);
+				pressed = (prevState.Buttons.B == ButtonState.Pressed);
 			break;
 			
 			case "X":
-				pressed = (prevState.Buttons.X == ButtonState.Pressed && state.Buttons.X == ButtonState.Released);
+				pressed = (prevState.Buttons.X == ButtonState.Pressed);
 			break;
 			
 			case "Y":
-				pressed = (prevState.Buttons.Y == ButtonState.Pressed && state.Buttons.Y == ButtonState.Released);
+				pressed = (prevState.Buttons.Y == ButtonState.Pressed);
 			break;
 			
 			case "Start":
-				pressed = (prevState.Buttons.Start == ButtonState.Pressed && state.Buttons.Start == ButtonState.Released);
+				pressed = (prevState.Buttons.Start == ButtonState.Pressed);
 			break;
 			
 			default:
