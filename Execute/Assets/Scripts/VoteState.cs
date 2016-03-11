@@ -21,6 +21,9 @@ public class VoteState : MonoBehaviour {
 	// Les votes ont-ils été comptés? (Vote terminé?)
 	public bool votesCounted;
 	public bool scoreCounted;
+	// Score animation
+	public float animDuration = 1.0f;
+
 	// Resistant montré
 	public bool resistantShown = false;
 	// Tous les calculs sont-ils faits?
@@ -189,13 +192,13 @@ public class VoteState : MonoBehaviour {
 					// Nombre de vote contre le joueur +=1, addition des scores au score global
 					player.hasVotes += vote.Value;
 					Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");		
-					countScores(player);
+					StartCoroutine(countScores(player));
 					}
 				}
 				
 			}				
 
-			yield return new WaitForSeconds(1.0f);
+			yield return new WaitForSeconds(animDuration);
 
 			foreach(Player player in game.players){
 				//if(!scoreCounted){
@@ -222,18 +225,32 @@ public class VoteState : MonoBehaviour {
 				}
 				//scoreCounted = true;
 				//}
-
-				// Reinit
-				player.hasVotedFor = "";
-				player.hasVotes = 0;
-				player.hasAlreadyVoted = false;
-				player.hasPushedStart = false;
-				player.scoreCounted = false;
 			}	
 				
 		yield return new WaitForSeconds(1.0f);
 			done = true;
 		}
+	}
+
+
+	IEnumerator countScores(Player _player){
+		
+		
+		int gScorestart = (int)_player.score;
+		int gScoretarget = (int)_player.score + round.scores [_player.id];
+
+		int rScorestart = (int)round.scores [_player.id];
+		int rScoretarget = (int)round.scores [_player.id] - round.scores [_player.id];
+		
+		for (float timer = 0; timer < animDuration; timer+=Time.deltaTime) {
+			float progress = timer/animDuration;
+			_player.score = (int)Mathf.Lerp(gScorestart,gScoretarget,progress);
+			round.scores[_player.id] = (int)Mathf.Lerp (rScorestart,rScoretarget,progress);
+			yield return null;
+		}
+
+		_player.score = gScoretarget;	
+		round.scores [_player.id] = rScoretarget;		
 	}
 
 
@@ -282,13 +299,6 @@ public class VoteState : MonoBehaviour {
 
 	}
 
-
-
-	void countScores(Player _player){
-		Mathf.Lerp (_player.score,_player.score+=round.scores[_player.id],0.1f);
-		Mathf.Lerp(round.scores[_player.id],round.scores[_player.id]-=round.scores[_player.id],0.1f);
-	}
-
 	// Update is called once per frame
 	void Update () {
 
@@ -297,6 +307,7 @@ public class VoteState : MonoBehaviour {
 				globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
 				roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();
 			}
+
 		}
 
 		if (voteDisplayed && !votesCounted) {
@@ -355,7 +366,16 @@ public class VoteState : MonoBehaviour {
 			StartCoroutine(countVotes ());
 		} else if (hasVoted >= 3 && votesCounted  || currentTime > voteDuration && votesCounted){
 			if(done && !nextRound){
-				GameManager.GetInstance().game.NextRound();
+				// Reinit
+				hasVoted = 0;
+				foreach(Player player in game.players){
+					player.hasVotedFor = "";
+					player.hasVotes = 0;
+					player.hasAlreadyVoted = false;
+					player.hasPushedStart = false;
+					player.scoreCounted = false;
+				}
+				GameManager.GetInstance().game.NextRound(); 
 				nextRound=true;
 			}
 				
