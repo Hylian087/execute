@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de boutons
-	public int buttonCount = 30;
+	public int buttonCount = 2;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -171,6 +171,9 @@ public class Sequence : MonoBehaviour {
 				player.joypad.VibrateOnce(0.1f);
 				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 
+				player.execCount+=1;
+				Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
+
 				currentButton.buttonAudioSource.clip = currentButton.okSound;
 				currentButton.buttonAudioSource.Play ();
 			}
@@ -185,6 +188,11 @@ public class Sequence : MonoBehaviour {
 
 				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 				player.joypad.VibrateTwice(0.4f);
+
+				player.resistantCount+=1;
+				Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
+				Debug.Log ("Joueur "+player.id+" resiste boutons :"+player.resistantCount);
+
 
 				currentButton.buttonAudioSource.clip = currentButton.okSound;
 				currentButton.buttonAudioSource.Play ();

@@ -226,7 +226,6 @@ public class ExecGame : MonoBehaviour {
 		
 		round = Round.MakeRound(this);
 		roundNumber += 1;
-		Debug.Log (roundNumber);
 	}
 
 	/**

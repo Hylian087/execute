@@ -76,11 +76,11 @@ public class Round : MonoBehaviour {
 		foreach (Player player in game.players) {
 			if (player == resistant) {
 				player.joypad.VibrateThrice();
-				player.isResistant = true;
+				//player.isResistant = true;
 			}
 			else {
 				player.joypad.VibrateTwice();
-				player.isResistant = false;
+				//player.isResistant = false;
 			}
 		}
 	}

@@ -27,6 +27,11 @@ public class Player {
 	// Score du joueur compté?
 	public bool scoreCounted;
 
+	// Comptage des boutons
+	public float execCount;
+	public float resistantCount;
+	public float resistantRatio;
+
 	/**
 	 * Constructeur
 	 * @param <int> id
