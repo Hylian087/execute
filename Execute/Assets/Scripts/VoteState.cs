@@ -10,7 +10,7 @@ public class VoteState : MonoBehaviour {
 	public Player player;
 
 	// Timer du vote
-	public float voteDuration = 5.0f;
+	public float voteDuration = 60.0f;
 
 	bool voteDisplayed;
 	GameObject timerText;
