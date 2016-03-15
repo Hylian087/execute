@@ -76,12 +76,16 @@ public class VoteState : MonoBehaviour {
 
 	IEnumerator voteDisplay(){
 		if (!voteDisplayed) {
-		
+
 		// création du mask
 		GameObject mask = Instantiate(Resources.Load ("VoteStateMask") as GameObject);
 		mask.transform.SetParent (gameObject.transform);
 
 		yield return new WaitForSeconds (0.25f);
+			mask.GetComponentInChildren<MeshRenderer>().sortingLayerName = "Vote";
+			mask.GetComponentInChildren<MeshRenderer>().sortingOrder = 7;
+			mask.GetComponentInChildren<TextMesh>().text = "JOUR "+game.roundNumber;
+
 		//Compteur de scores de partie pour chaque joueur
 		foreach (Player player in game.players) {
 			// Création des compteurs de scores GLOBAUX
@@ -279,7 +283,6 @@ public class VoteState : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-
 		// refacto
 		if(globalScoreCounter!=null && roundScoreCounter !=null && voteCounter !=null && voteSkull != null && votes !=null){
 			globalScoreCounter.Clear();

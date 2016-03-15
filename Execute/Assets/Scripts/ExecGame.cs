@@ -22,6 +22,7 @@ public class ExecGame : MonoBehaviour {
 	
 	// Manche actuelle
 	Round round;
+	public int roundNumber;
 
 	/**
 	 * Créer une partie
@@ -224,6 +225,8 @@ public class ExecGame : MonoBehaviour {
 		}
 		
 		round = Round.MakeRound(this);
+		roundNumber += 1;
+		Debug.Log (roundNumber);
 	}
 
 	/**
