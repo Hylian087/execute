@@ -10,7 +10,7 @@ public class VoteState : MonoBehaviour {
 	public Player player;
 
 	// Timer du vote
-	public float voteDuration = 5.0f;
+	public float voteDuration = 60.0f;
 
 	bool voteDisplayed;
 	GameObject timerText;
@@ -22,7 +22,7 @@ public class VoteState : MonoBehaviour {
 	public bool votesCounted;
 	public bool scoreCounted;
 	// Score animation
-	public float animDuration = 1.0f;
+	public float animDuration = 1.5f;
 
 	// Resistant montré
 	public bool resistantShown = false;
@@ -195,7 +195,7 @@ public class VoteState : MonoBehaviour {
 				if (player.voteID == vote.Key && votesCounted == true) {
 					// Nombre de vote contre le joueur +=1, addition des scores au score global
 					player.hasVotes += vote.Value;
-					Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");		
+					//Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");		
 					StartCoroutine(countScores(player));
 					}
 				}
@@ -211,21 +211,21 @@ public class VoteState : MonoBehaviour {
 				if (player.hasVotes > 3 && !player.isResistant && !player.scoreCounted) {
 					player.score = player.score / 2;
 					player.scoreCounted = true;
-					Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score GLOBAL actuel :" + player.score);
+					//Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score GLOBAL actuel :" + player.score);
 					// Si le joueur a >3 votes et était résistant, score /4
 				} else if (player.hasVotes > 3 && player.isResistant && !player.scoreCounted) {
 					player.score = player.score / 4;
 					player.scoreCounted = true;
-					Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score GLOBAL actuel :" + player.score);
+					//Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score GLOBAL actuel :" + player.score);
 					// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
 				} else if (player.hasVotes < 3 && !player.isResistant && !player.scoreCounted) {
 					player.scoreCounted = true;
-					Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score GLOBAL actuel :" + player.score);
+					//Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score GLOBAL actuel :" + player.score);
 					// Si le joueur a < 3 votes et était résistant, score *4
 				} else if (player.hasVotes < 3 && player.isResistant && !player.scoreCounted) {
 					player.score = player.score * 4;
 					player.scoreCounted = true;
-					Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
+					//Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
 				}
 				//scoreCounted = true;
 				//}
@@ -302,10 +302,10 @@ public class VoteState : MonoBehaviour {
 
 			player.resistantRatio = (player.resistantCount / round.sequences[player.id].buttonCount) * 100.0f;
 			if(player.resistantRatio >=0 && player.resistantRatio < 75){
-				Debug.Log ("Joueur "+player.id+" est exécutant");
+				//Debug.Log ("Joueur "+player.id+" est exécutant");
 			} else if(player.resistantRatio >= 75){
 				player.isResistant = true;
-				Debug.Log ("Joueur "+player.id+" est résistant avec un ratio de "+player.resistantRatio+" %");
+				//Debug.Log ("Joueur "+player.id+" est résistant avec un ratio de "+player.resistantRatio+" %");
 			}
 		}
 
@@ -347,15 +347,15 @@ public class VoteState : MonoBehaviour {
 							player.hasVotedFor = buttonName;
 							// Création / déplacement des skulls dans les compteurs
 							AddSkull (player);
-							Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
+							//Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
 							
 							// Si le joueur vote pour lui-meme, NOPE TODO : FEEDBACK
 						}else if(buttonName == player.voteID){
-							Debug.Log("Vous ne pouvez pas voter contre vous-meme !");
+							//Debug.Log("Vous ne pouvez pas voter contre vous-meme !");
 							
 							// Si le joueur appuie sur une touche fléchée, NOPE TODO : FEEDBACK
 						}else if(new List<string>(){"Up", "Down", "Left", "Right"}.Contains(buttonName)){
-							Debug.Log ("Vote invalide !");
+							//Debug.Log ("Vote invalide !");
 						}
 						break;
 					}

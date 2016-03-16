@@ -33,7 +33,8 @@ public class Round : MonoBehaviour {
 	
 	// Résistant potentiel de la manche
 	public Player resistant;
-	
+	public bool resistantChosen;
+
 	// Séquences de boutons
 	public Sequence[] sequences = new Sequence[4];
 	
@@ -69,20 +70,35 @@ public class Round : MonoBehaviour {
 		state = RoundState.WarmUp;
 		
         clockArm = GameObject.Find("ClockArm");
-		
-		resistant = game.players[Random.Range(0, 4)];
-		//Debug.Log("Résistant : " + resistant.id);
-		
-		foreach (Player player in game.players) {
-			if (player == resistant) {
-				player.joypad.VibrateThrice();
-				//player.isResistant = true;
+	}
+
+	void chooseResistant(){
+
+		if (!resistantChosen) {
+
+			resistant = game.players[Random.Range(0, 4)];
+			Debug.Log ("Joueur "+resistant.id+" a été designé résistant");
+			
+			foreach (Player player in game.players) {
+				if (player == resistant && resistant.chosenCount < player.chosenMaxCount) {
+					//Debug.Log ("Joueur "+player.id+" a été résistant "+resistant.chosenCount+" fois, on le choisit");
+					player.joypad.VibrateThrice();
+					player.chosenCount++;
+					resistantChosen = true;
+				}
+				else if(player == resistant && resistant.chosenCount == 1){
+					//Debug.Log ("Joueur "+player.id+" a été résistant 2 fois, choix d'un nouveau résistat");
+					resistantChosen = false;
+				}
+				else if(player != resistant){
+					//Debug.Log ("Joueur "+player.id+" est éxécutant");
+					player.joypad.VibrateTwice();
+				}
+
 			}
-			else {
-				player.joypad.VibrateTwice();
-				//player.isResistant = false;
-			}
+
 		}
+
 	}
 	
 	/**
@@ -141,6 +157,19 @@ public class Round : MonoBehaviour {
 	 */
 	void Update() {
 		currentTime += Time.deltaTime;
+
+		if (game.players [0].chosenCount == game.players [0].chosenMaxCount &&
+		    game.players [1].chosenCount == game.players [1].chosenMaxCount &&
+		    game.players [2].chosenCount == game.players [2].chosenMaxCount &&
+		    game.players [3].chosenCount == game.players [3].chosenMaxCount) {
+			foreach (Player player in game.players) {
+				player.chosenCount = 0;
+				Debug.Log ("Tout le monde a été choisi deux fois, on réinitialise");
+			}
+		} else {
+			chooseResistant ();
+		}
+
 		
 		if (state == RoundState.WarmUp) {
 

@@ -32,6 +32,10 @@ public class Player {
 	public float resistantCount;
 	public float resistantRatio;
 
+	// Nombre de fois où le joueur a été désigné
+	public int chosenCount;
+	public int chosenMaxCount = 2;
+
 	/**
 	 * Constructeur
 	 * @param <int> id
@@ -41,4 +45,5 @@ public class Player {
 		this.id = id;
 		this.joypad = joypad;
 	}
+
 }
