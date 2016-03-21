@@ -22,6 +22,7 @@ public class ExecGame : MonoBehaviour {
 	
 	// Manche actuelle
 	Round round;
+	public int roundNumber;
 
 	/**
 	 * Créer une partie
@@ -94,7 +95,7 @@ public class ExecGame : MonoBehaviour {
 					objects["Executer" + associatedPlayer.id].GetComponent<Renderer>().enabled = false;
 					players[associatedPlayer.id] = null;
 					associatedPlayer = null;
-					Debug.Log("Manette #" + joypad.playerIndex + " déconnectée : Joueur #" + associatedPlayer.id + " supprimé.");
+					//Debug.Log("Manette #" + joypad.playerIndex + " déconnectée : Joueur #" + associatedPlayer.id + " supprimé.");
 				}
 				
 				else if (!alreadyRegistred && joypad.IsConnected()) {
@@ -108,7 +109,7 @@ public class ExecGame : MonoBehaviour {
 					
 					// Création d'un joueur pour la manette
 					players[firstFreeId] = new Player(firstFreeId, joypad);
-					Debug.Log("Manette #" + joypad.playerIndex + " connectée : Joueur #" + firstFreeId + " créé.");
+					//Debug.Log("Manette #" + joypad.playerIndex + " connectée : Joueur #" + firstFreeId + " créé.");
 					objects["Executer" + firstFreeId].GetComponent<Renderer>().enabled = true;
 				}
 				
@@ -180,7 +181,7 @@ public class ExecGame : MonoBehaviour {
 								for (int i = 0; i < 4; i++) {
 									if (players[i] == null) {
 										players[i] = new Player(i, joypad2);
-										Debug.Log("Création d'un joueur #" + i + " pour les tests, associé à la manette #" + joypad2.playerIndex + " (déconnectée)");
+										//Debug.Log("Création d'un joueur #" + i + " pour les tests, associé à la manette #" + joypad2.playerIndex + " (déconnectée)");
 										break;
 									}
 								}
@@ -224,6 +225,7 @@ public class ExecGame : MonoBehaviour {
 		}
 		
 		round = Round.MakeRound(this);
+		roundNumber += 1;
 	}
 
 	/**

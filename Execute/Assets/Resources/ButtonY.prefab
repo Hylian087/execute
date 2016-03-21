@@ -11,6 +11,7 @@ GameObject:
   - 212: {fileID: 21294998}
   - 114: {fileID: 11478468}
   - 82: {fileID: 8224792}
+  - 95: {fileID: 9535252}
   m_Layer: 0
   m_Name: ButtonY
   m_TagString: Untagged
@@ -100,6 +101,23 @@ AudioSource:
       tangentMode: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
+--- !u!95 &9535252
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 181362}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 571d62d7025e8bd43bba281033efcd95, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
 --- !u!114 &11478468
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,6 +205,14 @@ Prefab:
       propertyPath: errorSound
       value: 
       objectReference: {fileID: 8300000, guid: 0e733e7ec6c1e3e4ba48700ed6734f8a, type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_Animation
+      value: 
+      objectReference: {fileID: 7400000, guid: b5af1c7803c6e1e4a9b92859c9715a41, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_PlayAutomatically
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 181362}
