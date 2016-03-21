@@ -44,6 +44,9 @@ TagManager:
   - name: Background
     uniqueID: 2358447439
     locked: 0
+  - name: MachineBackground
+    uniqueID: 1780784389
+    locked: 0
   - name: Buttons
     uniqueID: 789713061
     locked: 0
