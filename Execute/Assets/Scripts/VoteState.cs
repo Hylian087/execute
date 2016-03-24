@@ -267,8 +267,8 @@ public class VoteState : MonoBehaviour {
 		foreach (var counter in voteCounter) {
 			if(_player.hasAlreadyVoted == false && _player.hasVotedFor == counter.Value.GetComponentInChildren<VoteCounter>().voteID){
 				counter.Value.GetComponentInChildren<VoteCounter>().voteCount++;
-				_player.hasAlreadyVoted = true;
-				Debug.Log ("Skull Added");
+				//_player.hasAlreadyVoted = true;
+				//Debug.Log ("Skull Added");
 			}
 
 		}
@@ -276,10 +276,10 @@ public class VoteState : MonoBehaviour {
 	}
 	void RemoveSkull(Player _player){
 		foreach (var counter in voteCounter) {
-			if(_player.hasAlreadyVoted == true && _player.hasVotedFor == counter.Value.GetComponentInChildren<VoteCounter>().voteID){
-				counter.Value.GetComponentInChildren<VoteCounter>().voteCount--;
-				_player.hasAlreadyVoted = false;
-				Debug.Log ("Skull Removed");
+			if(_player.hasAlreadyVoted == true && _player.lastVote == counter.Value.GetComponentInChildren<VoteCounter>().voteID){
+				counter.Value.GetComponentInChildren<VoteCounter>().voteCount = counter.Value.GetComponentInChildren<VoteCounter>().voteCount-1;
+				//_player.hasAlreadyVoted = false;
+				//Debug.Log ("Skull Removed");
 			}
 		}
 
@@ -351,11 +351,16 @@ public class VoteState : MonoBehaviour {
 
 							if(player.hasAlreadyVoted == false){
 								player.hasVotedFor = buttonName;
+								Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
 								AddSkull (player);
+								player.hasAlreadyVoted = true;
 							}
 
 							if(player.hasAlreadyVoted == true && buttonName != player.hasVotedFor){
-
+								player.lastVote = player.hasVotedFor;
+								Debug.Log ("Dernier vote du joueur "+player.id+" : "+player.lastVote);
+								RemoveSkull (player);
+								player.hasAlreadyVoted = false;
 							}
 
 

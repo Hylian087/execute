@@ -22,6 +22,7 @@ public class Player {
 	public int hasVotes;
 	// Le joueur a-t-il déjà voté?
 	public bool hasAlreadyVoted;
+	public string lastVote;
 	// Le joueur a-t-il appuyé sur Start pour terminer le vote?
 	public bool hasPushedStart;
 	// Score du joueur compté?

@@ -28,14 +28,32 @@ public class VoteCounter : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		Debug.Log ("Vote Counter :" + voteID + " Count :" + voteCount);
-		if(voteCount > 0){
-			skulls [voteCount].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
-		}else{
-			foreach(var skull in skulls){
-				skull.Value.GetComponent<SpriteRenderer>().color = new Color(1f,1f,1f,0f);
-			}
+
+		switch (voteCount) {
+		case 0 :
+			skulls [1].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			skulls [2].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			skulls [3].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			break;
+		case 1:
+			skulls [1].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			skulls [2].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			skulls [3].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			break;
+		case 2 :
+			skulls [1].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			skulls [2].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			skulls [3].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 0f);
+			break;
+		case 3 :
+			skulls [1].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			skulls [2].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			skulls [3].GetComponent<SpriteRenderer> ().color = new Color (1f, 1f, 1f, 1f);
+			break;
 		}
+			
+
+			
 
 
 	}
