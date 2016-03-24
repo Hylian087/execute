@@ -198,7 +198,7 @@ public class VoteState : MonoBehaviour {
 				if (player.voteID == vote.Key && votesCounted == true) {
 					// Nombre de vote contre le joueur +=1, addition des scores au score global
 					player.hasVotes += vote.Value;
-					//Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");		
+					Debug.Log (" -Joueur # " + player.id + " a reçu " + player.hasVotes + " votes contre lui.");		
 					StartCoroutine(countScores(player));
 					}
 				}
@@ -349,31 +349,42 @@ public class VoteState : MonoBehaviour {
 						// Si le bouton != lui-meme & que ce n'est pas les touches fléchées
 						if(buttonName != player.voteID && new List<string>(){"A","B","X","Y"}.Contains(buttonName)){
 
-							if(player.hasAlreadyVoted == false){
+							// Si le joueur n'a jamais voté
+							if(player.hasAlreadyVoted == false && player.hasVotedFor == null && !player.hasPushedStart){
 								player.hasVotedFor = buttonName;
-								Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
+								//Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
 								AddSkull (player);
 								player.hasAlreadyVoted = true;
 							}
 
-							if(player.hasAlreadyVoted == true && buttonName != player.hasVotedFor){
+							// Si le joueur a déjà voté et qu'il vote pour une autre personne
+
+							if(player.hasAlreadyVoted == true && buttonName != player.hasVotedFor && !player.hasPushedStart){
 								player.lastVote = player.hasVotedFor;
-								Debug.Log ("Dernier vote du joueur "+player.id+" : "+player.lastVote);
+								//Debug.Log ("Dernier vote du joueur "+player.id+" : "+player.lastVote);
 								RemoveSkull (player);
 								player.hasAlreadyVoted = false;
 							}
 
-
+							if(player.hasAlreadyVoted == false && player.hasVotedFor != null && buttonName != player.hasVotedFor && !player.hasPushedStart){
+								player.hasVotedFor = buttonName;
+								AddSkull (player);
+								player.hasAlreadyVoted = true;
+							}
 
 							//Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
-							
+
+
 							// Si le joueur vote pour lui-meme, NOPE TODO : FEEDBACK
-						}else if(buttonName == player.voteID){
-							//Debug.Log("Vous ne pouvez pas voter contre vous-meme !");
+						}else if(buttonName == player.voteID && !player.hasPushedStart){
+							player.lastVote = player.hasVotedFor;
+							player.hasVotedFor = null;
+							RemoveSkull (player);
+							// Debug.Log("Vous ne pouvez pas voter contre vous-meme !");
 							
 							// Si le joueur appuie sur une touche fléchée, NOPE TODO : FEEDBACK
 						}else if(new List<string>(){"Up", "Down", "Left", "Right"}.Contains(buttonName)){
-							//Debug.Log ("Vote invalide !");
+							// Debug.Log ("Vote invalide !");
 						}
 						break;
 					}
@@ -383,11 +394,11 @@ public class VoteState : MonoBehaviour {
 				if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 					hasVoted+=1;
 					player.hasPushedStart=true;
-					//Debug.Log (hasVoted);
+					Debug.Log (hasVoted);
 				}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 					hasVoted-=1;
 					player.hasPushedStart=false;
-					//Debug.Log (hasVoted);
+					Debug.Log (hasVoted);
 				}
 				
 			}

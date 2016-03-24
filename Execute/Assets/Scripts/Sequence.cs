@@ -186,6 +186,8 @@ public class Sequence : MonoBehaviour {
 				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
 				//currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
+				currentButton.LaunchFeedback(precision);
+
 				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 				player.joypad.VibrateTwice(0.4f);
 
