@@ -10,7 +10,7 @@ public class VoteState : MonoBehaviour {
 	public Player player;
 
 	// Timer du vote
-	public float voteDuration = 60.0f;
+	public float voteDuration = 5.0f;
 
 	bool voteDisplayed;
 	GameObject timerText;
@@ -41,10 +41,10 @@ public class VoteState : MonoBehaviour {
 	public Dictionary<int, GameObject> roundScoreCounter;
 
 	// Compteurs de votes (un pour chaque joueur), string = nom du joueur, GameObject = objet créé en jeu pour afficher le compteur
-	public Dictionary<string,GameObject> voteCounter;
+	public Dictionary<int,GameObject> voteCounter;
 
 	// Dictionnaire contenant les feedback visuel des votes de chaque joueur (int = ID du joueur, GameObject = crane)
-	Dictionary<int, GameObject> voteSkull;
+	//Dictionary<int, GameObject> voteSkull;
 
 	// Tableau décomptant les votes : string = nom du joueur, int = nombre de votes
 	public Dictionary<string, int> votes;
@@ -74,6 +74,7 @@ public class VoteState : MonoBehaviour {
 		return vs;
 	}
 
+	// Fonction d'affichage du HUD de vote
 	IEnumerator voteDisplay(){
 		if (!voteDisplayed) {
 
@@ -114,14 +115,16 @@ public class VoteState : MonoBehaviour {
 		// Compteur de votes pour chaque joueur
 		foreach (Player player in game.players) {
 			// Création des compteurs de votes
-			votes.Add (player.voteID,0);
-			voteCounter.Add(player.voteID, Instantiate (Resources.Load ("VoteCounter"+player.id)) as GameObject);
+			votes.Add (player.voteID,0);			
+			voteCounter.Add(player.id, Instantiate (Resources.Load("VoteCounter"+player.id) as GameObject));
+				voteCounter[player.id].transform.SetParent (gameObject.transform);
+				voteCounter[player.id].GetComponentInChildren<VoteCounter>().voteID = player.voteID;
 		}
 
 		// Rangement des compteurs dans leur parent (le GO VoteState)
-		foreach (var counter in voteCounter) {
+		/*foreach (var counter in voteCounter) {
 			counter.Value.transform.SetParent (gameObject.transform);
-		}
+		}*/
 		
 		foreach (var gSCounter in globalScoreCounter) {
 			gSCounter.Value.transform.SetParent (gameObject.transform);
@@ -138,7 +141,7 @@ public class VoteState : MonoBehaviour {
 			timerText.GetComponent<MeshRenderer>().sortingOrder = 7;
 			timerText.GetComponent<TextMesh>().text = voteDuration.ToString();
 
-		// création du start
+		// création du 3-start
 		continueButtons = Instantiate (Resources.Load ("ContinueButtons")) as GameObject;
 		continueButtons.transform.SetParent (gameObject.transform);
 
@@ -149,7 +152,7 @@ public class VoteState : MonoBehaviour {
 
 	}
 
-
+	// Fonction de comptage final des votes et des scores
 	IEnumerator countVotes(){
 		if (!done) {
 		
@@ -236,7 +239,7 @@ public class VoteState : MonoBehaviour {
 		}
 	}
 
-
+	// Fonction pour animer les scores
 	IEnumerator countScores(Player _player){
 		
 		
@@ -261,40 +264,41 @@ public class VoteState : MonoBehaviour {
 	// Fonction d'affichage des votes dans les compteurs
 	void AddSkull(Player _player){
 		// Pour chaque compteur dans voteCounter
-		foreach(var counter in voteCounter){
-			// Si un joueur a voté pour un joueur et qu'il n'avait pas voté avant...
-			if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == false){
-				// Création d'un crane et placement dans le compteur
-				voteSkull.Add (_player.id,Instantiate(Resources.Load ("skullVote")) as GameObject);
-				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
-				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,-25,0);
-				// Le joueur a donc voté
+		foreach (var counter in voteCounter) {
+			if(_player.hasAlreadyVoted == false && _player.hasVotedFor == counter.Value.GetComponentInChildren<VoteCounter>().voteID){
+				counter.Value.GetComponentInChildren<VoteCounter>().voteCount++;
 				_player.hasAlreadyVoted = true;
+				Debug.Log ("Skull Added");
 			}
-			// Si le joueur change son vote (s'il a déjà voté mais qu'il vote encore une fois)
-			else if(_player.hasVotedFor == counter.Key && _player.hasAlreadyVoted == true){
-				// Changement de la place du crane vers le joueur pour lequel il change son vote
-				voteSkull[_player.id].transform.SetParent (counter.Value.transform);
-				voteSkull[_player.id].transform.position = counter.Value.transform.position + new Vector3((_player.id+1)*10,0,0);
-			}
-		} 	
+
+		}
 		
+	}
+	void RemoveSkull(Player _player){
+		foreach (var counter in voteCounter) {
+			if(_player.hasAlreadyVoted == true && _player.hasVotedFor == counter.Value.GetComponentInChildren<VoteCounter>().voteID){
+				counter.Value.GetComponentInChildren<VoteCounter>().voteCount--;
+				_player.hasAlreadyVoted = false;
+				Debug.Log ("Skull Removed");
+			}
+		}
+
 	}
 
 	// Use this for initialization
 	void Start () {
-		// refacto
-		if(globalScoreCounter!=null && roundScoreCounter !=null && voteCounter !=null && voteSkull != null && votes !=null){
+		// reinit
+		if(globalScoreCounter!=null && roundScoreCounter !=null /*&& voteCounter !=null && voteSkull != null*/ && votes !=null){
 			globalScoreCounter.Clear();
 			roundScoreCounter.Clear();
 			voteCounter.Clear();
-			voteSkull.Clear();
+			//voteSkull.Clear();
 			votes.Clear();
-		} else if(globalScoreCounter==null && roundScoreCounter ==null && voteCounter ==null && voteSkull == null && votes ==null){
+		} else if(globalScoreCounter==null && roundScoreCounter ==null /*&& voteCounter ==null && voteSkull == null*/ && votes ==null){
 				globalScoreCounter = new Dictionary<int, GameObject> ();
 				roundScoreCounter = new Dictionary<int, GameObject>();
-				voteCounter = new Dictionary<string,GameObject>();
-				voteSkull = new Dictionary<int, GameObject>();
+				voteCounter = new Dictionary<int,GameObject>();
+				//voteSkull = new Dictionary<int, GameObject>();
 				votes = new Dictionary<string, int> ();
 		}
 
@@ -309,8 +313,8 @@ public class VoteState : MonoBehaviour {
 			}
 		}
 
-		StartCoroutine (voteDisplay ());
 
+		StartCoroutine (voteDisplay ());
 	}
 
 	// Update is called once per frame
@@ -344,9 +348,18 @@ public class VoteState : MonoBehaviour {
 						
 						// Si le bouton != lui-meme & que ce n'est pas les touches fléchées
 						if(buttonName != player.voteID && new List<string>(){"A","B","X","Y"}.Contains(buttonName)){
-							player.hasVotedFor = buttonName;
-							// Création / déplacement des skulls dans les compteurs
-							AddSkull (player);
+
+							if(player.hasAlreadyVoted == false){
+								player.hasVotedFor = buttonName;
+								AddSkull (player);
+							}
+
+							if(player.hasAlreadyVoted == true && buttonName != player.hasVotedFor){
+
+							}
+
+
+
 							//Debug.Log ("Joueur "+player.id+" a voté pour "+player.hasVotedFor);
 							
 							// Si le joueur vote pour lui-meme, NOPE TODO : FEEDBACK
