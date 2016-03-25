@@ -40,6 +40,8 @@ public class Round : MonoBehaviour {
 	
 	// Aiguille de l'horloge
 	private GameObject clockArm;
+	private GameObject cinders;
+	Vector3 cindersPos;
 
 	public AudioClip machineStart = (AudioClip)Resources.Load ("machine_start", typeof(AudioClip));
 	public AudioClip machineWork = (AudioClip)Resources.Load ("machine_working", typeof(AudioClip));
@@ -71,6 +73,9 @@ public class Round : MonoBehaviour {
 		state = RoundState.WarmUp;
 		
         clockArm = GameObject.Find("ClockArm");
+		cinders = GameObject.Find("Cendres");
+		cinders.transform.position = new Vector3 (252, -170, 0);
+		cindersPos = cinders.transform.position;
 	}
 
 	void chooseResistant(){
@@ -206,6 +211,11 @@ public class Round : MonoBehaviour {
 				}
 				
 				clockArm.transform.localEulerAngles = new Vector3(0, 0, - (currentTime - warmUpDuration) / rhythmDuration * 360);
+				if(cinders.transform.position.y < -80){
+					//cinders.transform.position += new Vector3(0,(currentTime-warmUpDuration)/rhythmDuration,0);
+					cinders.transform.position = Vector3.Lerp(cindersPos,new Vector3(252,-80,0),(currentTime-warmUpDuration)/rhythmDuration);
+				}
+
 			}
 		}
 
