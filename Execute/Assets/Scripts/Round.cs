@@ -55,6 +55,7 @@ public class Round : MonoBehaviour {
 	public static Round MakeRound(ExecGame game) {
 		GameObject go = new GameObject("RoundInstance");
 		Round round = go.AddComponent<Round>();
+		Victims victims = go.AddComponent<Victims> ();
 		AudioSource machineSound = go.AddComponent<AudioSource> ();
 		
 		round.game = game;

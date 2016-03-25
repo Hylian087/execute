@@ -54,10 +54,15 @@ public class Victims : MonoBehaviour {
 
 			} else if(character.Value.GetComponent<victimChar>().hasWalked == true){				
 				yield return new WaitForSeconds(1.0f);
-				
-				character.Value.GetComponent<Animator>().SetBool ("canWalk", false);				
-				
+
+				if(character.Value.GetComponent<Animator>().GetBool("canWalk") == true){
+					character.Value.GetComponent<Animator>().SetBool ("canWalk", false);				
+					yield return null;
+				}
+
+
 				if(character.Value.GetComponent<victimChar>().moved == false){
+					yield return null;
 					character.Value.GetComponent<Transform>().transform.position+= new Vector3(7.0f,0,0);
 					//character.Value.GetComponent<SpriteRenderer>().sprite=
 					character.Value.GetComponent<victimChar>().moved = true;
