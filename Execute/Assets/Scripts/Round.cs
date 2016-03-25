@@ -105,7 +105,7 @@ public class Round : MonoBehaviour {
 	 * Démarrage de la phase de rythme
 	 */
 	void StartRhythmState() {
-		
+
 		state = RoundState.Rhythm;
 		gameObject.GetComponent<AudioSource> ().PlayOneShot (machineStart);
 		if (machineStart.length>1) {
