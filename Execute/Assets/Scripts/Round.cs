@@ -41,6 +41,7 @@ public class Round : MonoBehaviour {
 	// Aiguille de l'horloge
 	private GameObject clockArm;
 	private GameObject cinders;
+	GameObject cindersParticles;
 	Vector3 cindersPos;
 
 	public AudioClip machineStart = (AudioClip)Resources.Load ("machine_start", typeof(AudioClip));
@@ -76,6 +77,11 @@ public class Round : MonoBehaviour {
 		cinders = GameObject.Find("Cendres");
 		cinders.transform.position = new Vector3 (252, -170, 0);
 		cindersPos = cinders.transform.position;
+
+		cindersParticles = GameObject.Find ("CendresParticules");
+		cindersParticles.GetComponent<ParticleSystem>().enableEmission = false;
+		//Debug.Log(cindersParticles.GetComponent<ParticleSystem>().isPlaying);
+
 	}
 
 	void chooseResistant(){
@@ -211,9 +217,11 @@ public class Round : MonoBehaviour {
 				}
 				
 				clockArm.transform.localEulerAngles = new Vector3(0, 0, - (currentTime - warmUpDuration) / rhythmDuration * 360);
-				if(cinders.transform.position.y < -80){
+				if(cinders.transform.position.y < -80 && currentTime > warmUpDuration){
 					//cinders.transform.position += new Vector3(0,(currentTime-warmUpDuration)/rhythmDuration,0);
 					cinders.transform.position = Vector3.Lerp(cindersPos,new Vector3(252,-80,0),(currentTime-warmUpDuration)/rhythmDuration);
+					cindersParticles.GetComponent<ParticleSystem>().enableEmission = true;
+					//Debug.Log(cindersParticles.GetComponent<ParticleSystem>().isPlaying);
 				}
 
 			}
