@@ -20,8 +20,8 @@ public class Sequence : MonoBehaviour {
 	// La séquence est terminée
 	public bool done = false;
 	
-	// Nombre de boutons
-	public int buttonCount = 30;
+	// Nombre de patterns
+	public int buttonCount = 60;
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -159,58 +159,59 @@ public class Sequence : MonoBehaviour {
 		
 		if (buttonDownName != null && !currentButton.pressed) {
 			float precision = currentButton.GetPrecisionFor(currentTime);
-
-			// Le joueur exécute et réussit
-			if (currentButton.buttonName == buttonDownName) {
-				
-				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
-				//currentButton.SetColor(0.0f, 1.0f, 0.0f);
-				
-				currentButton.LaunchFeedback(precision);
-				
-				player.joypad.VibrateOnce(0.1f);
-				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
-
-				player.execCount+=1;
-				//Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
-
-				currentButton.buttonAudioSource.clip = currentButton.okSound;
-				currentButton.buttonAudioSource.Play ();
-			}
 			
-			// Le joueur résiste et réussit
-			else if (
-				player == round.resistant &&
-				player.joypad.IsInverse(currentButton.buttonName, buttonDownName)
-			) {
-				//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
-				//currentButton.SetColor(0.0f, 0.0f, 1.0f);
+			if (precision > 0) {
+				// Le joueur exécute et réussit
+				if (currentButton.buttonName == buttonDownName) {
+					
+					//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision.");
+					//currentButton.SetColor(0.0f, 1.0f, 0.0f);
+					
+					currentButton.LaunchFeedback(precision);
+					
+					player.joypad.VibrateOnce(0.1f);
+					round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 
-				currentButton.LaunchFeedback(precision);
+					player.execCount+=1;
+					//Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
 
-				round.scores[player.id] += Mathf.RoundToInt(precision * 100);
-				player.joypad.VibrateTwice(0.4f);
+					currentButton.buttonAudioSource.clip = currentButton.okSound;
+					currentButton.buttonAudioSource.Play ();
+				}
+				
+				// Le joueur résiste et réussit
+				else if (
+					player == round.resistant &&
+					player.joypad.IsInverse(currentButton.buttonName, buttonDownName)
+				) {
+					//Debug.Log("Joueur #" + player.id + " presse " + buttonDownName + " : " + Mathf.Floor(100 * precision) + "% de précision [résistance]");
+					//currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
-				player.resistantCount+=1;
-				//Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
-				//Debug.Log ("Joueur "+player.id+" resiste boutons :"+player.resistantCount);
+					currentButton.LaunchFeedback(precision);
+
+					round.scores[player.id] += Mathf.RoundToInt(precision * 100);
+					player.joypad.VibrateTwice(0.4f);
+
+					player.resistantCount += 1;
+					//Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
+					//Debug.Log ("Joueur "+player.id+" resiste boutons :"+player.resistantCount);
 
 
-				currentButton.buttonAudioSource.clip = currentButton.okSound;
-				currentButton.buttonAudioSource.Play ();
+					currentButton.buttonAudioSource.clip = currentButton.okSound;
+					currentButton.buttonAudioSource.Play ();
+				}
+				// Le joueur se trompe
+				else {
+					//Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
+					//currentButton.SetColor(1.0f, 0.0f, 0.0f);
+					player.joypad.VibrateOnce(0.5f, 1.0f);
+					currentButton.buttonAudioSource.clip = currentButton.errorSound;
+					currentButton.buttonAudioSource.Play ();
+				}
+				
+				currentButton.pressed = true;
 			}
-			// Le joueur se trompe
-			else {
-				//Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
-				//currentButton.SetColor(1.0f, 0.0f, 0.0f);
-				player.joypad.VibrateOnce(0.5f, 1.0f);
-				currentButton.buttonAudioSource.clip = currentButton.errorSound;
-				currentButton.buttonAudioSource.Play ();
-			}
-			
-			currentButton.pressed = true;
 		}
-
 	}
 	
 	
@@ -236,14 +237,14 @@ public class Sequence : MonoBehaviour {
 				b.y += 0.5f * (button.startTime + button.instant - currentTime);
 				
         		Gizmos.color = Color.green;
-	        	Gizmos.DrawLine(a, b);
+	        	//Gizmos.DrawLine(a, b);
 	        	
 	        	a.x += 0.05f;
 	        	b.x += 0.05f;
 	        	
-				b.y = a.y + 0.5f * precision;
+				b.y = a.y + 20f * precision;
 				
-        		Gizmos.color = Color.red;
+        		Gizmos.color = Color.green;
 	        	Gizmos.DrawLine(a, b);
 	        	
 	        	if (currentButton == button) {

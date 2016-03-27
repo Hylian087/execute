@@ -21,7 +21,7 @@ public class Button : MonoBehaviour {
 	public float instant;
 	
 	// Temps où le bouton est cliquable autour de son "instant".
-	public float clickableRadius = 0.5f;
+	private float clickableRadius = 0.25f;
 
 	// ID du bouton
 	public string buttonName;
@@ -61,7 +61,7 @@ public class Button : MonoBehaviour {
 	void Start() {
 		buttonAudioSource = gameObject.GetComponent<AudioSource> ();
 		GetComponent<SpriteRenderer>().sortingLayerName = "Buttons";
-		GetComponent<SpriteRenderer> ().sortingOrder = 5;
+		GetComponent<SpriteRenderer>().sortingOrder = 5;
 	}
 	
 	/**
