@@ -44,10 +44,10 @@ public class Round : MonoBehaviour {
 	GameObject cindersParticles;
 	Vector3 cindersPos;
 
-	public AudioClip machineStart = (AudioClip)Resources.Load ("machine_start", typeof(AudioClip));
-	public AudioClip machineWork = (AudioClip)Resources.Load ("machine_working", typeof(AudioClip));
-	public AudioClip machineIdle = (AudioClip)Resources.Load ("machine_idle", typeof(AudioClip));
-	public AudioClip machineStop = (AudioClip)Resources.Load ("machine_stop", typeof(AudioClip));
+	public AudioClip machineStart = (AudioClip)Resources.Load ("Sounds/machine_start", typeof(AudioClip));
+	public AudioClip machineWork = (AudioClip)Resources.Load ("Sounds/machine_working", typeof(AudioClip));
+	public AudioClip machineIdle = (AudioClip)Resources.Load ("Sounds/machine_idle", typeof(AudioClip));
+	public AudioClip machineStop = (AudioClip)Resources.Load ("Sounds/machine_stop", typeof(AudioClip));
 
 	public bool soundPlayed;
 
