@@ -16,7 +16,7 @@ public class Victims : MonoBehaviour {
 	void Start () {
 		neverDone = true;
 		for (int i = 0; i<characterAmount; i++) {
-			characters.Add (i,Instantiate(Resources.Load("Char0"+Random.Range(1,10)))as GameObject);
+			characters.Add (i,Instantiate(Resources.Load("Characters/Char0"+Random.Range(1,10)))as GameObject);
 			characters[i].transform.SetParent(gameObject.transform);
 			characters[i].transform.position = new Vector3(-118-(7*i),0,0);
 		}
