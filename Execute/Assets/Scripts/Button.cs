@@ -21,7 +21,7 @@ public class Button : MonoBehaviour {
 	public float instant;
 	
 	// Temps où le bouton est cliquable autour de son "instant".
-	private float clickableRadius = 0.25f;
+	private float clickableRadius = 0.30f;
 
 	// ID du bouton
 	public string buttonName;
@@ -131,11 +131,32 @@ public class Button : MonoBehaviour {
 	public void LaunchFeedback(float precision) {
 		GameManager gm = GameManager.GetInstance();
 		
+		string scoreFeedbackName = "FeedbackRate";
+		
 		if (precision > 0) {
 			// Feedback
 			GameObject feedbackGO = Instantiate(gm.prefabs["ButtonFeedbackOK"]);
 			feedbackGO.transform.position = gameObject.transform.position;
+			
+			if (precision > 0.85f) {
+				scoreFeedbackName = "FeedbackParfait";
+			}
+			else if (precision > 0.60f) {
+				scoreFeedbackName = "FeedbackSuper";
+			}
+			else if (precision > 0.30f) {
+				scoreFeedbackName = "FeedbackBien";
+			}
 		}
+		
+		if (gm.prefabs[scoreFeedbackName] == null) {
+			Debug.Log(scoreFeedbackName);
+		}
+		
+		GameObject scoreFeedbackGO = Instantiate(gm.prefabs[scoreFeedbackName]);
+		Vector3 pos = gameObject.transform.position;
+		pos.y += 8;
+		scoreFeedbackGO.transform.position = pos;
 	}
 }
 

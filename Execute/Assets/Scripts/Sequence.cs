@@ -161,6 +161,7 @@ public class Sequence : MonoBehaviour {
 			float precision = currentButton.GetPrecisionFor(currentTime);
 			
 			if (precision > 0) {
+				
 				// Le joueur exécute et réussit
 				if (currentButton.buttonName == buttonDownName) {
 					
@@ -188,7 +189,7 @@ public class Sequence : MonoBehaviour {
 					//currentButton.SetColor(0.0f, 0.0f, 1.0f);
 
 					currentButton.LaunchFeedback(precision);
-
+					
 					round.scores[player.id] += Mathf.RoundToInt(precision * 100);
 					player.joypad.VibrateTwice(0.4f);
 
@@ -202,6 +203,9 @@ public class Sequence : MonoBehaviour {
 				}
 				// Le joueur se trompe
 				else {
+					
+					currentButton.LaunchFeedback(0.0f);
+					
 					//Debug.Log("Joueur #" + player.id + " s'est trompé de bouton (" + currentButton.buttonName + " != " + buttonDownName + ")");
 					//currentButton.SetColor(1.0f, 0.0f, 0.0f);
 					player.joypad.VibrateOnce(0.5f, 1.0f);

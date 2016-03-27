@@ -55,6 +55,12 @@ public class GameManager : MonoBehaviour {
 		
 		// Prefabs des feedbacks
 		prefabs.Add("ButtonFeedbackOK", Resources.Load("ButtonFeedbackOK", typeof(GameObject)) as GameObject);
+		prefabs.Add("FeedbackBien", Resources.Load("ButtonsPrecisionFeedbacks/Bien", typeof(GameObject)) as GameObject);
+		prefabs.Add("FeedbackSuper", Resources.Load("ButtonsPrecisionFeedbacks/Super", typeof(GameObject)) as GameObject);
+		prefabs.Add("FeedbackRate", Resources.Load("ButtonsPrecisionFeedbacks/Rate", typeof(GameObject)) as GameObject);
+		prefabs.Add("FeedbackParfait", Resources.Load("ButtonsPrecisionFeedbacks/Parfait", typeof(GameObject)) as GameObject);
+		
+		Debug.Log(prefabs["FeedbackBien"]);
 		
 		// Chargement des prefabs des nuages
 		clouds = GameObject.Find("Clouds");
