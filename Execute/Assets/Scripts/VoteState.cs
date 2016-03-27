@@ -207,9 +207,9 @@ public class VoteState : MonoBehaviour {
 
 			yield return new WaitForSeconds(animDuration);
 
+			// Conditions de victoire et défaite
 			foreach(Player player in game.players){
 				//if(!scoreCounted){
-				// Conditions de victoire et défaite
 				// Si le joueur a >3 votes et n'était pas résistant, score /2
 				if (player.hasVotes > 3 && !player.isResistant && !player.scoreCounted) {
 					player.score = player.score / 2;
