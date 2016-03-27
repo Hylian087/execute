@@ -1,9 +1,52 @@
 fileFormatVersion: 2
 guid: 7ccd7610ab0c90e40a661ed6c85e61a6
-timeCreated: 1458826781
+timeCreated: 1459105453
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Operator_0
+    21300002: Operator_1
+    21300004: Operator_2
+    21300006: Operator_3
+    21300008: Operator_4
+    21300010: Operator_5
+    21300012: Operator_6
+    21300014: Operator_7
+    21300016: Operator_8
+    21300018: Operator_9
+    21300020: Operator_10
+    21300022: Operator_11
+    21300024: Operator_12
+    21300026: Operator_13
+    21300028: Operator_14
+    21300030: Operator_15
+    21300032: Operator_16
+    21300034: Operator_17
+    21300036: Operator_18
+    21300038: Operator_19
+    21300040: Operator_20
+    21300042: Operator_21
+    21300044: Operator_22
+    21300046: Operator_23
+    21300048: Operator_24
+    21300050: Operator_25
+    21300052: Operator_26
+    21300054: Operator_27
+    21300056: Operator_28
+    21300058: Operator_29
+    21300060: Operator_30
+    21300062: Operator_31
+    21300064: Operator_32
+    21300066: Operator_33
+    21300068: Operator_34
+    21300070: Operator_35
+    21300072: Operator_36
+    21300074: Operator_37
+    21300076: Operator_38
+    21300078: Operator_39
+    21300080: Operator_40
+    21300082: Operator_41
+    21300084: Operator_42
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -27,10 +70,10 @@ TextureImporter:
   cubemapConvolutionExponent: 1.5
   seamlessCubemap: 0
   textureFormat: -1
-  maxTextureSize: 2048
+  maxTextureSize: 8192
   textureSettings:
-    filterMode: -1
-    aniso: -1
+    filterMode: 0
+    aniso: 16
     mipBias: -1
     wrapMode: 1
   nPOTScale: 0
@@ -38,18 +81,448 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: .5, y: .5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 1
   alphaIsTransparency: 1
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Operator_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2688
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2624
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2560
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2496
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2432
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2368
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2304
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_7
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2240
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2176
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2112
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2048
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_11
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1984
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1920
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_13
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1856
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_14
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1792
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1728
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_16
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1664
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_17
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1600
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1536
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_19
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1472
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1408
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_21
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1344
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_22
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1280
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_23
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1216
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_24
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1152
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_25
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1088
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_26
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1024
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_27
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 960
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_28
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 896
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_29
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 832
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_31
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 704
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_32
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 640
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_33
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_34
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 512
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_35
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 448
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_36
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_37
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 320
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_38
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 256
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_39
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_41
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Operator_42
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 

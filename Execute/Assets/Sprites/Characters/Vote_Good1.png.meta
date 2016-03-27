@@ -1,72 +1,76 @@
 fileFormatVersion: 2
-guid: eb006a6cd61dc94408335299cbee3a4e
-timeCreated: 1459105157
+guid: 77c2d32e939f36d49b557a1d9b52565c
+timeCreated: 1459105230
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: Vote_Bad1_0
-    21300002: Vote_Bad1_1
-    21300004: Vote_Bad1_2
-    21300006: Vote_Bad1_3
-    21300008: Vote_Bad1_4
-    21300010: Vote_Bad1_5
-    21300012: Vote_Bad1_6
-    21300014: Vote_Bad1_7
-    21300016: Vote_Bad1_8
-    21300018: Vote_Bad1_9
-    21300020: Vote_Bad1_10
-    21300022: Vote_Bad1_11
-    21300024: Vote_Bad1_12
-    21300026: Vote_Bad1_13
-    21300028: Vote_Bad1_14
-    21300030: Vote_Bad1_15
-    21300032: Vote_Bad1_16
-    21300034: Vote_Bad1_17
-    21300036: Vote_Bad1_18
-    21300038: Vote_Bad1_19
-    21300040: Vote_Bad1_20
-    21300042: Vote_Bad1_21
-    21300044: Vote_Bad1_22
-    21300046: Vote_Bad1_23
-    21300048: Vote_Bad1_24
-    21300050: Vote_Bad1_25
-    21300052: Vote_Bad1_26
-    21300054: Vote_Bad1_27
-    21300056: Vote_Bad1_28
-    21300058: Vote_Bad1_29
-    21300060: Vote_Bad1_30
-    21300062: Vote_Bad1_31
-    21300064: Vote_Bad1_32
-    21300066: Vote_Bad1_33
-    21300068: Vote_Bad1_34
-    21300070: Vote_Bad1_35
-    21300072: Vote_Bad1_36
-    21300074: Vote_Bad1_37
-    21300076: Vote_Bad1_38
-    21300078: Vote_Bad1_39
-    21300080: Vote_Bad1_40
-    21300082: Vote_Bad1_41
-    21300084: Vote_Bad1_42
-    21300086: Vote_Bad1_43
-    21300088: Vote_Bad1_44
-    21300090: Vote_Bad1_45
-    21300092: Vote_Bad1_46
-    21300094: Vote_Bad1_47
-    21300096: Vote_Bad1_48
-    21300098: Vote_Bad1_49
-    21300100: Vote_Bad1_50
-    21300102: Vote_Bad1_51
-    21300104: Vote_Bad1_52
-    21300106: Vote_Bad1_53
-    21300108: Vote_Bad1_54
-    21300110: Vote_Bad1_55
-    21300112: Vote_Bad1_56
-    21300114: Vote_Bad1_57
-    21300116: Vote_Bad1_58
-    21300118: Vote_Bad1_59
-    21300120: Vote_Bad1_60
-    21300122: Vote_Bad1_61
-    21300124: Vote_Bad1_62
+    21300000: Vote_Good1_0
+    21300002: Vote_Good1_1
+    21300004: Vote_Good1_2
+    21300006: Vote_Good1_3
+    21300008: Vote_Good1_4
+    21300010: Vote_Good1_5
+    21300012: Vote_Good1_6
+    21300014: Vote_Good1_7
+    21300016: Vote_Good1_8
+    21300018: Vote_Good1_9
+    21300020: Vote_Good1_10
+    21300022: Vote_Good1_11
+    21300024: Vote_Good1_12
+    21300026: Vote_Good1_13
+    21300028: Vote_Good1_14
+    21300030: Vote_Good1_15
+    21300032: Vote_Good1_16
+    21300034: Vote_Good1_17
+    21300036: Vote_Good1_18
+    21300038: Vote_Good1_19
+    21300040: Vote_Good1_20
+    21300042: Vote_Good1_21
+    21300044: Vote_Good1_22
+    21300046: Vote_Good1_23
+    21300048: Vote_Good1_24
+    21300050: Vote_Good1_25
+    21300052: Vote_Good1_26
+    21300054: Vote_Good1_27
+    21300056: Vote_Good1_28
+    21300058: Vote_Good1_29
+    21300060: Vote_Good1_30
+    21300062: Vote_Good1_31
+    21300064: Vote_Good1_32
+    21300066: Vote_Good1_33
+    21300068: Vote_Good1_34
+    21300070: Vote_Good1_35
+    21300072: Vote_Good1_36
+    21300074: Vote_Good1_37
+    21300076: Vote_Good1_38
+    21300078: Vote_Good1_39
+    21300080: Vote_Good1_40
+    21300082: Vote_Good1_41
+    21300084: Vote_Good1_42
+    21300086: Vote_Good1_43
+    21300088: Vote_Good1_44
+    21300090: Vote_Good1_45
+    21300092: Vote_Good1_46
+    21300094: Vote_Good1_47
+    21300096: Vote_Good1_48
+    21300098: Vote_Good1_49
+    21300100: Vote_Good1_50
+    21300102: Vote_Good1_51
+    21300104: Vote_Good1_52
+    21300106: Vote_Good1_53
+    21300108: Vote_Good1_54
+    21300110: Vote_Good1_55
+    21300112: Vote_Good1_56
+    21300114: Vote_Good1_57
+    21300116: Vote_Good1_58
+    21300118: Vote_Good1_59
+    21300120: Vote_Good1_60
+    21300122: Vote_Good1_61
+    21300124: Vote_Good1_62
+    21300126: Vote_Good1_63
+    21300128: Vote_Good1_64
+    21300130: Vote_Good1_65
+    21300132: Vote_Good1_66
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -113,7 +117,47 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: Vote_Bad1_0
+    - name: Vote_Good1_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4224
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vote_Good1_1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4160
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vote_Good1_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4096
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vote_Good1_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4032
+        width: 65
+        height: 64
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Vote_Good1_4
       rect:
         serializedVersion: 2
         x: 0
@@ -123,7 +167,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_1
+    - name: Vote_Good1_5
       rect:
         serializedVersion: 2
         x: 0
@@ -133,7 +177,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_2
+    - name: Vote_Good1_6
       rect:
         serializedVersion: 2
         x: 0
@@ -143,7 +187,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_3
+    - name: Vote_Good1_7
       rect:
         serializedVersion: 2
         x: 0
@@ -151,9 +195,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_4
+    - name: Vote_Good1_8
       rect:
         serializedVersion: 2
         x: 0
@@ -161,9 +205,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_5
+    - name: Vote_Good1_9
       rect:
         serializedVersion: 2
         x: 0
@@ -171,9 +215,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_6
+    - name: Vote_Good1_10
       rect:
         serializedVersion: 2
         x: 0
@@ -181,9 +225,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_7
+    - name: Vote_Good1_11
       rect:
         serializedVersion: 2
         x: 0
@@ -191,9 +235,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_8
+    - name: Vote_Good1_12
       rect:
         serializedVersion: 2
         x: 0
@@ -201,9 +245,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_9
+    - name: Vote_Good1_13
       rect:
         serializedVersion: 2
         x: 0
@@ -211,9 +255,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_10
+    - name: Vote_Good1_14
       rect:
         serializedVersion: 2
         x: 0
@@ -221,9 +265,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_11
+    - name: Vote_Good1_15
       rect:
         serializedVersion: 2
         x: 0
@@ -231,9 +275,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_12
+    - name: Vote_Good1_16
       rect:
         serializedVersion: 2
         x: 0
@@ -241,9 +285,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_13
+    - name: Vote_Good1_17
       rect:
         serializedVersion: 2
         x: 0
@@ -251,9 +295,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_14
+    - name: Vote_Good1_18
       rect:
         serializedVersion: 2
         x: 0
@@ -261,9 +305,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_15
+    - name: Vote_Good1_19
       rect:
         serializedVersion: 2
         x: 0
@@ -271,9 +315,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_16
+    - name: Vote_Good1_20
       rect:
         serializedVersion: 2
         x: 0
@@ -281,9 +325,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_17
+    - name: Vote_Good1_21
       rect:
         serializedVersion: 2
         x: 0
@@ -291,9 +335,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_18
+    - name: Vote_Good1_22
       rect:
         serializedVersion: 2
         x: 0
@@ -301,9 +345,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_19
+    - name: Vote_Good1_23
       rect:
         serializedVersion: 2
         x: 0
@@ -311,9 +355,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_20
+    - name: Vote_Good1_24
       rect:
         serializedVersion: 2
         x: 0
@@ -321,9 +365,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_21
+    - name: Vote_Good1_25
       rect:
         serializedVersion: 2
         x: 0
@@ -331,9 +375,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_22
+    - name: Vote_Good1_26
       rect:
         serializedVersion: 2
         x: 0
@@ -341,9 +385,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_23
+    - name: Vote_Good1_27
       rect:
         serializedVersion: 2
         x: 0
@@ -351,9 +395,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_24
+    - name: Vote_Good1_28
       rect:
         serializedVersion: 2
         x: 0
@@ -361,9 +405,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_25
+    - name: Vote_Good1_29
       rect:
         serializedVersion: 2
         x: 0
@@ -371,9 +415,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_26
+    - name: Vote_Good1_30
       rect:
         serializedVersion: 2
         x: 0
@@ -381,9 +425,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_27
+    - name: Vote_Good1_31
       rect:
         serializedVersion: 2
         x: 0
@@ -391,9 +435,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_28
+    - name: Vote_Good1_32
       rect:
         serializedVersion: 2
         x: 0
@@ -401,9 +445,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_29
+    - name: Vote_Good1_33
       rect:
         serializedVersion: 2
         x: 0
@@ -411,9 +455,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_30
+    - name: Vote_Good1_34
       rect:
         serializedVersion: 2
         x: 0
@@ -421,9 +465,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_31
+    - name: Vote_Good1_35
       rect:
         serializedVersion: 2
         x: 0
@@ -431,9 +475,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_32
+    - name: Vote_Good1_36
       rect:
         serializedVersion: 2
         x: 0
@@ -441,9 +485,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_33
+    - name: Vote_Good1_37
       rect:
         serializedVersion: 2
         x: 0
@@ -451,9 +495,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_34
+    - name: Vote_Good1_38
       rect:
         serializedVersion: 2
         x: 0
@@ -461,9 +505,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_35
+    - name: Vote_Good1_39
       rect:
         serializedVersion: 2
         x: 0
@@ -471,9 +515,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_36
+    - name: Vote_Good1_40
       rect:
         serializedVersion: 2
         x: 0
@@ -481,9 +525,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_37
+    - name: Vote_Good1_41
       rect:
         serializedVersion: 2
         x: 0
@@ -491,9 +535,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_38
+    - name: Vote_Good1_42
       rect:
         serializedVersion: 2
         x: 0
@@ -501,9 +545,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_39
+    - name: Vote_Good1_43
       rect:
         serializedVersion: 2
         x: 0
@@ -511,9 +555,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_40
+    - name: Vote_Good1_44
       rect:
         serializedVersion: 2
         x: 0
@@ -521,9 +565,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_41
+    - name: Vote_Good1_45
       rect:
         serializedVersion: 2
         x: 0
@@ -531,9 +575,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_42
+    - name: Vote_Good1_46
       rect:
         serializedVersion: 2
         x: 0
@@ -541,9 +585,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_43
+    - name: Vote_Good1_47
       rect:
         serializedVersion: 2
         x: 0
@@ -551,9 +595,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_44
+    - name: Vote_Good1_48
       rect:
         serializedVersion: 2
         x: 0
@@ -561,9 +605,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_45
+    - name: Vote_Good1_49
       rect:
         serializedVersion: 2
         x: 0
@@ -571,9 +615,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_46
+    - name: Vote_Good1_50
       rect:
         serializedVersion: 2
         x: 0
@@ -581,9 +625,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_47
+    - name: Vote_Good1_51
       rect:
         serializedVersion: 2
         x: 0
@@ -591,9 +635,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_48
+    - name: Vote_Good1_52
       rect:
         serializedVersion: 2
         x: 0
@@ -601,9 +645,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_49
+    - name: Vote_Good1_53
       rect:
         serializedVersion: 2
         x: 0
@@ -611,9 +655,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_50
+    - name: Vote_Good1_54
       rect:
         serializedVersion: 2
         x: 0
@@ -621,9 +665,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_51
+    - name: Vote_Good1_55
       rect:
         serializedVersion: 2
         x: 0
@@ -631,9 +675,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_52
+    - name: Vote_Good1_56
       rect:
         serializedVersion: 2
         x: 0
@@ -641,9 +685,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_53
+    - name: Vote_Good1_57
       rect:
         serializedVersion: 2
         x: 0
@@ -651,9 +695,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_54
+    - name: Vote_Good1_58
       rect:
         serializedVersion: 2
         x: 0
@@ -661,9 +705,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_55
+    - name: Vote_Good1_59
       rect:
         serializedVersion: 2
         x: 0
@@ -671,9 +715,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_56
+    - name: Vote_Good1_60
       rect:
         serializedVersion: 2
         x: 0
@@ -681,9 +725,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_57
+    - name: Vote_Good1_61
       rect:
         serializedVersion: 2
         x: 0
@@ -691,9 +735,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_58
+    - name: Vote_Good1_62
       rect:
         serializedVersion: 2
         x: 0
@@ -701,9 +745,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_59
+    - name: Vote_Good1_63
       rect:
         serializedVersion: 2
         x: 0
@@ -711,9 +755,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_60
+    - name: Vote_Good1_64
       rect:
         serializedVersion: 2
         x: 0
@@ -721,9 +765,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_61
+    - name: Vote_Good1_65
       rect:
         serializedVersion: 2
         x: 0
@@ -731,9 +775,9 @@ TextureImporter:
         width: 65
         height: 64
       alignment: 0
-      pivot: {x: .5, y: .5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: Vote_Bad1_62
+    - name: Vote_Good1_66
       rect:
         serializedVersion: 2
         x: 0

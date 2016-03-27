@@ -1,44 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &141340
+--- !u!1 &188260
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 480950}
-  - 212: {fileID: 21266832}
-  - 95: {fileID: 9521160}
+  - 4: {fileID: 407552}
+  - 212: {fileID: 21202714}
+  - 95: {fileID: 9551180}
   m_Layer: 0
-  m_Name: Transition
+  m_Name: Operator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &480950
+--- !u!4 &407552
 Transform:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141340}
+  m_GameObject: {fileID: 188260}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 561.664368, y: -245.409897, z: 0}
+  m_LocalPosition: {x: -47, y: 48, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!95 &9521160
+--- !u!95 &9551180
 Animator:
   serializedVersion: 3
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141340}
+  m_GameObject: {fileID: 188260}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 8fbd54a3b179e4f43b290ab754a8db6b, type: 2}
+  m_Controller: {fileID: 9100000, guid: 5717e7a76df1cbb4897c814b4f685263, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -46,12 +46,12 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!212 &21266832
+--- !u!212 &21202714
 SpriteRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 141340}
+  m_GameObject: {fileID: 188260}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -68,9 +68,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: 190777167
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c354ec5c635aeaa4793a659a7e1b9f29, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7ccd7610ab0c90e40a661ed6c85e61a6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -81,5 +81,5 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 141340}
+  m_RootGameObject: {fileID: 188260}
   m_IsPrefabParent: 1
