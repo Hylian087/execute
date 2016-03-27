@@ -1,0 +1,217 @@
+fileFormatVersion: 2
+guid: c354ec5c635aeaa4793a659a7e1b9f29
+timeCreated: 1459024215
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Transition_0
+    21300002: Transition_1
+    21300004: Transition_2
+    21300006: Transition_3
+    21300008: Transition_4
+    21300010: Transition_5
+    21300012: Transition_6
+    21300014: Transition_7
+    21300016: Transition_8
+    21300018: Transition_9
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 4096
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Transition_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.5, y: 115}
+        - {x: -204.5, y: -115}
+        - {x: 204.5, y: -115}
+        - {x: 204.5, y: 115}
+    - name: Transition_1
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.11111, y: 115}
+        - {x: -204.11111, y: -115}
+        - {x: 205.88889, y: -115}
+        - {x: 205.88889, y: 115}
+    - name: Transition_2
+      rect:
+        serializedVersion: 2
+        x: 1280
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.22223, y: 115}
+        - {x: -204.22223, y: -115}
+        - {x: 205.77777, y: -115}
+        - {x: 205.77777, y: 115}
+    - name: Transition_3
+      rect:
+        serializedVersion: 2
+        x: 1920
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.33337, y: 115}
+        - {x: -204.33337, y: -115}
+        - {x: 205.66663, y: -115}
+        - {x: 205.66663, y: 115}
+    - name: Transition_4
+      rect:
+        serializedVersion: 2
+        x: 2560
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.44446, y: 115}
+        - {x: -204.44446, y: -115}
+        - {x: 205.55554, y: -115}
+        - {x: 205.55554, y: 115}
+    - name: Transition_5
+      rect:
+        serializedVersion: 2
+        x: 3200
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.55554, y: 115}
+        - {x: -204.55554, y: -115}
+        - {x: 205.44446, y: -115}
+        - {x: 205.44446, y: 115}
+    - name: Transition_6
+      rect:
+        serializedVersion: 2
+        x: 3840
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.66675, y: 115}
+        - {x: -204.66675, y: -115}
+        - {x: 205.33325, y: -115}
+        - {x: 205.33325, y: 115}
+    - name: Transition_7
+      rect:
+        serializedVersion: 2
+        x: 4480
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.77783, y: 115}
+        - {x: -204.77783, y: -115}
+        - {x: 205.22217, y: -115}
+        - {x: 205.22217, y: 115}
+    - name: Transition_8
+      rect:
+        serializedVersion: 2
+        x: 5120
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.38892, y: 115}
+        - {x: -204.38892, y: -115}
+        - {x: 204.61108, y: -115}
+        - {x: 204.61108, y: 115}
+    - name: Transition_9
+      rect:
+        serializedVersion: 2
+        x: 5760
+        y: 0
+        width: 640
+        height: 360
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -204.5, y: 115}
+        - {x: -204.5, y: -115}
+        - {x: -195.5, y: -115}
+        - {x: -195.5, y: 115}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
