@@ -9,8 +9,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 414702}
   - 212: {fileID: 21293782}
+  - 114: {fileID: 11401406}
   m_Layer: 0
-  m_Name: ButtonsPrecisionFeedback_1
+  m_Name: Super
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,6 +29,17 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!114 &11401406
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 194168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50954b5a27a751f4ca64a2905522d337, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21293782
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -52,8 +64,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 190777167
+  m_SortingOrder: 100
   m_Sprite: {fileID: 21300002, guid: 37764334e4f7eb041801a8c1addc4983, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -64,7 +76,15 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: 190777167
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_SortingOrder
+      value: 100
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 194168}
