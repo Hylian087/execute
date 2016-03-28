@@ -9,6 +9,10 @@ public class menuScript : MonoBehaviour {
 	}
 
 	public void StartLevel(){
+		Application.LoadLevel (2);
+	}
+
+	public void StartTuto(){
 		Application.LoadLevel (1);
 	}
 

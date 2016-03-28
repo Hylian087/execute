@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: 7c6051771783e544ab3e53e81cf1e606
-timeCreated: 1457696339
+guid: d5f39a37c4125ee489edf8bf69837de7
+timeCreated: 1459123427
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Pads_0
+    21300002: Pads_1
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -38,7 +40,7 @@ TextureImporter:
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -49,7 +51,27 @@ TextureImporter:
   textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Pads_0
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 1052
+        width: 296
+        height: 200
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: Pads_1
+      rect:
+        serializedVersion: 2
+        x: 276
+        y: 283
+        width: 296
+        height: 201
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
   spritePackingTag: 
   userData: 
   assetBundleName: 
