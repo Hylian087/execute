@@ -4,8 +4,15 @@ using UnityEngine.UI;
 
 public class menuScript : MonoBehaviour {
 
+	public GameObject tutorialMask;
+	public GameObject menuMask;
+
 	void Start(){
-	
+		tutorialMask = GameObject.Find ("Tutorial");
+		tutorialMask.SetActive (false);
+
+		menuMask = GameObject.Find ("MenuCanvas");
+		menuMask.SetActive (true);
 	}
 
 	public void StartLevel(){
@@ -13,7 +20,8 @@ public class menuScript : MonoBehaviour {
 	}
 
 	public void StartTuto(){
-		Application.LoadLevel (1);
+		tutorialMask.SetActive (true);
+		menuMask.SetActive (false);
 	}
 
 	public void CloseGame(){

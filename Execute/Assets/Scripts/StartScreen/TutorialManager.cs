@@ -55,7 +55,8 @@ public class TutorialManager : MonoBehaviour {
 		} else if (Input.GetButtonDown ("Joy1B") == true && currentSlide > 1) {
 			currentSlide -= 1;
 		} else if (Input.GetButtonDown ("Joy1Start") == true) {
-			Application.LoadLevel (0);
+			GameObject.Find ("MenuManager").GetComponent<menuScript>().menuMask.SetActive(true);
+			gameObject.SetActive (false);
 		}
 
 	}

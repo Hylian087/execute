@@ -24,6 +24,8 @@ public class ExecGame : MonoBehaviour {
 	Round round;
 	public int roundNumber;
 
+	//public Animator transitionObject;
+
 	/**
 	 * Créer une partie
 	 */
@@ -40,9 +42,13 @@ public class ExecGame : MonoBehaviour {
 	void Start() {
 		
 		objects = new Dictionary<string, GameObject>();
-		
+		/*
+		transitionObject = GameObject.Find ("Transition").GetComponent<Animator>();
+		transitionObject.SetBool ("transiting", true);
+		 */
+
 		state = GameState.JoyInit;
-		
+
 		// Objets
 		objects.Add("MachineBody", GameObject.Find("MachineBody"));
 		objects.Add("MachineMask", GameObject.Find("MachineMask"));
@@ -67,6 +73,13 @@ public class ExecGame : MonoBehaviour {
 			objects["TVScreen" + i].GetComponent<Renderer>().enabled = false;
 		}
 	}
+
+	/*
+	public IEnumerator transitionState(){
+		transitionObject.SetBool ("transiting", false);
+		yield return new WaitForSeconds (1.0f);
+		transitionObject.SetBool ("transiting", true);
+	}*/
 
 	/**
 	 * Mise à jour

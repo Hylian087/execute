@@ -65,3 +65,6 @@ TagManager:
   - name: Vote
     uniqueID: 1364600223
     locked: 0
+  - name: Transition
+    uniqueID: 1889271587
+    locked: 0
