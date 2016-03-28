@@ -10,7 +10,7 @@ public class VoteState : MonoBehaviour {
 	public Player player;
 
 	// Timer du vote
-	public float voteDuration = 100.0f;
+	public float voteDuration = 3.0f;
 
 	bool voteDisplayed;
 	GameObject timerText;
@@ -216,11 +216,13 @@ public class VoteState : MonoBehaviour {
 				// Si le joueur a >3 votes et n'était pas résistant
 				if (player.hasVotes == 3 && !player.isResistant && !player.scoreCounted) {
 					round.scores[player.id]=-1000;
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a >3 votes et était résistant
 				} else if (player.hasVotes == 3 && player.isResistant && !player.scoreCounted) {
 					round.scores[player.id]=-1000;
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
@@ -230,10 +232,12 @@ public class VoteState : MonoBehaviour {
 					// Si le joueur a < 3 votes et était résistant
 				} else if (player.hasVotes != 0 && player.hasVotes < 3 && player.isResistant && !player.scoreCounted) {
 					round.scores[player.id]=1000/player.hasVotes;
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 				} else if (player.hasVotes == 0 && player.isResistant){
 					round.scores[player.id]=1000;
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 				}
@@ -248,16 +252,23 @@ public class VoteState : MonoBehaviour {
 
 			foreach(Player player in game.players){	
 
+				voteCounter[player.id].SetActive(false);
+
 				if(player.hasVotedFor != ""){
 
-					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant"); round.scores[player.id] = 500;}
-					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -500;};
+					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant"); round.scores[player.id] = 500;
+						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
+					}
+					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -500;
+						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
+					};
 
 				} 
 
 				else if(player.hasVotedFor == ""){
 					Debug.Log ("Joueur "+player.id+" n'a pas voté");
 					round.scores[player.id] = -1000;
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 				}
 
 				//yield return new WaitForSeconds(1.0f);
@@ -265,7 +276,7 @@ public class VoteState : MonoBehaviour {
 
 			}
 
-		yield return new WaitForSeconds(animDuration+1.0f);
+		yield return new WaitForSeconds(animDuration+2.0f);
 
 			done = true;
 		}
@@ -457,6 +468,9 @@ public class VoteState : MonoBehaviour {
 					player.hasAlreadyVoted = false;
 					player.hasPushedStart = false;
 					player.scoreCounted = false;
+
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",false);
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",false);
 				}
 				GameManager.GetInstance().game.NextRound(); 
 				nextRound=true;

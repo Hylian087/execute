@@ -199,7 +199,11 @@ public class Round : MonoBehaviour {
 		}
 		else if (state == RoundState.Rhythm) {
 			bool done = true;
-			
+
+			foreach(Player player in game.players){
+				GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("rhythmState", true);
+			}
+
 			foreach (Sequence seq in sequences) {
 				done = done && seq.done;
 			}
@@ -209,6 +213,11 @@ public class Round : MonoBehaviour {
 				clockArm.transform.localEulerAngles = new Vector3(0, 0, 0);
 				
 				StartVoteState();
+
+				foreach(Player player in game.players){
+					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("rhythmState", false);
+				}
+
 			}
 			else {
 				if (rhythmDuration == 0) {
