@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: 1ee179af4af39904b943b7212243b5b5
-timeCreated: 1456891312
+timeCreated: 1459162695
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -58,44 +58,44 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 90
+        y: 94
         width: 83
         height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
+      alignment: 9
+      pivot: {x: 0.40547237, y: 0.6159476}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: VoteHands_1
       rect:
         serializedVersion: 2
         x: 0
-        y: 60
+        y: 63
         width: 83
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: VoteHands_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 30
+        y: 32
         width: 83
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     - name: VoteHands_3
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 1
         width: 83
         height: 30
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
     outline: []
