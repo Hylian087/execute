@@ -241,7 +241,7 @@ public class VoteState : MonoBehaviour {
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 				}
-				//yield return new WaitForSeconds(1.0f);
+				yield return new WaitForSeconds(1.0f);
 				StartCoroutine (countScores (player));
 				player.scoreCounted = true;
 				//scoreCounted = true;
@@ -271,7 +271,7 @@ public class VoteState : MonoBehaviour {
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 				}
 
-				//yield return new WaitForSeconds(1.0f);
+				yield return new WaitForSeconds(1.0f);
 				StartCoroutine (countScores (player));
 
 			}
