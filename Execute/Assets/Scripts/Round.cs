@@ -96,6 +96,7 @@ public class Round : MonoBehaviour {
 					//Debug.Log ("Joueur "+player.id+" a été résistant "+resistant.chosenCount+" fois, on le choisit");
 					player.joypad.VibrateThrice();
 					player.chosenCount++;
+					player.isResistant=true;
 					resistantChosen = true;
 				}
 				else if(player == resistant && resistant.chosenCount == 1){

@@ -17,7 +17,7 @@ public class Player {
 	// Vote ID
 	public string voteID;
 	// Celui pour qui le joueur a voté
-	public string hasVotedFor;
+	public string hasVotedFor ="";
 	// Nombre de votes que le joueur a reçu contre lui
 	public int hasVotes;
 	// Le joueur a-t-il déjà voté?

@@ -48,6 +48,7 @@ public class VoteState : MonoBehaviour {
 
 	// Tableau décomptant les votes : string = nom du joueur, int = nombre de votes
 	public Dictionary<string, int> votes;
+	public Dictionary<string,Player> idPlayers;
 
 	public GameObject continueButtons;
 	// Instance du script
@@ -119,6 +120,8 @@ public class VoteState : MonoBehaviour {
 			voteCounter.Add(player.id, Instantiate (Resources.Load("VoteCounter"+player.id) as GameObject));
 				voteCounter[player.id].transform.SetParent (gameObject.transform);
 				voteCounter[player.id].GetComponentInChildren<VoteCounter>().voteID = player.voteID;
+
+				idPlayers.Add (player.voteID,player);
 		}
 
 		// Rangement des compteurs dans leur parent (le GO VoteState)
@@ -205,36 +208,65 @@ public class VoteState : MonoBehaviour {
 				
 			}				
 
-			yield return new WaitForSeconds(animDuration);
+			yield return new WaitForSeconds(animDuration+1.0f);
 
 			// Conditions de victoire et défaite
 			foreach(Player player in game.players){
 				//if(!scoreCounted){
-				// Si le joueur a >3 votes et n'était pas résistant, score /2
-				if (player.hasVotes > 3 && !player.isResistant && !player.scoreCounted) {
-					player.score = player.score / 2;
-					player.scoreCounted = true;
-					//Debug.Log ("Joueur " + player.id + " n'était pas résistant et voit son score divisé par 2. Score GLOBAL actuel :" + player.score);
-					// Si le joueur a >3 votes et était résistant, score /4
-				} else if (player.hasVotes > 3 && player.isResistant && !player.scoreCounted) {
-					player.score = player.score / 4;
-					player.scoreCounted = true;
-					//Debug.Log ("Joueur " + player.id + " était un résistant et voit son score divisé par 4. Score GLOBAL actuel :" + player.score);
+				// Si le joueur a >3 votes et n'était pas résistant
+				if (player.hasVotes == 3 && !player.isResistant && !player.scoreCounted) {
+					round.scores[player.id]=-1000;
+					//StartCoroutine(countScores(player));
+					//player.scoreCounted = true;
+					// Si le joueur a >3 votes et était résistant
+				} else if (player.hasVotes == 3 && player.isResistant && !player.scoreCounted) {
+					round.scores[player.id]=-1000;
+					//StartCoroutine(countScores(player));
+					//player.scoreCounted = true;
 					// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
 				} else if (player.hasVotes < 3 && !player.isResistant && !player.scoreCounted) {
-					player.scoreCounted = true;
-					//Debug.Log ("Joueur " + player.id + " n'a pas reçu suffisamment de vote pour etre pénalisé. Score GLOBAL actuel :" + player.score);
-					// Si le joueur a < 3 votes et était résistant, score *4
-				} else if (player.hasVotes < 3 && player.isResistant && !player.scoreCounted) {
-					player.score = player.score * 4;
-					player.scoreCounted = true;
-					//Debug.Log ("Joueur " + player.id + " était résistant et voit son score multiplié par 4. Score GLOBAL actuel :" + player.score);
+					//StartCoroutine(countScores(player));
+					//player.scoreCounted = true;
+					// Si le joueur a < 3 votes et était résistant
+				} else if (player.hasVotes != 0 && player.hasVotes < 3 && player.isResistant && !player.scoreCounted) {
+					round.scores[player.id]=1000/player.hasVotes;
+					//StartCoroutine(countScores(player));
+					//player.scoreCounted = true;
+				} else if (player.hasVotes == 0 && player.isResistant){
+					round.scores[player.id]=1000;
+					//StartCoroutine(countScores(player));
+					//player.scoreCounted = true;
 				}
+				//yield return new WaitForSeconds(1.0f);
+				StartCoroutine (countScores (player));
+				player.scoreCounted = true;
 				//scoreCounted = true;
 				//}
 			}	
 				
-		yield return new WaitForSeconds(1.0f);
+		yield return new WaitForSeconds(animDuration+1.0f);
+
+			foreach(Player player in game.players){	
+
+				if(player.hasVotedFor != ""){
+
+					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant"); round.scores[player.id] = 500;}
+					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -500;};
+
+				} 
+
+				else if(player.hasVotedFor == ""){
+					Debug.Log ("Joueur "+player.id+" n'a pas voté");
+					round.scores[player.id] = -1000;
+				}
+
+				//yield return new WaitForSeconds(1.0f);
+				StartCoroutine (countScores (player));
+
+			}
+
+		yield return new WaitForSeconds(animDuration+1.0f);
+
 			done = true;
 		}
 	}
@@ -257,7 +289,8 @@ public class VoteState : MonoBehaviour {
 		}
 
 		_player.score = gScoretarget;	
-		round.scores [_player.id] = rScoretarget;		
+		round.scores [_player.id] = rScoretarget;	
+		Debug.Log ("Score  du joueur "+_player.id+" : "+_player.score);
 	}
 
 
@@ -293,6 +326,7 @@ public class VoteState : MonoBehaviour {
 			roundScoreCounter.Clear();
 			voteCounter.Clear();
 			//voteSkull.Clear();
+			idPlayers.Clear ();
 			votes.Clear();
 		} else if(globalScoreCounter==null && roundScoreCounter ==null /*&& voteCounter ==null && voteSkull == null*/ && votes ==null){
 				globalScoreCounter = new Dictionary<int, GameObject> ();
@@ -300,6 +334,7 @@ public class VoteState : MonoBehaviour {
 				voteCounter = new Dictionary<int,GameObject>();
 				//voteSkull = new Dictionary<int, GameObject>();
 				votes = new Dictionary<string, int> ();
+			idPlayers = new Dictionary<string, Player>();
 		}
 
 		foreach(Player player in game.players){
@@ -312,6 +347,7 @@ public class VoteState : MonoBehaviour {
 				//Debug.Log ("Joueur "+player.id+" est résistant avec un ratio de "+player.resistantRatio+" %");
 			}
 		}
+
 
 
 		StartCoroutine (voteDisplay ());
