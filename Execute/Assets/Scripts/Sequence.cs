@@ -21,7 +21,8 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de patterns
-	public int buttonCount = 60;
+	public int patternCount = 8;
+	public int buttonCount = 0; // Calculé
 	
 	// Temps actuel de la séquence
 	private float currentTime;
@@ -58,36 +59,50 @@ public class Sequence : MonoBehaviour {
 		float time = 0.0f;
 		
 		// Création de la séquence
-		for (int j = 0; j < buttonCount; j++) {
-
-			// Sélection aléatoire des boutons
-			string randomButtonId = Joypad.GetRandomButton();
+		for (int p = 0; p < patternCount; p++) {
 			
-			// Création d'un bouton avec son GO
-			float bDuration;
-			float bInstant;
+			buttonCount = (int) Mathf.Ceil(p / 2 + 3);
 			
-			if (j == 0) {
-				bDuration = 4.0f;
-				bInstant = 3.0f;
-			}
-			else {
-				bDuration = Random.Range(0.5f, 2.0f);
+			for (int b = 0; b < buttonCount; b++) {
+				
+				// Création d'un bouton avec son GO
+				float bDuration;
+				float bInstant;
+				
+				// Sélection aléatoire des boutons
+				string randomButtonId = Joypad.GetRandomButton();
+			
+				bDuration = Mathf.Ceil((patternCount - p) / 8 + 1) * 0.4f;
 				bInstant = bDuration / 2;
+				
+				if (b == 0) {
+					bDuration += 4.0f;
+					bInstant += 4.0f;
+					
+					if (p == 0) {
+						
+						// Rajouter un petit temps pour décaler tous les joueurs
+						bDuration += 0.4f * player.id;
+						bInstant += 0.4f * player.id;
+						
+					}
+				}
+				
+				Button button = Button.MakeButton(this, randomButtonId, time, bDuration, bInstant);
+				GameObject buttonGO = button.gameObject;
+				button.gameObject.GetComponent<Renderer>().enabled = false;
+
+				// Ajout du bouton créé dans le tableau contenant la séquence entière
+				buttons.Add(button);
+				
+				// Assignation de la position des boutons
+				buttonGO.transform.SetParent(gameObject.transform);
+				buttonGO.transform.position = gameObject.transform.position;
+				
+				time += button.duration;
+				
 			}
 			
-			Button button = Button.MakeButton(this, randomButtonId, time, bDuration, bInstant);
-			GameObject buttonGO = button.gameObject;
-			button.gameObject.GetComponent<Renderer>().enabled = false;
-
-			// Ajout du bouton créé dans le tableau contenant la séquence entière
-			buttons.Add(button);
-			
-			// Assignation de la position des boutons
-			buttonGO.transform.SetParent(gameObject.transform);
-			buttonGO.transform.position = gameObject.transform.position;
-			
-			time += button.duration;
 		}
 		
 		// Durée totale de la séquence = durée de tous les boutons
