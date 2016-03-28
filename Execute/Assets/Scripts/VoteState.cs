@@ -216,12 +216,14 @@ public class VoteState : MonoBehaviour {
 				// Si le joueur a >3 votes et n'était pas résistant
 				if (player.hasVotes == 3 && !player.isResistant && !player.scoreCounted) {
 					round.scores[player.id]=-1000;
+					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a >3 votes et était résistant
 				} else if (player.hasVotes == 3 && player.isResistant && !player.scoreCounted) {
 					round.scores[player.id]=-1000;
+					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
@@ -260,6 +262,7 @@ public class VoteState : MonoBehaviour {
 						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					}
 					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -500;
+						roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					};
 
@@ -268,6 +271,7 @@ public class VoteState : MonoBehaviour {
 				else if(player.hasVotedFor == ""){
 					Debug.Log ("Joueur "+player.id+" n'a pas voté");
 					round.scores[player.id] = -1000;
+					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 				}
 
@@ -370,7 +374,12 @@ public class VoteState : MonoBehaviour {
 		if (voteDisplayed) {
 			foreach(Player player in game.players){
 				globalScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = player.score.ToString ();
-				roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();
+				if(round.scores[player.id]>0){
+					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = "+"+round.scores[player.id].ToString();
+				}else{
+					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
+					}
+
 			}
 
 		}
