@@ -138,13 +138,13 @@ public class Button : MonoBehaviour {
 			GameObject feedbackGO = Instantiate(gm.prefabs["ButtonFeedbackOK"]);
 			feedbackGO.transform.position = gameObject.transform.position;
 			
-			if (precision > 0.85f) {
+			if (precision > 0.80f) {
 				scoreFeedbackName = "FeedbackParfait";
 			}
-			else if (precision > 0.60f) {
+			else if (precision > 0.50f) {
 				scoreFeedbackName = "FeedbackSuper";
 			}
-			else if (precision > 0.30f) {
+			else if (precision > 0.20f) {
 				scoreFeedbackName = "FeedbackBien";
 			}
 		}

@@ -21,7 +21,7 @@ public class Sequence : MonoBehaviour {
 	public bool done = false;
 	
 	// Nombre de patterns
-	public int patternCount = 8;
+	public int patternCount = 12;
 	public int buttonCount = 0; // Calculé
 	
 	// Temps actuel de la séquence
@@ -72,12 +72,12 @@ public class Sequence : MonoBehaviour {
 				// Sélection aléatoire des boutons
 				string randomButtonId = Joypad.GetRandomButton();
 			
-				bDuration = Mathf.Ceil((patternCount - p) / 8 + 1) * 0.4f;
+				bDuration = (((float) (patternCount - p)) / ((float) patternCount) * 2.0f + 1.0f) * 0.35f;
 				bInstant = bDuration / 2;
 				
 				if (b == 0) {
-					bDuration += 4.0f;
-					bInstant += 4.0f;
+					bDuration += 2.0f;
+					bInstant += 2.0f;
 					
 					if (p == 0) {
 						
