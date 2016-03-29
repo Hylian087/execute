@@ -131,13 +131,16 @@ public class ExecGame : MonoBehaviour {
 				foreach (string button in Joypad.AXIS_BUTTONS) {
 					if (associatedPlayer != null && joypad.IsCurrentlyDown(button)) {
 						aButtonIsDown = true;
+						
+						associatedPlayer.joypad.VibrateOnce(0.1f, 1f);
 
 						// Feedback sonore 
 						AudioSource audioSource = objects["TVScreen"+associatedPlayer.id].GetComponent<AudioSource>();
 						AudioClip audioClip = (AudioClip)Resources.Load ("static", typeof(AudioClip));
 						audioSource.clip = audioClip;
 						if(!audioSource.isPlaying){
-							audioSource.Play ();}
+							audioSource.Play ();
+						}
 
 						Renderer renderer = objects["TVScreen" + associatedPlayer.id].GetComponent<Renderer>();
 						renderer.enabled = true;
