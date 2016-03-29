@@ -71,9 +71,10 @@ public class menuScript : MonoBehaviour {
 		}
 		
 		// Boutons du menu
-		buttonCommencer = GameObject.Find("MenuMask/Boutons/ButtonCommencer/Hover");
-		buttonTutoriel = GameObject.Find("MenuMask/Boutons/ButtonTutoriel/Hover");
-		buttonQuitter = GameObject.Find("MenuMask/Boutons/ButtonQuitter/Hover");
+		var buttonsTransf = GameObject.Find("MenuMask").transform.Find("Boutons").gameObject.transform;
+		buttonCommencer = buttonsTransf.Find("ButtonCommencer/Hover").gameObject;
+		buttonTutoriel = buttonsTransf.Find("ButtonTutoriel/Hover").gameObject;
+		buttonQuitter = buttonsTransf.Find("ButtonQuitter/Hover").gameObject;
 	}
 
 	IEnumerator introCine(){
