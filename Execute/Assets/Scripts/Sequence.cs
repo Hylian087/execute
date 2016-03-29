@@ -147,6 +147,7 @@ public class Sequence : MonoBehaviour {
 			Vector3 position = button.gameObject.transform.position;
 			Renderer renderer = button.gameObject.GetComponent<Renderer>();
 			Color color = renderer.material.color;
+			button.okSound = Resources.Load ("Sounds/Input"+(player.id+1))as AudioClip;
 			
 			// Position en fonction du temps
 			position.x = (button.startTime + button.instant - currentTime) * scale + gameObject.transform.position.x;
@@ -190,7 +191,6 @@ public class Sequence : MonoBehaviour {
 
 					player.execCount+=1;
 					//Debug.Log ("Joueur "+player.id+" boutons :"+player.execCount);
-
 					currentButton.buttonAudioSource.clip = currentButton.okSound;
 					currentButton.buttonAudioSource.Play ();
 				}
