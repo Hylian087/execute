@@ -10,7 +10,7 @@ public class VoteState : MonoBehaviour {
 	public Player player;
 
 	// Timer du vote
-	public float voteDuration = 3.0f;
+	public float voteDuration = 100.0f;
 
 	bool voteDisplayed;
 	GameObject timerText;
@@ -213,32 +213,32 @@ public class VoteState : MonoBehaviour {
 			// Conditions de victoire et défaite
 			foreach(Player player in game.players){
 				//if(!scoreCounted){
-				// Si le joueur a >3 votes et n'était pas résistant
-				if (player.hasVotes == 3 && !player.isResistant && !player.scoreCounted) {
-					round.scores[player.id]=-1000;
+				// Si le joueur a >2 votes et n'était pas résistant
+				if (player.hasVotes >= 2 && !player.isResistant && !player.scoreCounted) {
+					round.scores[player.id]=-1000*player.hasVotes;
 					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a >3 votes et était résistant
-				} else if (player.hasVotes == 3 && player.isResistant && !player.scoreCounted) {
-					round.scores[player.id]=-1000;
+				} else if (player.hasVotes >= 2 && player.isResistant && !player.scoreCounted) {
+					round.scores[player.id]=-4000;
 					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
-				} else if (player.hasVotes < 3 && !player.isResistant && !player.scoreCounted) {
+				} else if (player.hasVotes < 2 && !player.isResistant && !player.scoreCounted) {
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a < 3 votes et était résistant
-				} else if (player.hasVotes != 0 && player.hasVotes < 3 && player.isResistant && !player.scoreCounted) {
-					round.scores[player.id]=1000/player.hasVotes;
+				} else if (player.hasVotes != 0 && player.hasVotes < 2 && player.isResistant && !player.scoreCounted) {
+					round.scores[player.id]=3000;
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 				} else if (player.hasVotes == 0 && player.isResistant){
-					round.scores[player.id]=1000;
+					round.scores[player.id]=4000;
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
@@ -258,18 +258,18 @@ public class VoteState : MonoBehaviour {
 
 				if(player.hasVotedFor != ""){
 
-					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant"); round.scores[player.id] = 500;
+					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant"); round.scores[player.id] = 1000;
 						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					}
-					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -500;
+					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -1000;
 						roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
 					};
 
 				} 
 
-				else if(player.hasVotedFor == ""){
-					Debug.Log ("Joueur "+player.id+" n'a pas voté");
+				else if(player.hasVotedFor == "" && !player.isResistant){
+					Debug.Log ("Joueur executeur "+player.id+" n'a pas voté");
 					round.scores[player.id] = -1000;
 					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
@@ -449,11 +449,11 @@ public class VoteState : MonoBehaviour {
 				// Les joueurs appuient sur Start
 				if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && !player.hasPushedStart){
 					hasVoted+=1;
-					player.hasPushedStart=true;
+					//player.hasPushedStart=true;
 					Debug.Log (hasVoted);
 				}else if(Input.GetButtonDown("Joy"+(player.id+1)+"Start") && player.hasPushedStart){
 					hasVoted-=1;
-					player.hasPushedStart=false;
+					//player.hasPushedStart=false;
 					Debug.Log (hasVoted);
 				}
 				
