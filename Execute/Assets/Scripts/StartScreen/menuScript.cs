@@ -14,8 +14,11 @@ public class menuScript : MonoBehaviour {
 	GameObject introText1;
 	GameObject introText2;
 	GameObject title;
+	GameObject subtitle;
+	GameObject buttonsGroup;
 	Vector3 titleStartPosition;
 	Vector3 titleEndPosition;
+	float currentTime;
 
 	private GameObject currentButton;
 	private GameObject buttonCommencer;
@@ -29,6 +32,12 @@ public class menuScript : MonoBehaviour {
 		
 		menuMask = GameObject.Find("MenuMask");
 		menuMask.SetActive(true);
+
+		buttonsGroup = GameObject.Find ("Boutons");
+		buttonsGroup.SetActive (false);
+
+		subtitle = GameObject.Find ("Subtitle");
+		subtitle.SetActive (false);
 
 		introText1 = GameObject.Find ("Texte1");
 		introText2 = GameObject.Find ("Texte2");
@@ -65,9 +74,6 @@ public class menuScript : MonoBehaviour {
 		buttonCommencer = GameObject.Find("MenuMask/Boutons/ButtonCommencer/Hover");
 		buttonTutoriel = GameObject.Find("MenuMask/Boutons/ButtonTutoriel/Hover");
 		buttonQuitter = GameObject.Find("MenuMask/Boutons/ButtonQuitter/Hover");
-		
-		SetActiveButton(buttonCommencer);
-		
 	}
 
 	IEnumerator introCine(){
@@ -78,7 +84,13 @@ public class menuScript : MonoBehaviour {
 		introText2.SetActive (true);
 		yield return new WaitForSeconds (3.0f);
 		introText2.SetActive (false);
-		title.transform.position = Vector3.Lerp (titleStartPosition, titleEndPosition, 1.0f);
+		title.GetComponent<Animator> ().SetBool ("animate", true);
+		yield return new WaitForSeconds (5.0f);
+		subtitle.SetActive (true);
+		yield return new WaitForSeconds (1.0f);
+		buttonsGroup.SetActive (true);
+		SetActiveButton(buttonCommencer);
+
 	}
 
 	public void StartLevel(){
@@ -103,7 +115,7 @@ public class menuScript : MonoBehaviour {
 	}
 	
 	public void Update() {
-		
+		currentTime += Time.deltaTime;
 		// Update nécessaire pour le fonctionnement des Joypad
 		Joypad.UpdateAll();
 		
@@ -170,7 +182,7 @@ public class menuScript : MonoBehaviour {
 		float lastCloudPosition = 0.0f;
 		
 		const float spawnY = 250f;
-		const float destroyY = -300f;
+		const float destroyY = -150f;
 		
 		foreach (Transform cloudTransform in clouds.transform) {
 			Vector3 pos = cloudTransform.position;
