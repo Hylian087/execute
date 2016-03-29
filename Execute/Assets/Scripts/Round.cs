@@ -48,6 +48,12 @@ public class Round : MonoBehaviour {
 	public AudioClip machineWork = (AudioClip)Resources.Load ("Sounds/machine_working", typeof(AudioClip));
 	public AudioClip machineIdle = (AudioClip)Resources.Load ("Sounds/machine_idle", typeof(AudioClip));
 	public AudioClip machineStop = (AudioClip)Resources.Load ("Sounds/machine_stop", typeof(AudioClip));
+	public AudioClip resisTick = (AudioClip)Resources.Load ("Sounds/ResisTick", typeof(AudioClip));
+
+	public AudioSource machineSound;
+	public AudioSource resisSound;
+	public float nextSound;
+	public float soundRate;
 
 	public bool soundPlayed;
 
@@ -59,7 +65,6 @@ public class Round : MonoBehaviour {
 		GameObject go = new GameObject("RoundInstance");
 		Round round = go.AddComponent<Round>();
 		Victims victims = go.AddComponent<Victims> ();
-		AudioSource machineSound = go.AddComponent<AudioSource> ();
 		
 		round.game = game;
 		
@@ -72,7 +77,11 @@ public class Round : MonoBehaviour {
 	void Start() {
 
 		state = RoundState.WarmUp;
-		
+
+		machineSound = gameObject.AddComponent<AudioSource> ();
+		resisSound = gameObject.AddComponent<AudioSource> ();
+		resisSound.clip = resisTick;
+
         clockArm = GameObject.Find("ClockArm");
 		cinders = GameObject.Find("Cendres");
 		cinders.transform.position = new Vector3 (252, -170, 0);
@@ -82,6 +91,14 @@ public class Round : MonoBehaviour {
 		cindersParticles.GetComponent<ParticleSystem>().enableEmission = false;
 		//Debug.Log(cindersParticles.GetComponent<ParticleSystem>().isPlaying);
 
+	}
+
+	void playResistSound(float _soundRate){
+		soundRate = _soundRate;
+		if(Time.time >= nextSound){
+			resisSound.PlayOneShot (resisTick,0.3f);
+			nextSound = Time.time + _soundRate;
+		}
 	}
 
 	void chooseResistant(){
@@ -201,6 +218,18 @@ public class Round : MonoBehaviour {
 
 			foreach(Player player in game.players){
 				GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("rhythmState", true);
+				player.resistantRatio = (player.resistantCount / sequences[player.id].buttons.Count) * 100.0f;
+				Debug.Log (player.resistantRatio);
+
+				if(player.resistantRatio > 25){
+					playResistSound(3.0f);
+					//StartCoroutine (playResistSound(0.0f,60.0f));
+				}else if(player.resistantRatio > 50){
+					playResistSound(2.0f);
+				}else if(player.resistantRatio > 75){
+					playResistSound(1.0f);
+				}
+
 			}
 
 			foreach (Sequence seq in sequences) {

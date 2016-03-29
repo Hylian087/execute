@@ -362,7 +362,6 @@ public class VoteState : MonoBehaviour {
 
 		foreach(Player player in game.players){
 
-			player.resistantRatio = (player.resistantCount / round.sequences[player.id].buttonCount) * 100.0f;
 			if(player.resistantRatio >=0 && player.resistantRatio < 75){
 				//Debug.Log ("Joueur "+player.id+" est exécutant");
 			} else if(player.resistantRatio >= 75){
