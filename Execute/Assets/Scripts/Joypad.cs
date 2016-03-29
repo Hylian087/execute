@@ -58,6 +58,7 @@ public class Joypad {
 		
 		// Ajout de ce joypad à la liste des joypads
 		joypads.Add(this);
+		
 	}
 
 	/**
@@ -67,56 +68,7 @@ public class Joypad {
 	 * @return <bool>
 	 */
 	public bool IsDown(string buttonName) {
-		bool pressed = false;
-		
-		if (updatesCounter < 2) {
-			return false;
-		}
-		
-		switch (buttonName) {
-			
-			case "Up":
-				pressed = (prevState.DPad.Up == ButtonState.Pressed);
-			break;
-			
-			case "Down":
-				pressed = (prevState.DPad.Down == ButtonState.Pressed);
-			break;
-			
-			case "Left":
-				pressed = (prevState.DPad.Left == ButtonState.Pressed);
-			break;
-			
-			case "Right":
-				pressed = (prevState.DPad.Right == ButtonState.Pressed);
-			break;
-			
-			case "A":
-				pressed = (prevState.Buttons.A == ButtonState.Pressed);
-			break;
-			
-			case "B":
-				pressed = (prevState.Buttons.B == ButtonState.Pressed);
-			break;
-			
-			case "X":
-				pressed = (prevState.Buttons.X == ButtonState.Pressed);
-			break;
-			
-			case "Y":
-				pressed = (prevState.Buttons.Y == ButtonState.Pressed);
-			break;
-			
-			case "Start":
-				pressed = (prevState.Buttons.Start == ButtonState.Pressed);
-			break;
-			
-			default:
-				pressed = false;
-			break;
-		}
-		
-		return pressed;
+		return ! IsDownInState(buttonName, prevState) && IsDownInState(buttonName, state);
 	}
 
 
@@ -127,11 +79,17 @@ public class Joypad {
 	 * @return <bool>
 	 */
 	public bool IsCurrentlyDown(string buttonName) {
+		return IsDownInState(buttonName, state);
+	}
+
+	/**
+	 * Tester si un bouton est appuyé
+	 * 
+	 * @param <string> le nom de la touche ("A", "B", "Up", ...)
+	 * @return <bool>
+	 */
+	public bool IsDownInState(string buttonName, GamePadState state) {
 		bool pressed = false;
-		
-		if (updatesCounter < 2) {
-			return false;
-		}
 		
 		switch (buttonName) {
 			
