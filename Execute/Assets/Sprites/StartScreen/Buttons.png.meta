@@ -1,0 +1,153 @@
+fileFormatVersion: 2
+guid: 451652f771453df43bc715a6ef756e2d
+timeCreated: 1459212153
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: Buttons_0
+    21300002: Buttons_1
+    21300004: Buttons_2
+    21300006: Buttons_3
+    21300008: Buttons_4
+    21300010: Buttons_5
+  serializedVersion: 2
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    linearTexture: 0
+    correctGamma: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 0
+  cubemapConvolution: 0
+  cubemapConvolutionSteps: 7
+  cubemapConvolutionExponent: 1.5
+  seamlessCubemap: 0
+  textureFormat: -1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: 0
+    aniso: 16
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  rGBM: 0
+  compressionQuality: 50
+  allowsAlphaSplitting: 0
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 1
+  alphaIsTransparency: 1
+  textureType: 8
+  buildTargetSettings: []
+  spriteSheet:
+    sprites:
+    - name: Buttons_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 39
+        width: 133
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -66.5, y: 19.5}
+        - {x: -66.5, y: -19.5}
+        - {x: 66.5, y: -19.5}
+        - {x: 66.5, y: 19.5}
+    - name: Buttons_1
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 39
+        width: 108
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -54, y: 19.5}
+        - {x: -54, y: -19.5}
+        - {x: 54, y: -19.5}
+        - {x: 54, y: 19.5}
+    - name: Buttons_2
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 39
+        width: 96
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -48, y: 19.5}
+        - {x: -48, y: -19.5}
+        - {x: 48, y: -19.5}
+        - {x: 48, y: 19.5}
+    - name: Buttons_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 133
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -66.5, y: 19.5}
+        - {x: -66.5, y: -19.5}
+        - {x: 66.5, y: -19.5}
+        - {x: 66.5, y: 19.5}
+    - name: Buttons_4
+      rect:
+        serializedVersion: 2
+        x: 133
+        y: 0
+        width: 108
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -54, y: 19.5}
+        - {x: -54, y: -19.5}
+        - {x: 54, y: -19.5}
+        - {x: 54, y: 19.5}
+    - name: Buttons_5
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 0
+        width: 96
+        height: 39
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -48, y: 19.5}
+        - {x: -48, y: -19.5}
+        - {x: 48, y: -19.5}
+        - {x: 48, y: 19.5}
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

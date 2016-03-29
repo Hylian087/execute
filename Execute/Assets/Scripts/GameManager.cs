@@ -77,7 +77,6 @@ public class GameManager : MonoBehaviour {
 			joypads[i] = new Joypad(i);
 		}
 		
-		
 		// Lancement d'une partie
 		game = ExecGame.MakeExecGame();
 		
