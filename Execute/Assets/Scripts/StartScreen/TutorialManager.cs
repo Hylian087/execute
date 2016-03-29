@@ -19,7 +19,7 @@ public class TutorialManager : MonoBehaviour {
 		slide2 = GameObject.Find ("Slide2");
 		slide3 = GameObject.Find ("Slide3");
 
-		slideTitle = GameObject.Find ("Title").GetComponent<Text> ();
+		slideTitle = GameObject.Find ("TutoTitle").GetComponent<Text> ();
 		slideInstructions = GameObject.Find ("Instructions1").GetComponent<Text> ();
 	}
 	

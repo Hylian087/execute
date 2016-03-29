@@ -204,12 +204,11 @@ MonoBehaviour:
   duration: 0
   startTime: 0
   instant: .5
-  clickableRadius: .5
   buttonName: 
   pressed: 0
   buttonAudioSource: {fileID: 0}
   okSound: {fileID: 8300000, guid: e204b28e60f2cda4e864688cab7d08ae, type: 3}
-  errorSound: {fileID: 8300000, guid: 0e733e7ec6c1e3e4ba48700ed6734f8a, type: 3}
+  errorSound: {fileID: 8300000, guid: 9bf5d39ef160fd9438a1454148ef667d, type: 3}
 --- !u!212 &21274828
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -275,7 +274,7 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: errorSound
       value: 
-      objectReference: {fileID: 8300000, guid: 0e733e7ec6c1e3e4ba48700ed6734f8a, type: 3}
+      objectReference: {fileID: 8300000, guid: 9bf5d39ef160fd9438a1454148ef667d, type: 3}
     - target: {fileID: 0}
       propertyPath: m_Animation
       value: 

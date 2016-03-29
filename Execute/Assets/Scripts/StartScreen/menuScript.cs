@@ -10,25 +10,46 @@ public class menuScript : MonoBehaviour {
 	
 	public GameObject tutorialMask;
 	public GameObject menuMask;
-	
+
+	GameObject introText1;
+	GameObject introText2;
+	GameObject title;
+	Vector3 titleStartPosition;
+	Vector3 titleEndPosition;
+
 	private GameObject currentButton;
 	private GameObject buttonCommencer;
 	private GameObject buttonTutoriel;
 	private GameObject buttonQuitter;
 
 	void Start() {
+
+		tutorialMask = GameObject.Find("Tutorial");
+		tutorialMask.SetActive(false);
 		
+		menuMask = GameObject.Find("MenuMask");
+		menuMask.SetActive(true);
+
+		introText1 = GameObject.Find ("Texte1");
+		introText2 = GameObject.Find ("Texte2");
+		title = GameObject.Find ("MainTitle");
+
+		titleStartPosition = title.transform.position;
+		titleEndPosition = new Vector3 (0, 45, 0);
+
+		introText1.SetActive (false);
+		introText2.SetActive (false);
+
+		if (introText1.activeSelf == false) {
+			StartCoroutine(introCine ());
+		}
 		
 		for (int i = 0; i < 4; i++) {
 			joypads[i] = new Joypad(i);
 		}
 		
 		
-		tutorialMask = GameObject.Find("Tutorial");
-		tutorialMask.SetActive(false);
 
-		menuMask = GameObject.Find("MenuMask");
-		menuMask.SetActive(true);
 		
 		
 		// Tableau des prefabs
@@ -41,12 +62,23 @@ public class menuScript : MonoBehaviour {
 		}
 		
 		// Boutons du menu
-		buttonCommencer = GameObject.Find("MenuMask/ButtonCommencer/Hover");
-		buttonTutoriel = GameObject.Find("MenuMask/ButtonTutoriel/Hover");
-		buttonQuitter = GameObject.Find("MenuMask/ButtonQuitter/Hover");
+		buttonCommencer = GameObject.Find("MenuMask/Boutons/ButtonCommencer/Hover");
+		buttonTutoriel = GameObject.Find("MenuMask/Boutons/ButtonTutoriel/Hover");
+		buttonQuitter = GameObject.Find("MenuMask/Boutons/ButtonQuitter/Hover");
 		
 		SetActiveButton(buttonCommencer);
 		
+	}
+
+	IEnumerator introCine(){
+		yield return new WaitForSeconds (1.0f);
+		introText1.SetActive (true);
+		yield return new WaitForSeconds (3.0f);
+		introText1.SetActive (false);
+		introText2.SetActive (true);
+		yield return new WaitForSeconds (3.0f);
+		introText2.SetActive (false);
+		title.transform.position = Vector3.Lerp (titleStartPosition, titleEndPosition, 1.0f);
 	}
 
 	public void StartLevel(){
