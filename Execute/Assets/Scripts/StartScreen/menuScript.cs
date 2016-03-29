@@ -138,7 +138,7 @@ public class menuScript : MonoBehaviour {
 		float lastCloudPosition = 0.0f;
 		
 		const float spawnY = 250f;
-		const float destroyY = -300f;
+		const float destroyY = -150f;
 		
 		foreach (Transform cloudTransform in clouds.transform) {
 			Vector3 pos = cloudTransform.position;
