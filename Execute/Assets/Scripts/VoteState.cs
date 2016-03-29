@@ -218,6 +218,7 @@ public class VoteState : MonoBehaviour {
 					round.scores[player.id]=-1000*player.hasVotes;
 					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
+					GameObject.Find ("Executer"+player.id).GetComponent<AudioSource>().PlayDelayed(5.0f);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a >3 votes et était résistant
@@ -225,6 +226,7 @@ public class VoteState : MonoBehaviour {
 					round.scores[player.id]=-4000;
 					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
+					GameObject.Find ("Executer"+player.id).GetComponent<AudioSource>().PlayDelayed(5.0f);
 					//StartCoroutine(countScores(player));
 					//player.scoreCounted = true;
 					// Si le joueur a < 3 votes et n'était pas résistant, pas de pénalité
@@ -258,12 +260,17 @@ public class VoteState : MonoBehaviour {
 
 				if(player.hasVotedFor != ""){
 
-					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant"); round.scores[player.id] = 1000;
+					if(idPlayers[player.hasVotedFor].isResistant && !player.isResistant){
+						Debug.Log ("Joueur "+player.id+" a bien voté pour le résistant");
+						round.scores[player.id] = 1000;
 						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasWon",true);
 					}
-					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant"); round.scores[player.id] = -1000;
+					else if(!idPlayers[player.hasVotedFor].isResistant && !player.isResistant){
+						Debug.Log ("Joueur "+player.id+" n'a pas a voté pour le résistant");
+						round.scores[player.id] = -1000;
 						roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 						GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
+						GameObject.Find ("Executer"+player.id).GetComponent<AudioSource>().PlayDelayed(5.0f);
 					};
 
 				} 
@@ -273,6 +280,7 @@ public class VoteState : MonoBehaviour {
 					round.scores[player.id] = -1000;
 					roundScoreCounter[player.id].GetComponentInChildren<TextMesh>().text = round.scores[player.id].ToString();
 					GameObject.Find ("Executer"+player.id).GetComponent<Animator>().SetBool ("hasLost",true);
+					GameObject.Find ("Executer"+player.id).GetComponent<AudioSource>().PlayDelayed(5.0f);
 				}
 
 				yield return new WaitForSeconds(1.0f);
